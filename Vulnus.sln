@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vulnus", "Vulnus.csproj", "{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{A22F6B6A-661F-48F7-BC3F-1E498BD5B5BB}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
