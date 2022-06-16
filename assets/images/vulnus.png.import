@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vulnus.png-a059931669774756c266afd76553d192.stex"
+path="res://.import/vulnus.png-3bd94597fdb3e317d20c44f9b16648ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/vulnus.png"
-dest_files=[ "res://.import/vulnus.png-a059931669774756c266afd76553d192.stex" ]
+source_file="res://assets/images/vulnus.png"
+dest_files=[ "res://.import/vulnus.png-3bd94597fdb3e317d20c44f9b16648ce.stex" ]
 
 [params]
 

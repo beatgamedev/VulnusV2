@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/grid.png-0e5acf495abafdc7f64f9b213a44aa0e.stex"
+path="res://.import/beatgamedev.png-148e88a7ae4747315c0f4b768f6888f8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/grid.png"
-dest_files=[ "res://.import/grid.png-0e5acf495abafdc7f64f9b213a44aa0e.stex" ]
+source_file="res://assets/images/beatgamedev.png"
+dest_files=[ "res://.import/beatgamedev.png-148e88a7ae4747315c0f4b768f6888f8.stex" ]
 
 [params]
 

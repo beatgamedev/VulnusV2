@@ -16,6 +16,8 @@ public class Global : Node
 		MapLoader.LoadMapsFromDirectory(OS.GetUserDataDir().PlusFile("maps"));
 		var end = OS.GetTicksUsec();
 		GD.Print("Took " + (end - start) / 1000 + "ms to load maps");
+
+		GotoScene("res://scenes/MainMenu.tscn");
 	}
 
 	public void GotoScene(string path)

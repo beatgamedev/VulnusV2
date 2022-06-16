@@ -15,10 +15,10 @@ config/description="Vulnus"
 run/main_scene="res://scenes/Startup.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="Vulnus"
-boot_splash/image="res://assets/beatgamedev.png"
+boot_splash/image="res://assets/images/beatgamedev.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.0470588, 0.0627451, 0.0941176, 1 )
-config/icon="res://assets/vulnus.png"
+config/icon="res://assets/images/vulnus.png"
 
 [autoload]
 
