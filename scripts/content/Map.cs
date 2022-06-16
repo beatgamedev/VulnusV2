@@ -1,7 +1,10 @@
 using Godot;
 using System;
+using System.IO;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters.Binary;
 using Newtonsoft.Json;
+using File = Godot.File;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
 public class Map
@@ -36,7 +39,7 @@ public class Map
 		public string Name;
 		[JsonIgnore]
 		public string Path;
-		[JsonIgnore]
+		[NonSerialized, JsonIgnore]
 		public MapData Data;
 		public void Load(Map map)
 		{
@@ -53,5 +56,26 @@ public class Map
 	{
 		[JsonProperty("_notes")]
 		public List<Note> Notes;
+	}
+	public static Map LoadCached(string path)
+	{
+		var file = new File();
+		if (file.Open(path.PlusFile("cache.bin"), File.ModeFlags.Read) == Error.Ok)
+		{
+			var deserializer = new BinaryFormatter();
+			var buffer = file.GetBuffer((long)file.GetLen());
+			var stream = new MemoryStream(buffer);
+			var cachedMap = (Map)deserializer.Deserialize(stream);
+			return cachedMap;
+		}
+		file.Open(path, File.ModeFlags.Read);
+		var map = JsonConvert.DeserializeObject<Map>(file.GetAsText());
+		file.Close();
+		return map;
+	}
+	public void Serialize(Stream stream)
+	{
+		var serializer = new BinaryFormatter();
+		serializer.Serialize(stream, this);
 	}
 }
