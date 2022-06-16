@@ -8,6 +8,7 @@ public static class AudioHandler
 		var file = new File();
 		file.Open(path, File.ModeFlags.Read);
 		var buffer = file.GetBuffer((long)file.GetLen());
+		file.Close();
 		AudioStream stream;
 		switch (GetFileFormat(buffer))
 		{
