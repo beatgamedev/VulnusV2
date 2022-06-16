@@ -40,7 +40,6 @@ public static class MapLoader
 		var mapFile = new File();
 		while (mapFileName != "")
 		{
-
 			if (mapFileName.Extension() == "vmap")
 			{
 				var hash = mapFile.GetMd5(directory.PlusFile(mapFileName));
