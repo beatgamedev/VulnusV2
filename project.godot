@@ -23,7 +23,6 @@ config/icon="res://assets/vulnus.png"
 [autoload]
 
 Global="*res://Global.cs"
-MapLoader="*res://scripts/content/MapLoader.cs"
 
 [physics]
 
