@@ -17,6 +17,7 @@ public static class MapLoader
 		if (cacheDir.Open(cachePath) != Error.Ok)
 		{
 			cacheDir.MakeDirRecursive(cachePath);
+			cacheDir.Open(cachePath);
 		}
 		List<string> caches = new List<string>();
 		cacheDir.ListDirBegin(true, true);
