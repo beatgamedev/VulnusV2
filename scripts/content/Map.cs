@@ -62,15 +62,18 @@ public class Map
 		var file = new File();
 		if (file.Open(path.PlusFile("cache.bin"), File.ModeFlags.Read) == Error.Ok)
 		{
+			GD.Print("Loading map from cache: " + path);
 			var deserializer = new BinaryFormatter();
 			var buffer = file.GetBuffer((long)file.GetLen());
 			var stream = new MemoryStream(buffer);
 			var cachedMap = (Map)deserializer.Deserialize(stream);
 			return cachedMap;
 		}
+		GD.Print("Loading map without cache: " + path);
 		file.Open(path.PlusFile("meta.json"), File.ModeFlags.Read);
 		var map = JsonConvert.DeserializeObject<Map>(file.GetAsText());
 		map.Path = path;
+		map.Difficulties = new List<Difficulty>();
 		foreach (string difficulty in map._difficulties)
 		{
 			var diffFile = new File();
@@ -81,6 +84,8 @@ public class Map
 		file.Close();
 		var writer = new FileStream(path.PlusFile("cache.bin"), FileMode.Create);
 		map.Serialize(writer);
+		writer.Flush();
+		writer.Dispose();
 		return map;
 	}
 	public void Serialize(Stream stream)
