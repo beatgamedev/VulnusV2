@@ -42,18 +42,31 @@ public static class MapLoader
 		{
 			if (mapFileName.Extension() == "vmap")
 			{
-				var hash = mapFile.GetMd5(directory + "/" + mapFileName);
+				var hash = mapFile.GetMd5(directory.PlusFile(mapFileName));
 				GD.Print("Found map: " + hash);
 				hashes.Add(hash);
 				if (!caches.Contains(hash)) // If the map isn't already cached, do extraction stuff
 				{
 					GD.Print("New cache added: " + hash);
-					mapFile.Open(directory + "/" + mapFileName, File.ModeFlags.Read);
+					mapFile.Open(directory.PlusFile(mapFileName), File.ModeFlags.Read);
 					var stream = new MemoryStream(mapFile.GetBuffer((long)mapFile.GetLen()));
 					ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read);
 					zip.ExtractToDirectory(cachePath.PlusFile(hash));
 				}
 				LoadedMaps.Add(Map.LoadFromPath(cachePath.PlusFile(hash))); // Load map from cache
+			}
+			else if (mapFileName.Extension() == "vpack")
+			{
+				GD.Print("Found pack: " + mapFileName);
+				mapFile.Open(directory.PlusFile(mapFileName), File.ModeFlags.Read);
+				var stream = new MemoryStream(mapFile.GetBuffer((long)mapFile.GetLen()));
+				ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read);
+				zip.ExtractToDirectory(directory.PlusFile(mapFileName.BaseName()));
+			}
+			else if (mapsDir.CurrentIsDir())
+			{
+				GD.Print("Found directory: " + mapFileName);
+				LoadMapsFromDirectory(directory.PlusFile(mapFileName));
 			}
 			else
 			{
