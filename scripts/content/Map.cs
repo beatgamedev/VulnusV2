@@ -57,7 +57,7 @@ public class Map
 		[JsonProperty("_notes")]
 		public List<Note> Notes;
 	}
-	public static Map LoadCached(string path)
+	public static Map LoadFromPath(string path)
 	{
 		var file = new File();
 		if (file.Open(path.PlusFile("cache.bin"), File.ModeFlags.Read) == Error.Ok)
@@ -68,9 +68,19 @@ public class Map
 			var cachedMap = (Map)deserializer.Deserialize(stream);
 			return cachedMap;
 		}
-		file.Open(path, File.ModeFlags.Read);
+		file.Open(path.PlusFile("meta.json"), File.ModeFlags.Read);
 		var map = JsonConvert.DeserializeObject<Map>(file.GetAsText());
+		map.Path = path;
+		foreach (string difficulty in map._difficulties)
+		{
+			var diffFile = new File();
+			diffFile.Open(path.PlusFile(difficulty), File.ModeFlags.Read);
+			map.Difficulties.Add(JsonConvert.DeserializeObject<Difficulty>(diffFile.GetAsText()));
+			diffFile.Close();
+		}
 		file.Close();
+		var writer = new FileStream(path.PlusFile("cache.bin"), FileMode.Create);
+		map.Serialize(writer);
 		return map;
 	}
 	public void Serialize(Stream stream)
