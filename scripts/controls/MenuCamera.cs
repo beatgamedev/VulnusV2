@@ -3,19 +3,22 @@ using System;
 
 public class MenuCamera : Camera
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public float Pitch = 0;
+	public float Yaw = 0;
+	public override void _Process(float delta)
 	{
-		
+		LookAt(this.Translation + Vector3.Forward, this.Translation + Vector3.Up);
+		RotateX(Pitch);
+		RotateY(Yaw);
 	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventMouseMotion)
+		{
+			var mouse = @event as InputEventMouseMotion;
+			Pitch += mouse.Relative.y * 0.1f;
+			Yaw += mouse.Relative.x * 0.1f;
+			Pitch = Mathf.Clamp(Pitch, -89, 89);
+		}
+	}
 }

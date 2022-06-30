@@ -22,6 +22,7 @@ public static class AudioHandler
 				break;
 			default:
 				stream = new AudioStreamSample();
+				((AudioStreamSample)stream).Data = buffer;
 				break;
 		}
 		return stream;
