@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/classes/ViewController.cs" type="Script" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/account.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=4]
+[ext_resource path="res://scripts/classes/View.cs" type="Script" id=5]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -14,6 +15,11 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -32.0
+
+[node name="Control" type="Control" parent="ViewContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
 
 [node name="Tabs" type="Control" parent="."]
 anchor_top = 1.0
