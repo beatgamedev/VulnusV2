@@ -1,21 +1,16 @@
 using Godot;
 using System;
 
-public class View : Control
+public partial class View : Control
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	public virtual void Display(Control container)
 	{
-		
+		if (this.GetParent<Control>() != container)
+			container.AddChild(this);
+		this.Show();
 	}
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	public virtual new void Hide()
+	{
+		base.Hide();
+	}
 }
