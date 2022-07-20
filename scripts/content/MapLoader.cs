@@ -40,7 +40,7 @@ public static class MapLoader
 		var mapFile = new File();
 		while (mapFileName != "")
 		{
-			if (mapFileName.Extension() == "vmap")
+			if (mapFileName.Extension() == "vul")
 			{
 				var hash = mapFile.GetMd5(directory.PlusFile(mapFileName));
 				GD.Print("Found map: " + hash);
@@ -54,23 +54,6 @@ public static class MapLoader
 					zip.ExtractToDirectory(cachePath.PlusFile(hash));
 				}
 				LoadedMaps.Add(Map.LoadFromPath(cachePath.PlusFile(hash))); // Load map from cache
-			}
-			// else if (mapFileName.Extension() == "vpack")
-			// {
-			// 	GD.Print("Found pack: " + mapFileName);
-			// 	mapFile.Open(directory.PlusFile(mapFileName), File.ModeFlags.Read);
-			// 	var stream = new MemoryStream(mapFile.GetBuffer((long)mapFile.GetLen()));
-			// 	ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read);
-			// 	zip.ExtractToDirectory(directory.PlusFile(mapFileName.BaseName()));
-			// }
-			// else if (mapsDir.CurrentIsDir() && !mapFileName.StartsWith("."))
-			// {
-			// 	GD.Print("Found directory: " + mapFileName);
-			// 	LoadMapsFromDirectory(directory.PlusFile(mapFileName));
-			// }
-			else
-			{
-				GD.Print(mapFileName + " is not a map file");
 			}
 			mapFileName = mapsDir.GetNext();
 		}

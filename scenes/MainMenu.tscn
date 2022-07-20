@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/classes/ViewController.cs" type="Script" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/account.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=4]
 [ext_resource path="res://scripts/views/Play.cs" type="Script" id=5]
+[ext_resource path="res://assets/Theme.tres" type="Theme" id=6]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -36,15 +37,12 @@ alignment = 1
 margin_right = 338.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-flat = true
+theme = ExtResource( 6 )
+toggle_mode = true
+action_mode = 0
 expand_icon = true
 
-[node name="Panel" type="Panel" parent="Tabs/HBoxContainer/Account"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 16.0
-
-[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Account/Panel"]
+[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Account"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -12.0
@@ -59,14 +57,11 @@ margin_left = 342.0
 margin_right = 681.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-flat = true
+theme = ExtResource( 6 )
+toggle_mode = true
+action_mode = 0
 
-[node name="Panel" type="Panel" parent="Tabs/HBoxContainer/Play"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 16.0
-
-[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Play/Panel"]
+[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Play"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -12.0
@@ -81,14 +76,11 @@ margin_left = 685.0
 margin_right = 1024.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-flat = true
+theme = ExtResource( 6 )
+toggle_mode = true
+action_mode = 0
 
-[node name="Panel" type="Panel" parent="Tabs/HBoxContainer/Settings"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 16.0
-
-[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Settings/Panel"]
+[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Settings"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -12.0
