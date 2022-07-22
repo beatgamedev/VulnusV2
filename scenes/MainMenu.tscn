@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://scripts/classes/ViewController.cs" type="Script" id=1]
+[ext_resource path="res://scripts/menu/MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/account.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=4]
-[ext_resource path="res://scripts/views/Play.cs" type="Script" id=5]
+[ext_resource path="res://assets/images/matt.jpg" type="Texture" id=5]
 [ext_resource path="res://assets/Theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/images/vulnus.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/beatgamedev.png" type="Texture" id=8]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -20,22 +22,57 @@ margin_bottom = -48.0
 [node name="Play" type="Control" parent="ViewContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="Tabs" type="Control" parent="."]
+[node name="Matt" type="TextureRect" parent="ViewContainer/Play"]
+anchor_left = 0.25
+anchor_top = 0.25
+anchor_right = 0.75
+anchor_bottom = 0.75
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Account" type="Control" parent="ViewContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Settings" type="Control" parent="ViewContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BottomBar" type="Control" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -48.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Tabs"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomBar"]
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 47.0
+margin_top = -48.0
+margin_right = -48.0
 custom_constants/separation = 0
 alignment = 1
 
-[node name="Account" type="Button" parent="Tabs/HBoxContainer"]
-margin_right = 426.0
+[node name="Account" type="Button" parent="BottomBar/HBoxContainer"]
+margin_right = 395.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 theme = ExtResource( 6 )
@@ -43,7 +80,7 @@ toggle_mode = true
 action_mode = 0
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Account"]
+[node name="TextureRect" type="TextureRect" parent="BottomBar/HBoxContainer/Account"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -16.0
@@ -53,9 +90,9 @@ texture = ExtResource( 3 )
 expand = true
 stretch_mode = 6
 
-[node name="Play" type="Button" parent="Tabs/HBoxContainer"]
-margin_left = 426.0
-margin_right = 853.0
+[node name="Play" type="Button" parent="BottomBar/HBoxContainer"]
+margin_left = 395.0
+margin_right = 790.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 theme = ExtResource( 6 )
@@ -63,7 +100,7 @@ toggle_mode = true
 pressed = true
 action_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Play"]
+[node name="TextureRect" type="TextureRect" parent="BottomBar/HBoxContainer/Play"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -16.0
@@ -73,16 +110,16 @@ texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 
-[node name="Settings" type="Button" parent="Tabs/HBoxContainer"]
-margin_left = 853.0
-margin_right = 1280.0
+[node name="Settings" type="Button" parent="BottomBar/HBoxContainer"]
+margin_left = 790.0
+margin_right = 1185.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 theme = ExtResource( 6 )
 toggle_mode = true
 action_mode = 0
 
-[node name="TextureRect" type="TextureRect" parent="Tabs/HBoxContainer/Settings"]
+[node name="TextureRect" type="TextureRect" parent="BottomBar/HBoxContainer/Settings"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -16.0
@@ -91,3 +128,41 @@ margin_bottom = 48.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 6
+
+[node name="Background" type="ColorRect" parent="BottomBar"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.12549, 0.12549, 1 )
+
+[node name="Logo" type="TextureRect" parent="BottomBar"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 47.0
+margin_bottom = -8.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="Brand" type="TextureRect" parent="BottomBar"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = -40.0
+margin_right = -1.0
+margin_bottom = -8.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="Background" type="ColorRect" parent="."]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+__meta__ = {
+"_edit_lock_": true
+}
