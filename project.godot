@@ -22,7 +22,7 @@ config/icon="res://assets/images/vulnus.png"
 
 [autoload]
 
-Global="*res://Global.cs"
+Global="*res://scripts/Global.cs"
 
 [display]
 

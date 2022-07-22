@@ -26,6 +26,7 @@ margin_bottom = -48.0
 mouse_filter = 1
 
 [node name="Play" type="Control" parent="ViewContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -33,8 +34,9 @@ __meta__ = {
 }
 
 [node name="Matt" type="TextureRect" parent="ViewContainer/Play"]
-margin_right = 64.0
-margin_bottom = 64.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 0.279907
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
