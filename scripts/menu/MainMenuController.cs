@@ -1,10 +1,9 @@
 using Godot;
 using System;
 
-public class MainMenuController : ViewController
+public class MainMenuController : Control
 {
 	public override void _Ready()
 	{
-		this.ShowView(this.FindNode("Play") as View);
 	}
 }
