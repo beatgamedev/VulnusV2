@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
-[ext_resource path="res://assets/fonts/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/styles/menubtnUnpressed.stylebox" type="StyleBox" id=2]
 [ext_resource path="res://assets/styles/menubtnPressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://assets/styles/menubtnHover.tres" type="StyleBox" id=4]
