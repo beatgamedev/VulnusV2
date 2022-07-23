@@ -19,6 +19,7 @@ boot_splash/image="res://assets/images/beatgamedev.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.0470588, 0.0627451, 0.0941176, 1 )
 config/icon="res://assets/images/vulnus.png"
+config/windows_native_icon="res://assets/images/vulnus.ico"
 
 [autoload]
 
@@ -30,6 +31,11 @@ window/size/width=1280
 window/size/height=720
 window/size/test_width=1024
 window/size/test_height=576
+window/vsync/use_vsync=false
+
+[gui]
+
+timers/tooltip_delay_sec=0.3
 
 [physics]
 
