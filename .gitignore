@@ -10,4 +10,4 @@ export_presets.cfg
 data_*/
 
 # Builds
-build/
+/build/
