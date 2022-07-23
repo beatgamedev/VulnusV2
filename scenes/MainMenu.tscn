@@ -105,11 +105,13 @@ alignment = 1
 [node name="Account" type="Button" parent="BottomBar/Buttons"]
 margin_right = 395.0
 margin_bottom = 48.0
-mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme = ExtResource( 6 )
 toggle_mode = true
 action_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="BottomBar/Buttons/Account"]
 anchor_left = 0.5
@@ -125,12 +127,14 @@ stretch_mode = 6
 margin_left = 395.0
 margin_right = 790.0
 margin_bottom = 48.0
-mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme = ExtResource( 6 )
 toggle_mode = true
 pressed = true
 action_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="BottomBar/Buttons/Play"]
 anchor_left = 0.5
@@ -146,11 +150,13 @@ stretch_mode = 6
 margin_left = 790.0
 margin_right = 1185.0
 margin_bottom = 48.0
-mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme = ExtResource( 6 )
 toggle_mode = true
 action_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="BottomBar/Buttons/Settings"]
 anchor_left = 0.5
