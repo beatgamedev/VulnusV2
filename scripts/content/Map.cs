@@ -45,7 +45,7 @@ public class Map
 		{
 			if (Data != null) return;
 			var file = new File();
-			file.Open(map.Path + "/" + Path, File.ModeFlags.Read);
+			file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read);
 			var data = JsonConvert.DeserializeObject<MapData>(file.GetAsText());
 			this.Data = data;
 			file.Close();
@@ -92,5 +92,30 @@ public class Map
 	{
 		var serializer = new BinaryFormatter();
 		serializer.Serialize(stream, this);
+	}
+	public ImageTexture LoadCover()
+	{
+		ImageTexture texture;
+		var cover = new Image();
+		var coverPath = "none";
+		foreach (string path in System.IO.Directory.GetFiles(Path))
+		{
+			if (path.BaseName().ToLower() == "cover")
+			{
+				coverPath = path;
+				break;
+			}
+		}
+		if (coverPath == "none")
+		{
+			texture = new ImageTexture();
+			cover.Load(coverPath);
+			texture.CreateFromImage(cover);
+		}
+		else
+		{
+			texture = (ImageTexture)ResourceLoader.Load("res://assets/images/matt.jpg");
+		}
+		return texture;
 	}
 }
