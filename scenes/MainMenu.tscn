@@ -35,18 +35,15 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="MapList" type="Control" parent="ViewContainer/Play"]
+[node name="MapDetail" type="Control" parent="ViewContainer/Play"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 
-[node name="Tween" type="Tween" parent="ViewContainer/Play/MapList"]
-
-[node name="MapDetail" type="Control" parent="ViewContainer/Play"]
-anchor_left = 0.506
-anchor_right = 0.999
+[node name="MapList" type="Control" parent="ViewContainer/Play"]
+anchor_left = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -7.68005
-margin_right = 1.27991
+margin_left = -8.0
 
 [node name="Account" type="Control" parent="ViewContainer"]
 visible = false
