@@ -1,175 +1,71 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scripts/menu/MainMenu.cs" type="Script" id=1]
-[ext_resource path="res://assets/images/play.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/account.png" type="Texture" id=3]
-[ext_resource path="res://assets/images/settings.png" type="Texture" id=4]
-[ext_resource path="res://scripts/menu/Play.cs" type="Script" id=5]
+[ext_resource path="res://assets/images/matt.jpg" type="Texture" id=2]
 [ext_resource path="res://assets/Theme.tres" type="Theme" id=6]
-[ext_resource path="res://assets/images/vulnus.png" type="Texture" id=7]
-[ext_resource path="res://assets/images/beatgamedev.png" type="Texture" id=8]
-[ext_resource path="res://scripts/menu/Settings.cs" type="Script" id=9]
-[ext_resource path="res://scripts/menu/Account.cs" type="Script" id=10]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+theme = ExtResource( 6 )
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+
+[node name="Texture" type="TextureRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Colour" type="ColorRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0941176, 0.0941176, 0.0941176, 0.392157 )
 
 [node name="ViewContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -48.0
-mouse_filter = 1
+margin_top = 96.0
 
-[node name="Play" type="Control" parent="ViewContainer"]
+[node name="MainMenu" type="Control" parent="ViewContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="MapDetail" type="Control" parent="ViewContainer/Play"]
-anchor_right = 0.5
+[node name="Sidebar" type="Control" parent="ViewContainer/MainMenu"]
+anchor_right = 0.25
 anchor_bottom = 1.0
+margin_left = 16.0
+margin_right = 16.0
 
-[node name="MapList" type="Control" parent="ViewContainer/Play"]
-anchor_left = 0.5
+[node name="Buttons" type="VBoxContainer" parent="ViewContainer/MainMenu/Sidebar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -8.0
-
-[node name="Account" type="Control" parent="ViewContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Settings" type="Control" parent="ViewContainer"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-script = ExtResource( 9 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="BottomBar" type="Control" parent="."]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -48.0
-
-[node name="Background" type="ColorRect" parent="BottomBar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
-color = Color( 0.12549, 0.12549, 0.12549, 1 )
-
-[node name="Logo" type="TextureRect" parent="BottomBar"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -44.0
-margin_right = 47.0
-margin_bottom = -4.0
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 6
-
-[node name="Brand" type="TextureRect" parent="BottomBar"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -48.0
-margin_top = -44.0
-margin_right = -1.0
-margin_bottom = -4.0
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 6
-
-[node name="Buttons" type="HBoxContainer" parent="BottomBar"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 47.0
-margin_top = -48.0
-margin_right = -48.0
-custom_constants/separation = 0
+margin_top = 64.0
 alignment = 1
 
-[node name="Account" type="Button" parent="BottomBar/Buttons"]
-margin_right = 395.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-theme = ExtResource( 6 )
-toggle_mode = true
-action_mode = 0
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Singleplayer" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
+margin_top = 228.0
+margin_right = 320.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="BottomBar/Buttons/Account"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -16.0
-margin_right = 16.0
-margin_bottom = 48.0
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 6
+[node name="Downloads" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
+margin_top = 264.0
+margin_right = 320.0
+margin_bottom = 296.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 0
 
-[node name="Play" type="Button" parent="BottomBar/Buttons"]
-margin_left = 395.0
-margin_right = 790.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-theme = ExtResource( 6 )
-toggle_mode = true
-pressed = true
-action_mode = 0
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Options" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
+margin_top = 300.0
+margin_right = 320.0
+margin_bottom = 332.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="BottomBar/Buttons/Play"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -16.0
-margin_right = 16.0
-margin_bottom = 48.0
-texture = ExtResource( 2 )
-expand = true
-stretch_mode = 6
-
-[node name="Settings" type="Button" parent="BottomBar/Buttons"]
-margin_left = 790.0
-margin_right = 1185.0
-margin_bottom = 48.0
-size_flags_horizontal = 3
-theme = ExtResource( 6 )
-toggle_mode = true
-action_mode = 0
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="TextureRect" type="TextureRect" parent="BottomBar/Buttons/Settings"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -16.0
-margin_right = 16.0
-margin_bottom = 48.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 6
+[node name="Topbar" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_bottom = 96.0
+color = Color( 0.141176, 0.141176, 0.141176, 1 )
