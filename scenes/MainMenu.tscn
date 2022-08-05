@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/images/matt.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/images/play.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/account.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/settings.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/matt.jpg" type="Texture" id=5]
 [ext_resource path="res://assets/Theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+use_filter = true
+font_data = ExtResource( 7 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -15,7 +30,7 @@ anchor_bottom = 1.0
 [node name="Texture" type="TextureRect" parent="Background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = ExtResource( 5 )
 expand = true
 
 [node name="Colour" type="ColorRect" parent="Background"]
@@ -39,33 +54,149 @@ margin_left = 16.0
 margin_right = 16.0
 
 [node name="Buttons" type="VBoxContainer" parent="ViewContainer/MainMenu/Sidebar"]
+anchor_top = 0.4
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 64.0
-alignment = 1
+custom_constants/separation = 4
+
+[node name="SignIn" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
+margin_right = 320.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="ViewContainer/MainMenu/Sidebar/Buttons/SignIn"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 32.0
+margin_bottom = -4.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="ViewContainer/MainMenu/Sidebar/Buttons/SignIn"]
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 4.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Sign In to Vulnus"
+valign = 1
 
 [node name="Singleplayer" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
-margin_top = 228.0
+margin_top = 36.0
 margin_right = 320.0
-margin_bottom = 260.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="ViewContainer/MainMenu/Sidebar/Buttons/Singleplayer"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 32.0
+margin_bottom = -4.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="ViewContainer/MainMenu/Sidebar/Buttons/Singleplayer"]
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 4.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Play Singleplayer"
+valign = 1
 
 [node name="Downloads" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
-margin_top = 264.0
+margin_top = 72.0
 margin_right = 320.0
-margin_bottom = 296.0
+margin_bottom = 104.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_vertical = 0
 
+[node name="Icon" type="TextureRect" parent="ViewContainer/MainMenu/Sidebar/Buttons/Downloads"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 32.0
+margin_bottom = -4.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="ViewContainer/MainMenu/Sidebar/Buttons/Downloads"]
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 4.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Download Maps"
+valign = 1
+
 [node name="Options" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
-margin_top = 300.0
+margin_top = 108.0
 margin_right = 320.0
-margin_bottom = 332.0
+margin_bottom = 140.0
 rect_min_size = Vector2( 0, 32 )
 size_flags_vertical = 0
+
+[node name="Icon" type="TextureRect" parent="ViewContainer/MainMenu/Sidebar/Buttons/Options"]
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 32.0
+margin_bottom = -4.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="ViewContainer/MainMenu/Sidebar/Buttons/Options"]
+anchor_right = 1.0
+margin_left = 40.0
+margin_top = 4.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Settings"
+valign = 1
 
 [node name="Topbar" type="ColorRect" parent="."]
 anchor_right = 1.0
 margin_bottom = 96.0
 color = Color( 0.141176, 0.141176, 0.141176, 1 )
+
+[node name="Profile" type="Control" parent="Topbar"]
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 8.0
+margin_right = 352.0
+margin_bottom = -8.0
+
+[node name="Avatar" type="TextureRect" parent="Topbar/Profile"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 72.0
+margin_bottom = 72.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="Background" type="ColorRect" parent="Topbar/Profile/Avatar"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+color = Color( 0.188235, 0.188235, 0.188235, 1 )
+
+[node name="Username" type="Label" parent="Topbar/Profile"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -232.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 2 )
+text = "Not logged in"
+valign = 2
