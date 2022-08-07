@@ -45,7 +45,7 @@ color = Color( 0.0941176, 0.0941176, 0.0941176, 0.392157 )
 [node name="ViewContainer" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 96.0
+margin_top = 72.0
 
 [node name="MainMenu" type="Control" parent="ViewContainer"]
 anchor_right = 1.0
