@@ -26,7 +26,7 @@ public class Options : Control
 	}
 	public void Open()
 	{
-		if (active)
+		if (this.Visible)
 			return;
 		opening = true;
 		this.Visible = true;
@@ -36,7 +36,7 @@ public class Options : Control
 	}
 	public void Close()
 	{
-		if (!active)
+		if (!this.Visible)
 			return;
 		active = false;
 		opening = false;
