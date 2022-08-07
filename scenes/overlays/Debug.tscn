@@ -6,13 +6,11 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 18
-use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 18
-use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -33,6 +31,22 @@ custom_fonts/font = SubResource( 1 )
 text = "Render:"
 
 [node name="Value" type="Label" parent="Render"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_right = 112.0
+margin_bottom = 24.0
+custom_fonts/font = SubResource( 2 )
+text = "60"
+
+[node name="Physics" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 80.0
+margin_bottom = 55.0
+custom_fonts/font = SubResource( 1 )
+text = "Physics:"
+
+[node name="Value" type="Label" parent="Physics"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_right = 112.0
