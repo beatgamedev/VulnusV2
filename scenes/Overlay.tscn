@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/overlays/Debug.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/overlay/Fade.cs" type="Script" id=2]
 [ext_resource path="res://scenes/overlays/Options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/images/beatgamedev.png" type="Texture" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
 
 [node name="Overlay" type="Control"]
 anchor_right = 1.0
@@ -22,3 +30,32 @@ script = ExtResource( 2 )
 [node name="Debug" parent="." instance=ExtResource( 1 )]
 margin_bottom = 64.0
 mouse_filter = 2
+
+[node name="Beta" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -256.0
+margin_top = -48.0
+
+[node name="beatgamedev" type="TextureRect" parent="Beta"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -48.0
+margin_top = 8.0
+margin_bottom = -8.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Beta"]
+anchor_bottom = 1.0
+margin_top = 8.0
+margin_right = 208.0
+margin_bottom = -8.0
+custom_fonts/font = SubResource( 1 )
+text = "Vulnus Beta g1"
+align = 2
+valign = 1

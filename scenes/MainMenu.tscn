@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/Theme.tres" type="Theme" id=6]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scripts/menu/MainMenu.cs" type="Script" id=8]
+[ext_resource path="res://assets/images/vulnus.png" type="Texture" id=9]
 [ext_resource path="res://scripts/menu/MenuHandler.cs" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
@@ -64,6 +65,7 @@ margin_right = 352.0
 custom_constants/separation = 4
 
 [node name="SignIn" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
+visible = false
 margin_right = 352.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
@@ -84,13 +86,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 56.0
 custom_fonts/font = SubResource( 1 )
-text = "Sign In to Vulnus"
+text = "Sign In"
 valign = 1
 
 [node name="Singleplayer" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
-margin_top = 44.0
 margin_right = 352.0
-margin_bottom = 84.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_vertical = 0
 
@@ -109,13 +110,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 56.0
 custom_fonts/font = SubResource( 1 )
-text = "Play Singleplayer"
+text = "Singleplayer"
 valign = 1
 
 [node name="Downloads" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
-margin_top = 88.0
+margin_top = 44.0
 margin_right = 352.0
-margin_bottom = 128.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_vertical = 0
 
@@ -138,9 +139,9 @@ text = "Download Maps"
 valign = 1
 
 [node name="Options" type="Button" parent="ViewContainer/MainMenu/Sidebar/Buttons"]
-margin_top = 132.0
+margin_top = 88.0
 margin_right = 352.0
-margin_bottom = 172.0
+margin_bottom = 128.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_vertical = 0
 
@@ -162,23 +163,30 @@ custom_fonts/font = SubResource( 1 )
 text = "Settings"
 valign = 1
 
+[node name="Singleplayer" type="Control" parent="ViewContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Topbar" type="ColorRect" parent="."]
 anchor_right = 1.0
-margin_bottom = 96.0
+margin_bottom = 72.0
 color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [node name="Profile" type="Control" parent="Topbar"]
+anchor_left = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
+margin_left = -296.0
 margin_top = 8.0
-margin_right = 352.0
+margin_right = -8.0
 margin_bottom = -8.0
 
 [node name="Avatar" type="TextureRect" parent="Topbar/Profile"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 72.0
-margin_bottom = 72.0
+margin_right = 48.0
+margin_bottom = 48.0
 texture = ExtResource( 3 )
 expand = true
 
@@ -195,8 +203,17 @@ color = Color( 0.188235, 0.188235, 0.188235, 1 )
 [node name="Username" type="Label" parent="Topbar/Profile"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -232.0
+margin_left = -224.0
 margin_bottom = 32.0
 custom_fonts/font = SubResource( 2 )
 text = "Not logged in"
 valign = 2
+
+[node name="Vulnus" type="TextureRect" parent="Topbar"]
+anchor_bottom = 1.0
+margin_top = 12.0
+margin_right = 72.0
+margin_bottom = -12.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6

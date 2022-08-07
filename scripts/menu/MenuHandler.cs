@@ -7,7 +7,7 @@ public class MenuHandler : Control
 	public override void _Ready()
 	{
 		var viewContainer = GetNode<Control>("ViewContainer");
-		Control[] views = { viewContainer.GetNode<Control>("MainMenu") };
+		Control[] views = { viewContainer.GetNode<Control>("MainMenu"), viewContainer.GetNode<Control>("Singleplayer") };
 		Views = views;
 		GoTo(0);
 	}
