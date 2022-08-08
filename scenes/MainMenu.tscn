@@ -5,14 +5,14 @@
 [ext_resource path="res://assets/images/account.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/matt.jpg" type="Texture" id=5]
-[ext_resource path="res://assets/Theme.tres" type="Theme" id=6]
+[ext_resource path="res://assets/themes/MainMenu.tres" type="Theme" id=6]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://scripts/menu/MainMenu.cs" type="Script" id=8]
 [ext_resource path="res://assets/images/vulnus.png" type="Texture" id=9]
 [ext_resource path="res://scripts/menu/MenuHandler.cs" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
-size = 18
+size = 20
 use_filter = true
 font_data = ExtResource( 1 )
 
