@@ -1,5 +1,8 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class Startup : Node
 {
@@ -7,21 +10,23 @@ public class Startup : Node
 	private string text;
 	private float counter;
 	private static bool hasRun = false;
+	private static bool ready = false;
+	private static Dictionary<string, Task> tasks = new Dictionary<string, Task>();
 	public override void _Ready()
 	{
-		if (!hasRun)
-		{
-			hasRun = true;
-		}
-		else
-		{
-			GD.Print("Already loaded!");
+		if (hasRun)
 			return;
-		}
+		hasRun = true;
+		Run();
+	}
+	public void Run()
+	{
 		label = GetNode<Label>("Label");
 		text = "Loading maps";
-		LoadMaps();
-		Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
+		Task LoadMapsTask = new Task(() => LoadMaps());
+		tasks.Add("maps", LoadMapsTask);
+		LoadMapsTask.Start();
+		ready = true;
 	}
 	public override void _Process(float delta)
 	{
@@ -30,10 +35,34 @@ public class Startup : Node
 		var dots = (int)(counter * 3) % 4;
 		label.Text = text + new string('.', dots);
 	}
+	public override void _PhysicsProcess(float delta)
+	{
+		base._PhysicsProcess(delta);
+		if (ready)
+		{
+			bool allDone = true;
+			foreach (KeyValuePair<string, Task> pair in tasks)
+			{
+				var task = pair.Value;
+				if (pair.Key == "maps" && !task.IsCompleted)
+				{
+					text = $"Loading maps ({MapLoader.LoadedMaps.Count})";
+				}
+				allDone = allDone && task.IsCompleted;
+				if (!allDone)
+					break;
+			}
+			if (!allDone)
+				return;
+			ready = false;
+			tasks.Clear();
+			Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
+		}
+	}
 	public void LoadMaps()
 	{
 		var start = OS.GetTicksUsec();
-		bool loaded = MapLoader.LoadMapsFromDirectory(OS.GetUserDataDir().PlusFile("maps"));
+		bool loaded = MapLoader.LoadMapsFromDirectory("user://maps");
 		var end = OS.GetTicksUsec();
 		if (!loaded)
 		{

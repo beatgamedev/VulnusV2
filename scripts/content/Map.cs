@@ -13,6 +13,8 @@ public class Map
 	[JsonProperty("_version")]
 	public int FormatVersion;
 	[NonSerialized]
+	public string Hash;
+	[NonSerialized]
 	public string Path;
 	[JsonProperty("_artist")]
 	public string Artist;
@@ -57,7 +59,7 @@ public class Map
 		[JsonProperty("_notes")]
 		public List<Note> Notes;
 	}
-	public static Map LoadFromPath(string path)
+	public static Map LoadFromPath(string path, string hash)
 	{
 		var file = new File();
 		if (file.Open(path.PlusFile("cache.bin"), File.ModeFlags.Read) == Error.Ok)
@@ -67,6 +69,7 @@ public class Map
 			var buffer = file.GetBuffer((long)file.GetLen());
 			var stream = new MemoryStream(buffer);
 			var cachedMap = (Map)deserializer.Deserialize(stream);
+			cachedMap.Hash = hash;
 			return cachedMap;
 		}
 		GD.Print("Loading map without cache: " + path);
@@ -86,6 +89,7 @@ public class Map
 		map.Serialize(writer);
 		writer.Flush();
 		writer.Dispose();
+		map.Hash = hash;
 		return map;
 	}
 	public void Serialize(Stream stream)
@@ -117,5 +121,9 @@ public class Map
 			texture = (ImageTexture)ResourceLoader.Load("res://assets/images/matt.jpg");
 		}
 		return texture;
+	}
+	public AudioStream LoadAudio()
+	{
+		return AudioHandler.LoadAudio(Path.PlusFile(Music));
 	}
 }
