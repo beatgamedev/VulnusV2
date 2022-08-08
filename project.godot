@@ -33,6 +33,14 @@ window/size/test_width=1280
 window/size/test_height=720
 window/vsync/use_vsync=false
 
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/godot-openxr/plugin.cfg" )
+
+[gdnative]
+
+singletons=[ "res://addons/godot-openxr/config/godot_openxr.gdnlib" ]
+
 [gui]
 
 timers/tooltip_delay_sec=0.3
@@ -56,8 +64,9 @@ common/enable_pause_aware_picking=true
 quality/filters/sharpen_intensity=0.4
 quality/driver/fallback_to_gles2=true
 threads/thread_model=2
+vram_compression/import_etc=true
 quality/filters/use_nearest_mipmap_filter=true
-environment/default_clear_color=Color( 0.301961, 0.301961, 0.301961, 1 )
+environment/default_clear_color=Color( 0, 0.0941176, 0.188235, 1 )
 quality/filters/msaa=1
 quality/filters/use_fxaa=true
-environment/default_environment="res://assets/Environment.tres"
+environment/default_environment="res://assets/environments/Environment.tres"
