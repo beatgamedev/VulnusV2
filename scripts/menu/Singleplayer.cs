@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Play : Control
+public class Play : View
 {
 	private Control mapList;
 	private Control mapDetail;

@@ -3,19 +3,19 @@ using System;
 
 public class MenuHandler : Control
 {
-	private Control[] Views;
+	private int VisibleView = 0;
+	private View[] Views;
 	public override void _Ready()
 	{
 		var viewContainer = GetNode<Control>("ViewContainer");
-		Control[] views = { viewContainer.GetNode<Control>("MainMenu"), viewContainer.GetNode<Control>("Singleplayer") };
+		View[] views = { viewContainer.GetNode<View>("MainMenu"), viewContainer.GetNode<View>("Singleplayer") };
 		Views = views;
 		GoTo(0);
 	}
 	public void GoTo(int view)
 	{
-		for (int i = 0; i < Views.Length; i++)
-		{
-			Views[i].Visible = i == view;
-		}
+		Views[VisibleView].SetActive(false);
+		Views[view].SetActive(true);
+		VisibleView = view;
 	}
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Options : Control
+public class Options : View
 {
 	private bool active = false;
 	private Tween tween;
