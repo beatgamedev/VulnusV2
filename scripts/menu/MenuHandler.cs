@@ -9,6 +9,10 @@ public class MenuHandler : Control
 	{
 		var viewContainer = GetNode<Control>("ViewContainer");
 		View[] views = { viewContainer.GetNode<View>("MainMenu"), viewContainer.GetNode<View>("Singleplayer") };
+		foreach (View view in views)
+		{
+			view.Visible = false;
+		}
 		Views = views;
 		CallDeferred(nameof(GoTo), 0);
 	}
