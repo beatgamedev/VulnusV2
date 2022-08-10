@@ -14,9 +14,11 @@ public partial class View : Control
 	public virtual void OnShow()
 	{
 		this.IsActive = true;
+		this.Visible = true;
 	}
 	public virtual void OnHide()
 	{
 		this.IsActive = false;
+		this.Visible = false;
 	}
 }

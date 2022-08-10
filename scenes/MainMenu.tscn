@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -16,6 +16,11 @@
 size = 20
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+use_filter = true
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -165,6 +170,7 @@ text = "Settings"
 valign = 1
 
 [node name="Singleplayer" type="Control" parent="ViewContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 11 )
@@ -175,6 +181,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -48.0
 color = Color( 0.12549, 0.12549, 0.12549, 1 )
+
+[node name="Back" type="Button" parent="ViewContainer/Singleplayer/BottomBar"]
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_right = 192.0
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/BottomBar/Back"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -16.0
+custom_fonts/font = SubResource( 3 )
+text = "BACK"
+align = 2
+valign = 1
+
+[node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
 
 [node name="Topbar" type="ColorRect" parent="."]
 anchor_right = 1.0
