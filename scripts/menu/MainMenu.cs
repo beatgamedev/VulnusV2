@@ -5,6 +5,7 @@ public class MainMenu : View
 {
 	public override void _Ready()
 	{
+		base._Ready();
 		MenuHandler menu = GetParent<Control>().GetParent<MenuHandler>();
 		var sidebar = GetNode<Control>("Sidebar");
 		var buttons = sidebar.GetNode<Control>("Buttons");

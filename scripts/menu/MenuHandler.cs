@@ -10,12 +10,13 @@ public class MenuHandler : Control
 		var viewContainer = GetNode<Control>("ViewContainer");
 		View[] views = { viewContainer.GetNode<View>("MainMenu"), viewContainer.GetNode<View>("Singleplayer") };
 		Views = views;
-		GoTo(0);
+		CallDeferred(nameof(GoTo), 0);
 	}
 	public void GoTo(int view)
 	{
-		Views[VisibleView].SetActive(false);
-		Views[view].SetActive(true);
+		if (view != VisibleView)
+			Views[VisibleView].SetActive(false);
 		VisibleView = view;
+		Views[view].SetActive(true);
 	}
 }

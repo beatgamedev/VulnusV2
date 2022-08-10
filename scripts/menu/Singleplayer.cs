@@ -10,6 +10,7 @@ public class Singleplayer : View
 	private MenuHandler menu;
 	public override void _Ready()
 	{
+		base._Ready();
 		menu = GetParent<Control>().GetParent<MenuHandler>();
 		tween = GetNode<Tween>("Tween");
 		// mapList = GetNode<Control>("MapList");
@@ -23,7 +24,6 @@ public class Singleplayer : View
 		base.OnShow();
 		tween.StopAll();
 		tween.InterpolateProperty(bottomBar, "margin_top", 0, -48, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
-		tween.InterpolateProperty(bottomBar, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();
 	}
 }

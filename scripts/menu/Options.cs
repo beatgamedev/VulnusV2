@@ -8,6 +8,7 @@ public class Options : View
 	private bool opening = false;
 	public override void _Ready()
 	{
+		base._Ready();
 		tween = GetNode<Tween>("Tween");
 		tween.Connect("tween_all_completed", this, nameof(TweenCompleted));
 		var topbar = GetNode<Control>("Topbar");
