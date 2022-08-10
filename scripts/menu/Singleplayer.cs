@@ -17,13 +17,13 @@ public class Singleplayer : View
 		bottomBar = GetNode<Control>("BottomBar");
 		var backBtn = bottomBar.GetNode<Button>("Back");
 		backBtn.Connect("pressed", menu, nameof(MenuHandler.GoTo), new Godot.Collections.Array(0));
-		tween.InterpolateProperty(bottomBar, "margin_top", 0, -48, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
-		tween.InterpolateProperty(bottomBar, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 	}
 	public override void OnShow()
 	{
 		base.OnShow();
 		tween.StopAll();
+		tween.InterpolateProperty(bottomBar, "margin_top", 0, -48, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
+		tween.InterpolateProperty(bottomBar, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();
 	}
 }
