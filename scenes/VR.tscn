@@ -4,7 +4,7 @@
 
 [sub_resource type="ViewportTexture" id=1]
 flags = 4
-viewport_path = NodePath("Plane/Viewport")
+viewport_path = NodePath("UI/Viewport")
 
 [sub_resource type="SpatialMaterial" id=2]
 resource_local_to_scene = true
