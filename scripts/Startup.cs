@@ -62,7 +62,7 @@ public class Startup : Node
 	public void LoadMaps()
 	{
 		var start = OS.GetTicksUsec();
-		bool loaded = MapLoader.LoadMapsFromDirectory("user://maps");
+		bool loaded = MapLoader.LoadMapsFromDirectory(OS.GetUserDataDir().PlusFile("maps"));
 		var end = OS.GetTicksUsec();
 		if (!loaded)
 		{

@@ -64,7 +64,7 @@ public class Map
 		var file = new File();
 		if (file.Open(path.PlusFile("cache.bin"), File.ModeFlags.Read) == Error.Ok)
 		{
-			GD.Print("Loading map from cache: " + path);
+			// GD.Print("Loading map from cache: " + path);
 			var deserializer = new BinaryFormatter();
 			var buffer = file.GetBuffer((long)file.GetLen());
 			var stream = new MemoryStream(buffer);
@@ -72,7 +72,7 @@ public class Map
 			cachedMap.Hash = hash;
 			return cachedMap;
 		}
-		GD.Print("Loading map without cache: " + path);
+		// GD.Print("Loading map without cache: " + path);
 		file.Open(path.PlusFile("meta.json"), File.ModeFlags.Read);
 		var map = JsonConvert.DeserializeObject<Map>(file.GetAsText());
 		map.Path = path;

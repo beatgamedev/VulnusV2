@@ -31,13 +31,13 @@ public static class SquirrelW
 		if (newVer != null)
 		{
 			UpToDate = false;
-			Events.EmitSignal(nameof(EventsW.OnOutdated), newVer);
+			Events.EmitSignal(nameof(EventsW.OnOutdated), newVer.FutureReleaseEntry.Version.ToString());
 		}
 	}
 	private static void OnInstall(SemanticVersion version, IAppTools tools)
 	{
 		tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
-		
+
 	}
 	private static void OnUninstall(SemanticVersion version, IAppTools tools)
 	{
@@ -52,6 +52,6 @@ public static class SquirrelW
 		[Signal]
 		public delegate void OnProgress(int progress);
 		[Signal]
-		public delegate void OnOutdated(UpdateInfo update);
+		public delegate void OnOutdated(string newVersion);
 	}
 }

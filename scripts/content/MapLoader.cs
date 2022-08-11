@@ -27,7 +27,7 @@ public static class MapLoader
 			if (cacheDir.CurrentIsDir())
 			{
 				caches.Add(cacheFileName);
-				GD.Print("Found cache: " + cacheFileName);
+				// GD.Print("Found cache: " + cacheFileName);
 			}
 			cacheFileName = cacheDir.GetNext();
 		}
@@ -43,17 +43,17 @@ public static class MapLoader
 			if (mapFileName.Extension() == "vul")
 			{
 				var hash = mapFile.GetMd5(directory.PlusFile(mapFileName));
-				GD.Print("Found map: " + hash);
+				// GD.Print("Found map: " + hash);
 				hashes.Add(hash);
 				if (LoadedMaps.Find(map => map.Hash == hash) != null)
 				{
-					GD.Print("Map already loaded: " + hash);
+					// GD.Print("Map already loaded: " + hash);
 				}
 				else
 				{
 					if (!caches.Contains(hash)) // If the map isn't already cached, do extraction stuff
 					{
-						GD.Print("New cache added: " + hash);
+						// GD.Print("New cache added: " + hash);
 						mapFile.Open(directory.PlusFile(mapFileName), File.ModeFlags.Read);
 						var stream = new MemoryStream(mapFile.GetBuffer((long)mapFile.GetLen()));
 						ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read);
@@ -69,7 +69,7 @@ public static class MapLoader
 		{
 			if (!hashes.Contains(hash))
 			{
-				GD.Print("Old cache deleted: " + hash);
+				// GD.Print("Old cache deleted: " + hash);
 				System.IO.Directory.Delete(cachePath.PlusFile(hash), true);
 			}
 		}
