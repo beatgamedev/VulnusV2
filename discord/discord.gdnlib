@@ -1,0 +1,20 @@
+[general]
+
+singleton=false
+load_once=false
+symbol_prefix=""
+reloadable=false
+
+[entry]
+
+OSX.64="res://discord/lib/x64/discord_game_sdk.dylib"
+Windows.64="res://discord/lib/x64/discord_game_sdk.dll"
+Windows.32="res://discord/lib/x32/discord_game_sdk.dll"
+X11.64="res://discord/lib/x64/discord_game_sdk.so"
+
+[dependencies]
+
+OSX.64=[  ]
+Windows.64=[  ]
+Windows.32=[  ]
+X11.64=[  ]
