@@ -3,6 +3,7 @@ using System;
 
 public class MenuHandler : Control
 {
+	public static int NextView = 0;
 	private int VisibleView = 0;
 	private View[] Views;
 	public override void _Ready()
@@ -15,6 +16,15 @@ public class MenuHandler : Control
 		}
 		Views = views;
 		CallDeferred(nameof(GoTo), 0);
+	}
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+		if (NextView != 0)
+		{
+			CallDeferred(nameof(GoTo), NextView);
+			NextView = 0;
+		}
 	}
 	public void GoTo(int view)
 	{
