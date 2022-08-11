@@ -31,6 +31,52 @@ namespace Discord
 	public class ActivityW
 	{
 		public Activity Activity { get; private set; }
+		public DateTime? StartTimestamp
+		{
+			get
+			{
+				if (this.Activity.Timestamps.Start < 1) return null;
+				return DateTimeOffset.FromUnixTimeSeconds(this.Activity.Timestamps.Start).DateTime;
+			}
+			set
+			{
+				var activity = this.Activity;
+				if (value != null)
+					activity.Timestamps.Start = ((DateTimeOffset)value).ToUnixTimeSeconds();
+			}
+		}
+		public DateTime? EndTimestamp
+		{
+			get
+			{
+				if (this.Activity.Timestamps.End < 1) return null;
+				return DateTimeOffset.FromUnixTimeSeconds(this.Activity.Timestamps.End).DateTime;
+			}
+			set
+			{
+				var activity = this.Activity;
+				if (value != null)
+					activity.Timestamps.End = ((DateTimeOffset)value).ToUnixTimeSeconds();
+			}
+		}
+		public string State
+		{
+			get => this.Activity.State;
+			set
+			{
+				var activity = this.Activity;
+				activity.State = value;
+			}
+		}
+		public string Details
+		{
+			get => this.Activity.Details;
+			set
+			{
+				var activity = this.Activity;
+				activity.Details = value;
+			}
+		}
 		public ActivityW(string state = "Idle", string details = null, DateTime? startTimestamp = null, DateTime? endTimestamp = null)
 		{
 			var activity = new Activity();
@@ -38,11 +84,14 @@ namespace Discord
 			activity.Assets.LargeImage = "vulnus";
 			activity.Assets.LargeText = "Vulnus";
 			activity.Assets.SmallImage = "beatgamedev";
-			if (startTimestamp != null) activity.Timestamps.Start = ((DateTimeOffset)startTimestamp).ToUnixTimeSeconds();
 			if (endTimestamp != null) activity.Timestamps.End = ((DateTimeOffset)endTimestamp).ToUnixTimeSeconds();
 			activity.State = state;
 			activity.Details = details;
 			this.Activity = activity;
+			this.StartTimestamp = startTimestamp;
+			this.EndTimestamp = endTimestamp;
+			this.State = state;
+			this.Details = details;
 		}
 	}
 }
