@@ -198,6 +198,25 @@ valign = 1
 
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
 
+[node name="MapList" type="Control" parent="ViewContainer/Singleplayer"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_bottom = -48.0
+rect_clip_content = true
+
+[node name="Content" type="VBoxContainer" parent="ViewContainer/Singleplayer/MapList"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="Button" type="Button" parent="ViewContainer/Singleplayer/MapList/Content"]
+margin_right = 576.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+rect_pivot_offset = Vector2( 576, 0 )
+
 [node name="Topbar" type="ColorRect" parent="."]
 anchor_right = 1.0
 margin_bottom = 72.0

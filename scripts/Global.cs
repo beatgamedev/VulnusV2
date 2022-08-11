@@ -9,12 +9,15 @@ public class Global : Node
 	public Node CurrentScene { get; private set; }
 	public Control Overlay { get; private set; }
 	public Dictionary<string, Control> Overlays { get; private set; }
-	public override void _Ready()
+	public Global() : base()
 	{
 		Instance = this;
+		SquirrelW.Run();
 		Discord = new Discord.DiscordW();
 		Discord.SetActivity(new Discord.ActivityW());
-		SquirrelW.Run();
+	}
+	public override void _Ready()
+	{
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);
 		var overlayScene = (PackedScene)GD.Load("res://scenes/Overlay.tscn");

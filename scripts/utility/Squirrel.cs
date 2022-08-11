@@ -37,7 +37,6 @@ public static class SquirrelW
 	private static void OnInstall(SemanticVersion version, IAppTools tools)
 	{
 		tools.CreateShortcutForThisExe(ShortcutLocation.StartMenu | ShortcutLocation.Desktop);
-
 	}
 	private static void OnUninstall(SemanticVersion version, IAppTools tools)
 	{
