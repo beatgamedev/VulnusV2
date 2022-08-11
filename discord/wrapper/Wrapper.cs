@@ -31,15 +31,15 @@ namespace Discord
 	public class ActivityW
 	{
 		public Activity Activity { get; private set; }
-		public ActivityW(string state = "Idle", string details = null, long? startTimestamp = null, long? endTimestamp = null)
+		public ActivityW(string state = "Idle", string details = null, DateTime? startTimestamp = null, DateTime? endTimestamp = null)
 		{
 			var activity = new Activity();
 			activity.ApplicationId = DiscordW.ClientId;
 			activity.Assets.LargeImage = "vulnus";
 			activity.Assets.LargeText = "Vulnus";
 			activity.Assets.SmallImage = "beatgamedev";
-			if (startTimestamp != null) activity.Timestamps.Start = (long)startTimestamp;
-			if (endTimestamp != null) activity.Timestamps.End = (long)endTimestamp;
+			if (startTimestamp != null) activity.Timestamps.Start = ((DateTimeOffset)startTimestamp).ToUnixTimeSeconds();
+			if (endTimestamp != null) activity.Timestamps.End = ((DateTimeOffset)endTimestamp).ToUnixTimeSeconds();
 			activity.State = state;
 			activity.Details = details;
 			this.Activity = activity;

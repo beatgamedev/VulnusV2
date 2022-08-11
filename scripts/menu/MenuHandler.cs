@@ -16,6 +16,10 @@ public class MenuHandler : Control
 		}
 		Views = views;
 		CallDeferred(nameof(GoTo), 0);
+		Global.Discord.SetActivity(new Discord.ActivityW(
+			state: "Selecting a map",
+			startTimestamp: DateTime.Now
+		));
 	}
 	public override void _EnterTree()
 	{
