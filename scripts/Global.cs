@@ -5,14 +5,15 @@ using System.Collections.Generic;
 public class Global : Node
 {
 	public static Global Instance;
-	public static Discord.Wrapper Discord;
+	public static Discord.DiscordW Discord;
 	public Node CurrentScene { get; private set; }
 	public Control Overlay { get; private set; }
 	public Dictionary<string, Control> Overlays { get; private set; }
 	public override void _Ready()
 	{
 		Instance = this;
-		Discord = new Discord.Wrapper();
+		Discord = new Discord.DiscordW();
+		Discord.SetActivity(new Discord.ActivityW());
 		SquirrelW.Run();
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);
