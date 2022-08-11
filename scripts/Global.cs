@@ -8,10 +8,10 @@ public class Global : Node
 	public Node CurrentScene { get; private set; }
 	public Control Overlay { get; private set; }
 	public Dictionary<string, Control> Overlays { get; private set; }
-
 	public override void _Ready()
 	{
 		Instance = this;
+		SquirrelW.Run();
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);
 		var overlayScene = (PackedScene)GD.Load("res://scenes/Overlay.tscn");
