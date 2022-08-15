@@ -20,11 +20,25 @@ public class Map
 	public string Artist;
 	[JsonProperty("_title")]
 	public string Title;
+	public string Name
+	{
+		get
+		{
+			return $"{Title} - {Artist}";
+		}
+	}
 	[JsonProperty("_difficulties")]
 	public List<string> _difficulties;
 	public List<Difficulty> Difficulties;
 	[JsonProperty("_mappers")]
-	public List<string> Mappers;
+	public List<string> _mappers;
+	public string Mappers
+	{
+		get
+		{
+			return string.Join(", ", _mappers.ToArray());
+		}
+	}
 	[JsonProperty("_music")]
 	public string Music;
 	[Serializable, JsonObject]
@@ -61,6 +75,7 @@ public class Map
 	}
 	public static Map LoadFromPath(string path, string hash)
 	{
+		path = path.Replace("user://", OS.GetUserDataDir());
 		var file = new File();
 		if (file.Open(path.PlusFile("cache.bin"), File.ModeFlags.Read) == Error.Ok)
 		{
@@ -69,6 +84,7 @@ public class Map
 			var buffer = file.GetBuffer((long)file.GetLen());
 			var stream = new MemoryStream(buffer);
 			var cachedMap = (Map)deserializer.Deserialize(stream);
+			cachedMap.Path = path;
 			cachedMap.Hash = hash;
 			return cachedMap;
 		}
@@ -86,18 +102,18 @@ public class Map
 		}
 		file.Close();
 		var writer = new FileStream(path.PlusFile("cache.bin"), FileMode.Create);
-		map.Serialize(writer);
-		writer.Flush();
+		map.SerializeToFile(ref writer);
 		writer.Dispose();
 		map.Hash = hash;
 		return map;
 	}
-	public void Serialize(Stream stream)
+	public void SerializeToFile(ref FileStream stream)
 	{
 		var serializer = new BinaryFormatter();
 		serializer.Serialize(stream, this);
+		stream.Flush();
 	}
-	public ImageTexture LoadCover()
+	public Texture LoadCover()
 	{
 		ImageTexture texture;
 		var cover = new Image();
@@ -112,14 +128,11 @@ public class Map
 		}
 		if (coverPath == "none")
 		{
-			texture = new ImageTexture();
-			cover.Load(coverPath);
-			texture.CreateFromImage(cover);
+			return Global.Matt;
 		}
-		else
-		{
-			texture = (ImageTexture)ResourceLoader.Load("res://assets/images/matt.jpg");
-		}
+		texture = new ImageTexture();
+		cover.Load(coverPath);
+		texture.CreateFromImage(cover);
 		return texture;
 	}
 	public AudioStream LoadAudio()
