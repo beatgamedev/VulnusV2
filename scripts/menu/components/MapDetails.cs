@@ -13,8 +13,10 @@ public class MapDetails : View
 	}
 	public void OnMapSelected(string hash)
 	{
+		var preview = GetNode<AudioStreamPlayer>("MusicPreview");
 		if (hash == null)
 		{
+			preview.Stop();
 			SetActive(false);
 			return;
 		}
@@ -23,5 +25,7 @@ public class MapDetails : View
 		GetNode<TextureRect>("Cover").Texture = map.LoadCover();
 		GetNode<Label>("Title").Text = map.Title;
 		GetNode<Label>("Mappers").Text = map.Mappers;
+		preview.Stream = map.LoadAudio();
+		preview.Play(preview.Stream.GetLength() / 3);
 	}
 }

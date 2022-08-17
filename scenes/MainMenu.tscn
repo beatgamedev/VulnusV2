@@ -239,6 +239,8 @@ texture = ExtResource( 5 )
 expand = true
 stretch_mode = 6
 
+[node name="MusicPreview" type="AudioStreamPlayer" parent="ViewContainer/Singleplayer/MapDetails"]
+
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0
 anchor_right = 1.0
