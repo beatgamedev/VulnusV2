@@ -240,7 +240,7 @@ expand = true
 stretch_mode = 6
 
 [node name="MusicPreview" type="AudioStreamPlayer" parent="ViewContainer/Singleplayer/MapDetails"]
-volume_db = -5.0
+bus = "Music"
 
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0

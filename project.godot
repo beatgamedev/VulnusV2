@@ -21,6 +21,10 @@ boot_splash/bg_color=Color( 0.0470588, 0.0627451, 0.0941176, 1 )
 config/icon="res://assets/images/vulnus.png"
 config/windows_native_icon="res://assets/images/vulnus.ico"
 
+[audio]
+
+default_bus_layout="res://assets/audiobus.tres"
+
 [autoload]
 
 Global="*res://scripts/Global.cs"
