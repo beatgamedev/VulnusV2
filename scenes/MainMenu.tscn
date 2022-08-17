@@ -176,6 +176,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 11 )
 
+[node name="MapList" type="Control" parent="ViewContainer/Singleplayer"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 64.0
+rect_clip_content = true
+script = ExtResource( 12 )
+
+[node name="Content" type="VBoxContainer" parent="ViewContainer/Singleplayer/MapList"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0
 anchor_right = 1.0
@@ -198,19 +211,6 @@ align = 2
 valign = 1
 
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
-
-[node name="MapList" type="Control" parent="ViewContainer/Singleplayer"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 64.0
-rect_clip_content = true
-script = ExtResource( 12 )
-
-[node name="Content" type="VBoxContainer" parent="ViewContainer/Singleplayer/MapList"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 0
 
 [node name="Topbar" type="ColorRect" parent="."]
 anchor_right = 1.0
