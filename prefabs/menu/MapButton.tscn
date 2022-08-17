@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/menu/components/MapButton.cs" type="Script" id=1]
 [ext_resource path="res://assets/images/matt.jpg" type="Texture" id=2]
@@ -7,6 +7,14 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.188235, 0.188235, 0.188235, 1 )
+corner_radius_top_left = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.188235, 0.188235, 0.188235, 1 )
+border_width_right = 24
+border_color = Color( 0.156863, 0.784314, 1, 1 )
+border_blend = true
 corner_radius_top_left = 24
 corner_radius_bottom_left = 24
 
@@ -27,7 +35,7 @@ margin_bottom = 64.0
 rect_min_size = Vector2( 0, 64 )
 rect_pivot_offset = Vector2( 576, 0 )
 custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 1 )
+custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/disabled = SubResource( 1 )
 custom_styles/normal = SubResource( 1 )

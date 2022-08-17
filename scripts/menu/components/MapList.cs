@@ -11,12 +11,24 @@ public class MapList : Control
 	public override void _Ready()
 	{
 		content = GetNode<VBoxContainer>("Content");
+		mapButtons = new MapButton[MapLoader.LoadedMaps.Count];
+		int i = 0;
 		foreach (Map map in MapLoader.LoadedMaps)
 		{
 			var btn = MapButton.Create();
 			btn.Map = map;
 			btn.ManualUpdate();
+			btn.Connect("pressed", this, nameof(OnMapButtonPressed), new Godot.Collections.Array() { btn });
 			content.AddChild(btn);
+			mapButtons[i] = btn;
+			i++;
+		}
+	}
+	public void OnMapButtonPressed(MapButton button)
+	{
+		foreach (MapButton btn in mapButtons)
+		{
+			btn.Pressed = button.Pressed && btn == button;
 		}
 	}
 	public override void _Process(float delta)
