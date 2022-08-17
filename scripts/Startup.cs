@@ -48,6 +48,10 @@ public class Startup : Node
 				{
 					text = $"Loading maps ({MapLoader.LoadedMaps.Count})";
 				}
+				if (task.IsFaulted)
+				{
+					GD.Print(task.Exception);
+				}
 				allDone = allDone && task.IsCompleted;
 				if (!allDone)
 					break;

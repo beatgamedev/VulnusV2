@@ -113,8 +113,11 @@ public class Map
 		serializer.Serialize(stream, this);
 		stream.Flush();
 	}
+	[NonSerialized]
+	public Texture Cover;
 	public Texture LoadCover()
 	{
+		if (Cover != null) return Cover;
 		ImageTexture texture;
 		var cover = new Image();
 		var coverPath = "none";
@@ -128,11 +131,13 @@ public class Map
 		}
 		if (coverPath == "none")
 		{
+			Cover = Global.Matt;
 			return Global.Matt;
 		}
 		texture = new ImageTexture();
 		cover.Load(coverPath);
 		texture.CreateFromImage(cover);
+		Cover = texture;
 		return texture;
 	}
 	public AudioStream LoadAudio()

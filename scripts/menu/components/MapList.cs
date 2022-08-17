@@ -28,14 +28,14 @@ public class MapList : Control
 	public void OnMapButtonPressed(MapButton button)
 	{
 		SelectedMap = button.Pressed ? button.Map : null;
-		EmitSignal(nameof(MapSelected), SelectedMap);
+		EmitSignal(nameof(MapSelected), button.Pressed ? SelectedMap.Hash : null);
 		foreach (MapButton btn in mapButtons)
 		{
 			btn.Pressed = button.Pressed && btn == button;
 		}
 	}
 	[Signal]
-	public delegate void MapSelected(Map map);
+	public delegate void MapSelected(string hash);
 	public override void _Process(float delta)
 	{
 		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), (-64f * MapLoader.LoadedMaps.Count) + (RectSize.y - 64f), 0f);

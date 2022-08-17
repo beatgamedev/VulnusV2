@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -12,9 +12,20 @@
 [ext_resource path="res://scripts/menu/MenuHandler.cs" type="Script" id=10]
 [ext_resource path="res://scripts/menu/Singleplayer.cs" type="Script" id=11]
 [ext_resource path="res://scripts/menu/components/MapList.cs" type="Script" id=12]
+[ext_resource path="res://scripts/menu/components/MapDetails.cs" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 22
 use_filter = true
 font_data = ExtResource( 1 )
 
@@ -188,6 +199,45 @@ script = ExtResource( 12 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 0
+
+[node name="MapDetails" type="ColorRect" parent="ViewContainer/Singleplayer"]
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_bottom = -48.0
+color = Color( 0.188235, 0.188235, 0.188235, 0.376471 )
+script = ExtResource( 13 )
+
+[node name="Title" type="Label" parent="ViewContainer/Singleplayer/MapDetails"]
+anchor_right = 1.0
+margin_left = 160.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = 80.0
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 4 )
+text = "Fucking Disgusting Scum - Seifuku Yangire"
+valign = 2
+autowrap = true
+
+[node name="Mappers" type="Label" parent="ViewContainer/Singleplayer/MapDetails"]
+anchor_right = 1.0
+margin_left = 160.0
+margin_top = 80.0
+margin_right = -16.0
+margin_bottom = 152.0
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 5 )
+text = "DyamoDash"
+autowrap = true
+
+[node name="Cover" type="TextureRect" parent="ViewContainer/Singleplayer/MapDetails"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 152.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
 
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0
