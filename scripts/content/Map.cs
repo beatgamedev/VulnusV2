@@ -120,7 +120,7 @@ public class Map
 		var coverPath = "none";
 		foreach (string path in System.IO.Directory.GetFiles(Path))
 		{
-			if (path.BaseName().ToLower() == "cover")
+			if (path.GetFile().BaseName().ToLower() == "cover")
 			{
 				coverPath = path;
 				break;
