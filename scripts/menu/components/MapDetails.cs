@@ -25,6 +25,7 @@ public class MapDetails : View
 		GetNode<TextureRect>("Cover").Texture = map.LoadCover();
 		GetNode<Label>("Title").Text = map.Title;
 		GetNode<Label>("Mappers").Text = map.Mappers;
+		preview.Stream = null;
 		preview.Stream = map.LoadAudio();
 		preview.Play(preview.Stream.GetLength() / 3);
 	}
