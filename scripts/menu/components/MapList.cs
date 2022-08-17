@@ -3,6 +3,7 @@ using System;
 
 public class MapList : Control
 {
+	public Map SelectedMap { get; private set; }
 	private MapButton[] mapButtons;
 	private VBoxContainer content;
 	private float scrollSpeed = 0;
@@ -26,11 +27,15 @@ public class MapList : Control
 	}
 	public void OnMapButtonPressed(MapButton button)
 	{
+		SelectedMap = button.Pressed ? button.Map : null;
+		EmitSignal(nameof(MapSelected), SelectedMap);
 		foreach (MapButton btn in mapButtons)
 		{
 			btn.Pressed = button.Pressed && btn == button;
 		}
 	}
+	[Signal]
+	public delegate void MapSelected(Map map);
 	public override void _Process(float delta)
 	{
 		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), (-64f * MapLoader.LoadedMaps.Count) + (RectSize.y - 64f), 0f);
