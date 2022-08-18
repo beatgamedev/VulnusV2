@@ -10,23 +10,39 @@ public class Startup : Node
 	private string text;
 	private float counter;
 	private static bool hasRun = false;
-	private static bool ready = false;
-	private static Dictionary<string, Task> tasks = new Dictionary<string, Task>();
+	private static Task task;
 	public override void _Ready()
 	{
+		label = GetNode<Label>("Label");
 		if (hasRun)
 			return;
 		hasRun = true;
-		Run();
+		Connect(nameof(StageReached), this, nameof(OnStageReached));
+		task = Task.Run(Run);
 	}
+	public void OnStageReached(string stage, bool end)
+	{
+		if (end)
+		{
+			Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
+		}
+		text = stage;
+		counter = 0;
+	}
+	[Signal]
+	public delegate void StageReached(string stage, bool end);
 	public void Run()
 	{
-		label = GetNode<Label>("Label");
-		text = "Loading maps";
-		Task LoadMapsTask = new Task(() => LoadMaps());
-		tasks.Add("maps", LoadMapsTask);
-		LoadMapsTask.Start();
-		ready = true;
+		if (OS.HasFeature("Android"))
+		{
+			EmitSignal(nameof(StageReached), "Request permissions", false);
+			OS.RequestPermissions();
+		}
+		EmitSignal(nameof(StageReached), "Loading settings", false);
+		Settings.LoadSettings();
+		EmitSignal(nameof(StageReached), "Loading maps", false);
+		LoadMaps();
+		EmitSignal(nameof(StageReached), "All done", true);
 	}
 	public override void _Process(float delta)
 	{
@@ -34,34 +50,8 @@ public class Startup : Node
 		counter += delta;
 		var dots = (int)(counter * 3) % 4;
 		label.Text = text + new string('.', dots);
-	}
-	public override void _PhysicsProcess(float delta)
-	{
-		base._PhysicsProcess(delta);
-		if (ready)
-		{
-			bool allDone = true;
-			foreach (KeyValuePair<string, Task> pair in tasks)
-			{
-				var task = pair.Value;
-				if (pair.Key == "maps" && !task.IsCompleted)
-				{
-					text = $"Loading maps ({MapLoader.LoadedMaps.Count})";
-				}
-				if (task.IsFaulted)
-				{
-					GD.Print(task.Exception);
-				}
-				allDone = allDone && task.IsCompleted;
-				if (!allDone)
-					break;
-			}
-			if (!allDone)
-				return;
-			ready = false;
-			tasks.Clear();
-			Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
-		}
+		if (task.IsFaulted)
+			throw task.Exception;
 	}
 	public void LoadMaps()
 	{
