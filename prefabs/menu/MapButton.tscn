@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://scripts/menu/components/MapButton.cs" type="Script" id=1]
+[ext_resource path="res://scripts/menu/components/maps/MapButton.cs" type="Script" id=1]
 [ext_resource path="res://assets/images/matt.jpg" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=4]

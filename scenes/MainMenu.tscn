@@ -11,8 +11,8 @@
 [ext_resource path="res://assets/images/vulnus.png" type="Texture" id=9]
 [ext_resource path="res://scripts/menu/MenuHandler.cs" type="Script" id=10]
 [ext_resource path="res://scripts/menu/Singleplayer.cs" type="Script" id=11]
-[ext_resource path="res://scripts/menu/components/MapList.cs" type="Script" id=12]
-[ext_resource path="res://scripts/menu/components/MapDetails.cs" type="Script" id=13]
+[ext_resource path="res://scripts/menu/components/maps/MapList.cs" type="Script" id=12]
+[ext_resource path="res://scripts/menu/components/maps/MapDetails.cs" type="Script" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
