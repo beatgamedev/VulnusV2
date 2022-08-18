@@ -38,9 +38,8 @@ public class MapList : Control
 	public delegate void MapSelected(string hash);
 	public override void _Process(float delta)
 	{
-		if (mapButtons.Length <= 1)
-			return;
-		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), (-64f * MapLoader.LoadedMaps.Count) + (RectSize.y - 64f), 0f);
+		var mapSize = (-64f * MapLoader.LoadedMaps.Count);
+		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), mapSize + (Mathf.Min(mapSize, RectSize.y) - 64f), 0f);
 		content.RectPosition = new Vector2(content.RectPosition.x, scrollPosition);
 		scrollSpeed -= scrollSpeed * delta / 0.2f;
 	}
