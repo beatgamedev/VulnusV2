@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
 
@@ -19,6 +19,20 @@ border_color = Color( 1, 1, 1, 1 )
 content_margin_right = 4.0
 bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
 border_width_left = 4
+
+[sub_resource type="ImageTexture" id=11]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.096, 0.474, 0.6, 1 )
+border_width_right = 8
+border_color = Color( 0.156863, 0.784314, 1, 1 )
+border_blend = true
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxLine" id=13]
+color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+thickness = 8
 
 [sub_resource type="DynamicFont" id=7]
 use_filter = true
@@ -50,6 +64,12 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 4 )
 Button/styles/normal = SubResource( 5 )
 Button/styles/pressed = SubResource( 6 )
+HSlider/icons/grabber = SubResource( 11 )
+HSlider/icons/grabber_disabled = SubResource( 11 )
+HSlider/icons/grabber_highlight = SubResource( 11 )
+HSlider/styles/grabber_area = SubResource( 12 )
+HSlider/styles/grabber_area_highlight = SubResource( 12 )
+HSlider/styles/slider = SubResource( 13 )
 TabContainer/fonts/font = SubResource( 7 )
 TabContainer/styles/panel = SubResource( 8 )
 TabContainer/styles/tab_bg = SubResource( 9 )
