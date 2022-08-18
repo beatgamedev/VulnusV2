@@ -30,10 +30,6 @@ public class Global : Node
 	}
 	public void AddOverlay()
 	{
-		CallDeferred(nameof(AddOverlay));
-	}
-	private void DeferredAddOverlay()
-	{
 		var overlayScene = (PackedScene)GD.Load("res://scenes/Overlay.tscn");
 		Overlay = (Control)overlayScene.Instance();
 		Overlays = new Dictionary<string, Control>();
