@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class Settings
 {
-	public static int[] Volume;
+	public static int[] Volume = new int[3];
 	public static void UpdateSettings(bool loading)
 	{
 		var masterBus = AudioServer.GetBusIndex("Master");
@@ -25,10 +25,12 @@ public static class Settings
 		var settings = new SerializedSettings();
 		if (file.FileExists(path))
 		{
+			file.Open(path, Godot.File.ModeFlags.Read);
 			var deserializer = new BinaryFormatter();
 			var buffer = file.GetBuffer((long)file.GetLen());
 			var stream = new MemoryStream(buffer);
 			settings = (SerializedSettings)deserializer.Deserialize(stream);
+			file.Close();
 		}
 		foreach (FieldInfo field in typeof(SerializedSettings).GetFields())
 		{

@@ -22,18 +22,21 @@ public class Global : Node
 		Matt = (StreamTexture)GD.Load("res://assets/images/matt.jpg");
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);
-		var overlayScene = (PackedScene)GD.Load("res://scenes/Overlay.tscn");
-		Overlay = (Control)overlayScene.Instance();
-		Overlays = new Dictionary<string, Control>();
-		CallDeferred(nameof(AddOverlay));
 	}
 	public override void _PhysicsProcess(float delta)
 	{
 		base._PhysicsProcess(delta);
 		Discord.RunCallbacks();
 	}
-	private void AddOverlay()
+	public void AddOverlay()
 	{
+		CallDeferred(nameof(AddOverlay));
+	}
+	private void DeferredAddOverlay()
+	{
+		var overlayScene = (PackedScene)GD.Load("res://scenes/Overlay.tscn");
+		Overlay = (Control)overlayScene.Instance();
+		Overlays = new Dictionary<string, Control>();
 		GetTree().Root.AddChild(Overlay);
 		GetTree().Root.MoveChild(Overlay, 1);
 		foreach (Control overlay in Overlay.GetChildren())

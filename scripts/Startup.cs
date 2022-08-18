@@ -40,6 +40,8 @@ public class Startup : Node
 		}
 		EmitSignal(nameof(StageReached), "Loading settings", false);
 		Settings.LoadSettings();
+		EmitSignal(nameof(StageReached), "Adding overlays", false);
+		Global.Instance.AddOverlay();
 		EmitSignal(nameof(StageReached), "Loading maps", false);
 		LoadMaps();
 		EmitSignal(nameof(StageReached), "All done", true);
