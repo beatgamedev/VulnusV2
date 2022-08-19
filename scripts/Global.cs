@@ -40,11 +40,11 @@ public class Global : Node
 			Overlays.Add(overlay.Name, overlay);
 		}
 	}
-	public void GotoScene(string path)
+	public void GotoScene(string path, Action<Node> callback = null)
 	{
-		CallDeferred(nameof(DeferredGotoScene), path);
+		CallDeferred(nameof(DeferredGotoScene), path, callback);
 	}
-	private void DeferredGotoScene(string path)
+	private void DeferredGotoScene(string path, Action<Node> callback = null)
 	{
 		CurrentScene.Free();
 		var nextScene = (PackedScene)GD.Load(path);
@@ -52,5 +52,6 @@ public class Global : Node
 		GetTree().Root.AddChild(CurrentScene);
 		GetTree().Root.MoveChild(CurrentScene, 0);
 		GetTree().CurrentScene = CurrentScene;
+		callback?.Invoke(CurrentScene);
 	}
 }

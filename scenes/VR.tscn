@@ -2,8 +2,7 @@
 
 [ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=1]
 
-[sub_resource type="ViewportTexture" id=1]
-flags = 4
+[sub_resource type="ViewportTexture" id=4]
 viewport_path = NodePath("UI/Viewport")
 
 [sub_resource type="SpatialMaterial" id=2]
@@ -11,7 +10,7 @@ resource_local_to_scene = true
 flags_transparent = true
 flags_unshaded = true
 flags_albedo_tex_force_srgb = true
-albedo_texture = SubResource( 1 )
+albedo_texture = SubResource( 4 )
 
 [sub_resource type="PlaneMesh" id=3]
 material = SubResource( 2 )
@@ -35,7 +34,7 @@ mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Viewport" type="Viewport" parent="UI"]
-size = Vector2( 960, 720 )
+size = Vector2( 1200, 900 )
 transparent_bg = true
 render_target_v_flip = true
 

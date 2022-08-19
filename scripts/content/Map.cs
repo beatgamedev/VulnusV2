@@ -61,7 +61,7 @@ public class Map
 		{
 			if (Data != null) return;
 			var file = new File();
-			file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read);
+			GD.Print(file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read));
 			var data = JsonConvert.DeserializeObject<MapData>(file.GetAsText());
 			this.Data = data;
 			file.Close();
@@ -97,7 +97,9 @@ public class Map
 		{
 			var diffFile = new File();
 			diffFile.Open(path.PlusFile(difficulty), File.ModeFlags.Read);
-			map.Difficulties.Add(JsonConvert.DeserializeObject<Difficulty>(diffFile.GetAsText()));
+			var diff = JsonConvert.DeserializeObject<Difficulty>(diffFile.GetAsText());
+			diff.Path = difficulty;
+			map.Difficulties.Add(diff);
 			diffFile.Close();
 		}
 		file.Close();
