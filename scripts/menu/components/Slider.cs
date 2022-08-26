@@ -6,6 +6,8 @@ public class Slider : Control
 	[Export]
 	public string Label = "";
 	[Export]
+	public string Suffix = "";
+	[Export]
 	public float Value = 0;
 	[Export]
 	public float Max = 100;
@@ -15,7 +17,7 @@ public class Slider : Control
 	public float Step = 1;
 	public override void _Ready()
 	{
-		GetNode<Label>("Label").Text = $"{Label} ({Value})";
+		GetNode<Label>("Label").Text = $"{Label} ({Value}{Suffix})";
 		GetNode<Godot.Slider>("Slider").Value = Value;
 		GetNode<Godot.Slider>("Slider").MaxValue = Max;
 		GetNode<Godot.Slider>("Slider").MinValue = Min;

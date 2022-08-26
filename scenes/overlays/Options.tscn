@@ -269,6 +269,7 @@ margin_top = 30.0
 margin_bottom = 68.0
 script = ExtResource( 6 )
 Label = "Master Volume"
+Suffix = "%"
 Value = 100.0
 
 [node name="Slider" type="HSlider" parent="Content/Audio/Volume/Master"]
@@ -291,6 +292,7 @@ margin_top = 70.0
 margin_bottom = 108.0
 script = ExtResource( 6 )
 Label = "Music Volume"
+Suffix = "%"
 Value = 100.0
 
 [node name="Slider" type="HSlider" parent="Content/Audio/Volume/Music"]
@@ -313,6 +315,7 @@ margin_top = 110.0
 margin_bottom = 148.0
 script = ExtResource( 6 )
 Label = "SFX Volume"
+Suffix = "%"
 Value = 100.0
 
 [node name="Slider" type="HSlider" parent="Content/Audio/Volume/SFX"]
