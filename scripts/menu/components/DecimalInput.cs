@@ -13,11 +13,11 @@ public class DecimalInput : Control
 		Value = value;
 		GetNode<SpinBox>("SpinBox").Value = value;
 	}
-	public void OnValueChanged(int value)
+	public void OnValueChanged(float value)
 	{
 		Value = value;
 		EmitSignal(nameof(ValueChanged), value);
 	}
 	[Signal]
-	public delegate void ValueChanged(int value);
+	public delegate void ValueChanged(float value);
 }
