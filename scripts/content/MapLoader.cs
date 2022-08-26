@@ -57,7 +57,17 @@ public static class MapLoader
 						ZipArchive zip = new ZipArchive(stream, ZipArchiveMode.Read);
 						zip.ExtractToDirectory(cachePath.PlusFile(hash));
 					}
-					LoadedMaps.Add(Map.LoadFromPath(cachePath.PlusFile(hash), hash)); // Load map from cache
+					try
+					{
+						var map = Map.LoadFromPath(cachePath.PlusFile(hash), hash);
+						if (map.FormatVersion > Map.LatestFormat)
+							throw new Exception("Unsupported version");
+						LoadedMaps.Add(map); // Load map from cache
+					}
+					catch (Exception e)
+					{
+						GD.PrintErr($"{hash}: {e.Message}");
+					}
 				}
 			}
 			mapFileName = mapsDir.GetNext();

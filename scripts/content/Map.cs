@@ -7,7 +7,13 @@ using Newtonsoft.Json;
 using File = Godot.File;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class Map
+public class MapVersion {
+	public static int LatestFormat = 2;
+	[JsonProperty("_version")]
+	public int FormatVersion;
+}
+[Serializable, JsonObject(MemberSerialization.OptIn)]
+public class Map : MapVersion
 {
 	public static int LatestFormat = 2;
 	[JsonProperty("_version")]
@@ -73,6 +79,9 @@ public class Map
 		[JsonProperty("_notes")]
 		public List<Note> Notes;
 	}
+	public static Map Load(string json) {
+		return JsonConvert.DeserializeObject<Map>(json);
+	}
 	public static Map LoadFromPath(string path, string hash)
 	{
 		path = path.Replace("user://", OS.GetUserDataDir());
@@ -90,7 +99,7 @@ public class Map
 		}
 		// GD.Print("Loading map without cache: " + path);
 		file.Open(path.PlusFile("meta.json"), File.ModeFlags.Read);
-		var map = JsonConvert.DeserializeObject<Map>(file.GetAsText());
+		var map = Map.Load(file.GetAsText());
 		map.Path = path;
 		map.Difficulties = new List<Difficulty>();
 		foreach (string difficulty in map._difficulties)

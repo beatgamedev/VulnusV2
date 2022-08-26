@@ -20,8 +20,6 @@ public class Global : Node
 	public override void _Ready()
 	{
 		Matt = (StreamTexture)GD.Load("res://assets/images/matt.jpg");
-		Viewport root = GetTree().Root;
-		CurrentScene = root.GetChild(root.GetChildCount() - 1);
 	}
 	public override void _PhysicsProcess(float delta)
 	{
@@ -39,19 +37,5 @@ public class Global : Node
 		{
 			Overlays.Add(overlay.Name, overlay);
 		}
-	}
-	public void GotoScene(string path, Action<Node> callback = null)
-	{
-		CallDeferred(nameof(DeferredGotoScene), path, callback);
-	}
-	private void DeferredGotoScene(string path, Action<Node> callback = null)
-	{
-		CurrentScene.Free();
-		var nextScene = (PackedScene)GD.Load(path);
-		CurrentScene = nextScene.Instance();
-		GetTree().Root.AddChild(CurrentScene);
-		GetTree().Root.MoveChild(CurrentScene, 0);
-		GetTree().CurrentScene = CurrentScene;
-		callback?.Invoke(CurrentScene);
 	}
 }
