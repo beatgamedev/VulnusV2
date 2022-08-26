@@ -37,7 +37,7 @@ public class Startup : Node
 			OS.RequestPermissions();
 		}
 		EmitSignal(nameof(StageReached), "Loading settings", false);
-		Settings.LoadSettings();
+		Settings.UpdateSettings(true);
 		EmitSignal(nameof(StageReached), "Adding overlays", false);
 		Global.Instance.AddOverlay();
 		EmitSignal(nameof(StageReached), "Loading maps", false);

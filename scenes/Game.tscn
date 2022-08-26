@@ -1,3 +1,26 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
 
-[node name="Spatial" type="Spatial"]
+[ext_resource path="res://assets/skin/Block.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/gameplay/GameCamera.cs" type="Script" id=2]
+
+[sub_resource type="MultiMesh" id=1]
+mesh = ExtResource( 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+
+[node name="Game" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
+far = 1000.0
+script = ExtResource( 2 )
+
+[node name="MultiMeshInstance" type="MultiMeshInstance" parent="."]
+transform = Transform( 0.875, 0, 0, 0, 0.875, 0, 0, 0, 0.875, 0, 0, -0.1 )
+layers = 3
+cast_shadow = 0
+multimesh = SubResource( 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
