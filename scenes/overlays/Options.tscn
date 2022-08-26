@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://assets/themes/MainMenu.tres" type="Theme" id=5]
 [ext_resource path="res://scripts/menu/components/Slider.cs" type="Script" id=6]
 [ext_resource path="res://scripts/menu/components/options/Volume.cs" type="Script" id=7]
+[ext_resource path="res://scripts/menu/components/Dropdown.cs" type="Script" id=8]
+[ext_resource path="res://scripts/menu/components/DecimalInput.cs" type="Script" id=9]
+[ext_resource path="res://scripts/menu/components/options/CameraSettings.cs" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=3]
 size = 18
@@ -90,6 +93,7 @@ margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
 margin_bottom = 108.0
+script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -106,6 +110,7 @@ valign = 1
 anchor_right = 1.0
 margin_top = 30.0
 margin_bottom = 62.0
+script = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="Content/Gameplay/Camera/Mode"]
 anchor_right = 1.0
@@ -127,6 +132,7 @@ selected = 0
 anchor_right = 1.0
 margin_top = 66.0
 margin_bottom = 98.0
+script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="Content/Gameplay/Camera/Sensitivity"]
 anchor_right = 1.0
@@ -166,6 +172,7 @@ valign = 1
 anchor_right = 1.0
 margin_top = 30.0
 margin_bottom = 62.0
+script = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="Content/Gameplay/Approach/Method"]
 anchor_right = 1.0
@@ -187,6 +194,7 @@ selected = 0
 anchor_right = 1.0
 margin_top = 66.0
 margin_bottom = 98.0
+script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="Content/Gameplay/Approach/Distance"]
 anchor_right = 1.0
@@ -209,6 +217,7 @@ suffix = "m"
 anchor_right = 1.0
 margin_top = 102.0
 margin_bottom = 134.0
+script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="Content/Gameplay/Approach/Time"]
 anchor_right = 1.0
@@ -232,6 +241,7 @@ suffix = "s"
 anchor_right = 1.0
 margin_top = 138.0
 margin_bottom = 170.0
+script = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="Content/Gameplay/Approach/Speed"]
 anchor_right = 1.0
