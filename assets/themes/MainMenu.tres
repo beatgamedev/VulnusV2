@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=17 format=2]
+[gd_resource type="Theme" load_steps=20 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
 
@@ -17,8 +17,7 @@ border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 content_margin_right = 4.0
-bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
-border_width_left = 4
+bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [sub_resource type="ImageTexture" id=11]
 
@@ -39,6 +38,29 @@ content_margin_left = 8.0
 bg_color = Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [sub_resource type="StyleBoxEmpty" id=15]
+
+[sub_resource type="StyleBoxFlat" id=18]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color( 0.25098, 0.25098, 0.25098, 0.392157 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id=16]
+content_margin_left = 2.0
+content_margin_right = 2.0
+bg_color = Color( 0.188235, 0.188235, 0.188235, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.188235, 0.188235, 0.188235, 1 )
 
 [sub_resource type="DynamicFont" id=7]
 use_filter = true
@@ -70,6 +92,9 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 4 )
 Button/styles/normal = SubResource( 5 )
 Button/styles/pressed = SubResource( 6 )
+CheckBox/styles/hover = SubResource( 6 )
+CheckBox/styles/hover_pressed = SubResource( 6 )
+CheckBox/styles/pressed = SubResource( 6 )
 HSlider/icons/grabber = SubResource( 11 )
 HSlider/icons/grabber_disabled = SubResource( 11 )
 HSlider/icons/grabber_highlight = SubResource( 11 )
@@ -81,6 +106,9 @@ OptionButton/styles/focus = SubResource( 15 )
 OptionButton/styles/hover = SubResource( 14 )
 OptionButton/styles/normal = SubResource( 14 )
 OptionButton/styles/pressed = SubResource( 14 )
+PopupMenu/styles/hover = SubResource( 18 )
+PopupMenu/styles/panel = SubResource( 16 )
+PopupPanel/styles/panel = SubResource( 17 )
 TabContainer/fonts/font = SubResource( 7 )
 TabContainer/styles/panel = SubResource( 8 )
 TabContainer/styles/tab_bg = SubResource( 9 )

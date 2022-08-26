@@ -248,12 +248,12 @@ stretch_mode = 6
 bus = "Music"
 
 [node name="Play" type="Button" parent="ViewContainer/Singleplayer/MapDetails"]
-anchor_top = 0.9
-anchor_bottom = 0.9
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = -88.0
-margin_right = 192.0
-margin_bottom = -48.0
+margin_top = -72.0
+margin_right = 224.0
+margin_bottom = -32.0
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Play"]
 anchor_right = 1.0
@@ -262,14 +262,17 @@ custom_fonts/font = SubResource( 6 )
 text = "PLAY"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Difficulty" type="OptionButton" parent="ViewContainer/Singleplayer/MapDetails"]
-anchor_top = 0.9
-anchor_bottom = 0.9
+anchor_top = 1.0
+anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = -128.0
-margin_right = 192.0
-margin_bottom = -96.0
+margin_top = -112.0
+margin_right = 224.0
+margin_bottom = -80.0
 
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0
@@ -281,7 +284,7 @@ color = Color( 0.12549, 0.12549, 0.12549, 1 )
 [node name="Back" type="Button" parent="ViewContainer/Singleplayer/BottomBar"]
 anchor_bottom = 1.0
 margin_top = -16.0
-margin_right = 192.0
+margin_right = 224.0
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/BottomBar/Back"]
 anchor_right = 1.0
@@ -291,6 +294,9 @@ custom_fonts/font = SubResource( 3 )
 text = "BACK"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
 

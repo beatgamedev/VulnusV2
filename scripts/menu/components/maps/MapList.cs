@@ -7,7 +7,7 @@ public class MapList : Control
 	private MapButton[] mapButtons;
 	private VBoxContainer content;
 	private float scrollSpeed = 0;
-	private float scrollSensitivity = 96f;
+	private float scrollSensitivity = 128f;
 	private float scrollPosition = 0;
 	public override void _Ready()
 	{
@@ -27,21 +27,21 @@ public class MapList : Control
 	}
 	public void OnMapButtonPressed(MapButton button)
 	{
-		SelectedMap = button.Pressed ? button.Map : null;
-		EmitSignal(nameof(MapSelected), button.Pressed ? SelectedMap.Hash : null);
 		foreach (MapButton btn in mapButtons)
 		{
 			btn.Pressed = button.Pressed && btn == button;
 		}
+		SelectedMap = button.Pressed ? button.Map : null;
+		EmitSignal(nameof(MapSelected), button.Pressed ? SelectedMap.Hash : null);
 	}
 	[Signal]
 	public delegate void MapSelected(string hash);
 	public override void _Process(float delta)
 	{
-		var mapSize = -64f * (MapLoader.LoadedMaps.Count - 1);
-		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), mapSize, 0f);
+		var mapSize = (-64f * (MapLoader.LoadedMaps.Count - 1)) + (this.RectSize.y - 112);
+		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), Mathf.Min(mapSize, 0f), 0f);
 		content.RectPosition = new Vector2(content.RectPosition.x, scrollPosition);
-		scrollSpeed -= scrollSpeed * delta / 0.2f;
+		scrollSpeed -= scrollSpeed * delta / 0.1f;
 	}
 	public override void _Input(InputEvent @event)
 	{

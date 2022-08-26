@@ -3,12 +3,10 @@ using System;
 
 public class Options : View
 {
-	private Tween tween;
 	private bool moving = false;
 	public override void _Ready()
 	{
 		base._Ready();
-		tween = GetNode<Tween>("Tween");
 		var topbar = GetNode<Control>("Topbar");
 		var closeBtn = topbar.GetNode<Button>("Close");
 		closeBtn.Connect("pressed", this, nameof(SetActive), new Godot.Collections.Array(false));
@@ -26,10 +24,10 @@ public class Options : View
 			return;
 		moving = true;
 		this.Visible = true;
-		tween.InterpolateProperty(this, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine);
-		tween.InterpolateProperty(this, "rect_scale", new Vector2(0.8f, 0.8f), new Vector2(1, 1), 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
-		tween.Start();
-		await ToSignal(tween, "tween_all_completed");
+		ViewTween.InterpolateProperty(this, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine);
+		ViewTween.InterpolateProperty(this, "rect_scale", new Vector2(0.8f, 0.8f), new Vector2(1, 1), 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
+		ViewTween.Start();
+		await ToSignal(ViewTween, "tween_all_completed");
 		IsActive = true;
 		moving = false;
 	}
@@ -38,10 +36,10 @@ public class Options : View
 		if (moving || !IsActive)
 			return;
 		moving = true;
-		tween.InterpolateProperty(this, "modulate:a", 1, 0, 0.15f, Tween.TransitionType.Sine);
-		tween.InterpolateProperty(this, "rect_scale", new Vector2(1, 1), new Vector2(0.9f, 0.9f), 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
-		tween.Start();
-		await ToSignal(tween, "tween_all_completed");
+		ViewTween.InterpolateProperty(this, "modulate:a", 1, 0, 0.15f, Tween.TransitionType.Sine);
+		ViewTween.InterpolateProperty(this, "rect_scale", new Vector2(1, 1), new Vector2(0.9f, 0.9f), 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
+		ViewTween.Start();
+		await ToSignal(ViewTween, "tween_all_completed");
 		IsActive = false;
 		this.Visible = false;
 		moving = false;
