@@ -24,10 +24,10 @@ public static class Settings
 			case 0:
 				ApproachRate = ApproachDistance / ApproachTime;
 				break;
-			case 1:
+			case 2:
 				ApproachDistance = ApproachRate * ApproachTime;
 				break;
-			case 2:
+			case 1:
 				ApproachTime = ApproachDistance / ApproachRate;
 				break;
 			default:
