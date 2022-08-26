@@ -19,6 +19,20 @@ public static class Settings
 			LoadSettings();
 		else
 			SaveSettings();
+		switch (ApproachMode)
+		{
+			case 0:
+				ApproachRate = ApproachDistance / ApproachTime;
+				break;
+			case 1:
+				ApproachDistance = ApproachRate * ApproachTime;
+				break;
+			case 2:
+				ApproachTime = ApproachDistance / ApproachRate;
+				break;
+			default:
+				break;
+		}
 		var masterBus = AudioServer.GetBusIndex("Master");
 		AudioServer.SetBusVolumeDb(masterBus, GD.Linear2Db(Volume[0] / 100f));
 		var musicBus = AudioServer.GetBusIndex("Music");
