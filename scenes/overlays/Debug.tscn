@@ -18,7 +18,7 @@ font_data = ExtResource( 1 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -192.0
-margin_bottom = 128.0
+margin_bottom = 64.0
 color = Color( 0.141176, 0.141176, 0.141176, 0.392157 )
 script = ExtResource( 3 )
 
