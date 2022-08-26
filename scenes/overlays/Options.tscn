@@ -27,11 +27,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -384.0
-margin_top = -240.0
-margin_right = 384.0
-margin_bottom = 240.0
-rect_pivot_offset = Vector2( 384, 240 )
+margin_left = -320.0
+margin_top = -192.0
+margin_right = 320.0
+margin_bottom = 192.0
+rect_pivot_offset = Vector2( 320, 0 )
 color = Color( 0.141176, 0.141176, 0.141176, 1 )
 script = ExtResource( 4 )
 
@@ -79,13 +79,178 @@ margin_top = 32.0
 theme = ExtResource( 5 )
 tab_align = 0
 
-[node name="Main" type="Control" parent="Content"]
-visible = false
+[node name="Gameplay" type="Control" parent="Content"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
 
+[node name="Camera" type="Control" parent="Content/Gameplay"]
+anchor_right = 0.5
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = 108.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Content/Gameplay/Camera"]
+anchor_right = 1.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 5 )
+text = "Camera"
+align = 1
+valign = 1
+
+[node name="Mode" type="Control" parent="Content/Gameplay/Camera"]
+anchor_right = 1.0
+margin_top = 30.0
+margin_bottom = 62.0
+
+[node name="Label" type="Label" parent="Content/Gameplay/Camera/Mode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "Camera Mode"
+valign = 1
+
+[node name="OptionButton" type="OptionButton" parent="Content/Gameplay/Camera/Mode"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+text = "Spin"
+items = [ "Spin", null, false, 1, null, "Lock", null, false, 2, null ]
+selected = 0
+
+[node name="Sensitivity" type="Control" parent="Content/Gameplay/Camera"]
+anchor_right = 1.0
+margin_top = 66.0
+margin_bottom = 98.0
+
+[node name="Label" type="Label" parent="Content/Gameplay/Camera/Sensitivity"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "Sensitivity"
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="Content/Gameplay/Camera/Sensitivity"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+step = 0.1
+value = 1.0
+allow_greater = true
+
+[node name="Approach" type="Control" parent="Content/Gameplay"]
+anchor_right = 0.5
+margin_left = 8.0
+margin_top = 114.0
+margin_right = -8.0
+margin_bottom = 292.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Content/Gameplay/Approach"]
+anchor_right = 1.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 5 )
+text = "Approach"
+align = 1
+valign = 1
+
+[node name="Method" type="Control" parent="Content/Gameplay/Approach"]
+anchor_right = 1.0
+margin_top = 30.0
+margin_bottom = 62.0
+
+[node name="Label" type="Label" parent="Content/Gameplay/Approach/Method"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "Setting Mode"
+valign = 1
+
+[node name="OptionButton" type="OptionButton" parent="Content/Gameplay/Approach/Method"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+text = "Dist. & Time"
+items = [ "Dist. & Time", null, false, 0, null, "Dist. & Rate", null, false, 1, null, "Time & Rate", null, false, 2, null ]
+selected = 0
+
+[node name="Distance" type="Control" parent="Content/Gameplay/Approach"]
+anchor_right = 1.0
+margin_top = 66.0
+margin_bottom = 98.0
+
+[node name="Label" type="Label" parent="Content/Gameplay/Approach/Distance"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "Approach Distance"
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="Content/Gameplay/Approach/Distance"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+max_value = 50.0
+value = 50.0
+allow_greater = true
+suffix = "m"
+
+[node name="Time" type="Control" parent="Content/Gameplay/Approach"]
+anchor_right = 1.0
+margin_top = 102.0
+margin_bottom = 134.0
+
+[node name="Label" type="Label" parent="Content/Gameplay/Approach/Time"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "Approach Time"
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="Content/Gameplay/Approach/Time"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+allow_greater = true
+suffix = "s"
+
+[node name="Speed" type="Control" parent="Content/Gameplay/Approach"]
+anchor_right = 1.0
+margin_top = 138.0
+margin_bottom = 170.0
+
+[node name="Label" type="Label" parent="Content/Gameplay/Approach/Speed"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "Approach Rate"
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="Content/Gameplay/Approach/Speed"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+allow_greater = true
+editable = false
+suffix = "m/s"
+
 [node name="Audio" type="Control" parent="Content"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -169,6 +334,45 @@ anchor_right = 1.0
 margin_bottom = 30.0
 custom_fonts/font = SubResource( 5 )
 text = "Volume Control"
+align = 1
+valign = 1
+
+[node name="Account" type="Control" parent="Content"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 26.0
+
+[node name="Status" type="Label" parent="Content/Account"]
+anchor_right = 1.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 5 )
+text = "You are not logged in."
+align = 1
+valign = 1
+
+[node name="Unavailable" type="Label" parent="Content/Account"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 30.0
+custom_fonts/font = SubResource( 5 )
+text = "Not Yet Implemented"
+align = 1
+valign = 1
+
+[node name="Control" type="Control" parent="Content/Account"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 30.0
+
+[node name="RankStatus" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -32.0
+margin_bottom = -2.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "These settings are rankable."
 align = 1
 valign = 1
 

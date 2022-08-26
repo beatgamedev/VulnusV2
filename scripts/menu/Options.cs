@@ -17,6 +17,16 @@ public class Options : View
 		{
 			SetActive(!IsActive);
 		}
+		if (!IsActive)
+			return;
+		bool rankable = true;
+		if (Settings.ApproachRate > 100f)
+			rankable = false;
+		if (Settings.ApproachDistance > 100f)
+			rankable = false;
+		if (Settings.ApproachTime > 2f)
+			rankable = false;
+		GetNode<Label>("RankStatus").Text = rankable ? "These settings are rankable." : "These settings are not rankable.";
 	}
 	public override async void OnShow()
 	{
