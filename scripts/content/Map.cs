@@ -7,7 +7,8 @@ using Newtonsoft.Json;
 using File = Godot.File;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class MapVersion {
+public class MapVersion
+{
 	public static int LatestFormat = 2;
 	[JsonProperty("_version")]
 	public int FormatVersion;
@@ -15,9 +16,6 @@ public class MapVersion {
 [Serializable, JsonObject(MemberSerialization.OptIn)]
 public class Map : MapVersion
 {
-	public static int LatestFormat = 2;
-	[JsonProperty("_version")]
-	public int FormatVersion;
 	[NonSerialized]
 	public string Hash;
 	[NonSerialized]
@@ -79,7 +77,8 @@ public class Map : MapVersion
 		[JsonProperty("_notes")]
 		public List<Note> Notes;
 	}
-	public static Map Load(string json) {
+	public static Map Load(string json)
+	{
 		return JsonConvert.DeserializeObject<Map>(json);
 	}
 	public static Map LoadFromPath(string path, string hash)
