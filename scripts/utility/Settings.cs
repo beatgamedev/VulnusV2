@@ -13,7 +13,7 @@ public static class Settings
 	public static float ApproachTime = 1f;
 	public static float ApproachRate = 50f;
 	public static int[] Volume = new int[3];
-	public static void UpdateSettings(bool loading)
+	public static void UpdateSettings(bool loading = false)
 	{
 		if (loading)
 			LoadSettings();
