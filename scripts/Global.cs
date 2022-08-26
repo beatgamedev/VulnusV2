@@ -30,11 +30,15 @@ public class Global : Node
 	}
 	public void AddOverlay()
 	{
+		CallDeferred(nameof(DeferredAddOverlay));
+	}
+	private void DeferredAddOverlay()
+	{
 		var overlayScene = (PackedScene)GD.Load("res://scenes/Overlay.tscn");
 		Overlay = (Control)overlayScene.Instance();
 		Overlays = new Dictionary<string, Control>();
 		GetTree().Root.AddChild(Overlay);
-		GetTree().Root.MoveChild(Overlay, 1);
+		GetTree().Root.MoveChild(Overlay, 2);
 		foreach (Control overlay in Overlay.GetChildren())
 		{
 			Overlays.Add(overlay.Name, overlay);
@@ -50,7 +54,7 @@ public class Global : Node
 		var nextScene = (PackedScene)GD.Load(path);
 		CurrentScene = nextScene.Instance();
 		GetTree().Root.AddChild(CurrentScene);
-		GetTree().Root.MoveChild(CurrentScene, 0);
+		GetTree().Root.MoveChild(CurrentScene, 1);
 		GetTree().CurrentScene = CurrentScene;
 		callback?.Invoke(CurrentScene);
 	}

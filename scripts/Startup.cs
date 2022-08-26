@@ -23,9 +23,7 @@ public class Startup : Node
 	public void OnStageReached(string stage, bool end)
 	{
 		if (end)
-		{
 			Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
-		}
 		text = stage;
 		counter = 0;
 	}
