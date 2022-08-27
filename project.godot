@@ -33,8 +33,8 @@ Global="*res://scripts/Global.cs"
 
 window/size/width=1280
 window/size/height=720
-window/size/test_width=1280
-window/size/test_height=720
+window/size/test_width=1024
+window/size/test_height=576
 window/vsync/use_vsync=false
 
 [editor_plugins]
