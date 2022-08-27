@@ -24,7 +24,14 @@ namespace Discord
 		public void RunCallbacks()
 		{
 			if (this.Discord == null) return;
-			this.Discord?.RunCallbacks();
+			try
+			{
+				this.Discord?.RunCallbacks();
+			}
+			catch
+			{
+				Dispose();
+			}
 		}
 	}
 	public class ActivityW
