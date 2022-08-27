@@ -12,7 +12,6 @@ public class GameCamera : Godot.Camera
 	private static float clamp = (6f - 0.525f) / 2f;
 	public override void _EnterTree()
 	{
-		Settings.UpdateSettings(true);
 		Yaw = 0f;
 		Pitch = 0f;
 		CursorPosition = new Vector2();

@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/skin/Block.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/gameplay/GameCamera.cs" type="Script" id=2]
-[ext_resource path="res://assets/skin/grid_minimal.png" type="Texture" id=3]
+[ext_resource path="res://assets/skin/cursor.png" type="Texture" id=3]
+[ext_resource path="res://scripts/gameplay/Game.cs" type="Script" id=4]
+[ext_resource path="res://assets/skin/grid_minimal.png" type="Texture" id=5]
+[ext_resource path="res://scripts/gameplay/NoteManager.cs" type="Script" id=6]
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
@@ -12,14 +15,26 @@ ambient_light_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
+albedo_texture = ExtResource( 5 )
+
+[sub_resource type="PlaneMesh" id=6]
+size = Vector2( 0.525, 0.525 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
 albedo_texture = ExtResource( 3 )
 
 [sub_resource type="MultiMesh" id=5]
 instance_count = 1
+visible_instance_count = 1
 mesh = ExtResource( 1 )
 transform_2d_array = PoolVector2Array( 1, 0, 0, 1, 0, 0 )
 
 [node name="Game" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+bus = "Music"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
@@ -36,5 +51,22 @@ transform = Transform( 3, 0, 0, 0, -4.37114e-08, -3, 0, 1, -1.31134e-07, 0, 0, 0
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
-[node name="MultiMeshInstance" type="MultiMeshInstance" parent="."]
+[node name="Cursor" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="GhostCursor" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="NoteManager" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="NoteRenderer" type="MultiMeshInstance" parent="NoteManager"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15 )
 multimesh = SubResource( 5 )
+
+[node name="HUD" type="Spatial" parent="."]
