@@ -25,7 +25,8 @@ public class Global : Node
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-		base._PhysicsProcess(delta);
+		if (Input.IsActionJustPressed("fullscreen"))
+			OS.WindowFullscreen = !OS.WindowFullscreen;
 		Discord.RunCallbacks();
 	}
 	public void AddOverlay()
