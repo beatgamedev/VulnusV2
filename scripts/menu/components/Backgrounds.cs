@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public class Backgrounds : Control
 {
+	private Random random = new Random();
 	public TextureRect Texture;
 	public List<Texture>
 		Textures = new List<Texture>{
@@ -24,6 +26,7 @@ public class Backgrounds : Control
 	private DateTimeOffset lastChange = DateTimeOffset.Now;
 	public override void _Ready()
 	{
+		Textures = Textures.OrderBy(_ => random.Next()).ToList();
 		tween = new Tween();
 		AddChild(tween);
 		Texture = GetNode<TextureRect>("Texture");
@@ -39,7 +42,7 @@ public class Backgrounds : Control
 			AddChild(transition);
 			MoveChild(transition, 1);
 			var next = Textures[Mathf.PosMod(background++, Textures.Count)];
-			if (new Random().Next(0, 50) == 1)
+			if (random.Next(0, 50) == 1)
 				next = Global.Matt;
 			Texture.Texture = next;
 			tween.StopAll();
