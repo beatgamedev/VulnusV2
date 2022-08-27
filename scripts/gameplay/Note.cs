@@ -25,4 +25,8 @@ public class Note : Reference
 	{
 		return (T - noteTime) / approachTime;
 	}
+	public bool IsTouching(Vector2 cursorPosition)
+	{
+		return Mathf.Abs(cursorPosition.x - X) <= AABB && Mathf.Abs(cursorPosition.y - Y) <= AABB;
+	}
 }
