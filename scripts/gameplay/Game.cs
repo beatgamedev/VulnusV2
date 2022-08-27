@@ -6,12 +6,16 @@ public class Game : Spatial
 	public static Map LoadedMap;
 	public static Map.MapData LoadedMapData;
 
+	public static Score Score;
+
 	public GameCamera Camera;
 	public Spatial Cursor;
 	public Spatial GhostCursor;
 
 	public NoteManager NoteManager;
 	public SyncManager SyncManager;
+
+	public bool Ended;
 
 	public override void _Ready()
 	{
@@ -21,6 +25,10 @@ public class Game : Spatial
 
 		NoteManager = GetNode<NoteManager>("NoteManager");
 		SyncManager = GetNode<SyncManager>("SyncManager");
+
+		Score = new Score();
+
+		Ended = false;
 
 		Camera.Cursor = Cursor;
 		Camera.GhostCursor = GhostCursor;
@@ -32,5 +40,11 @@ public class Game : Spatial
 		}
 
 		SyncManager.SetStream(LoadedMap.LoadAudio());
+		SyncManager.Connect("Ended", this, nameof(GameEnded));
+	}
+	public void GameEnded()
+	{
+		Ended = true;
+		Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
 	}
 }
