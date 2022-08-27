@@ -48,6 +48,13 @@ public class GameCamera : Godot.Camera
 		if (Cursor != null)
 			Cursor.Translation = new Vector3(ClampedCursorPosition.x, ClampedCursorPosition.y, 0);
 		if (GhostCursor != null)
+		{
+			GhostCursor.Visible = CursorPosition != ClampedCursorPosition;
+			if (!GhostCursor.Visible)
+				return;
 			GhostCursor.Translation = new Vector3(CursorPosition.x, CursorPosition.y, 0);
+			var distance = Mathf.Min(1f, ClampedCursorPosition.DistanceSquaredTo(CursorPosition));
+			((MeshInstance)GhostCursor).MaterialOverride.Set("albedo_color", new Color(1f, 1f, 1f, distance));
+		}
 	}
 }
