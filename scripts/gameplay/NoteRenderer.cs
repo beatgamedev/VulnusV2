@@ -21,8 +21,8 @@ public class NoteRenderer : MultiMeshInstance
 		for (int i = 0; i < Notes.Length; i++)
 		{
 			var note = Notes[i];
-			var noteDistance = note.CalculateTime(NoteManager.NoteTime, Settings.ApproachTime) * Settings.ApproachDistance;
-			Multimesh.SetInstanceTransform(i, new Transform(Basis.Identity, new Vector3(note.X, note.Y, -noteDistance)));
+			var noteDistance = note.CalculateTime(NoteManager.SyncManager.NoteTime, Settings.ApproachTime) * Settings.ApproachDistance;
+			Multimesh.SetInstanceTransform(i, new Transform(Basis.Identity, new Vector3(note.X, note.Y, (float)-noteDistance)));
 			Multimesh.SetInstanceColor(i, note.Color);
 		}
 	}

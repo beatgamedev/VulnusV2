@@ -11,15 +11,14 @@ public class NoteManager : Node
 
 	public List<Note> Notes;
 	public NoteRenderer NoteRenderer;
-
-	public float NoteTime;
+	public SyncManager SyncManager;
 
 	public override void _Ready()
 	{
 		Game = GetParent<Game>();
 		Camera = Game.GetNode<GameCamera>("Camera");
 		NoteRenderer = GetNode<NoteRenderer>("NoteRenderer");
-		NoteTime = -2f;
+		SyncManager = Game.GetNode<SyncManager>("SyncManager");
 		Notes = new List<Note>();
 		uint i = 0;
 		foreach (Map.Note noteData in Game.LoadedMapData.Notes)
@@ -31,11 +30,10 @@ public class NoteManager : Node
 	public override void _Process(float delta)
 	{
 		var approachTime = Settings.ApproachTime;
-		var visibleNotes = Notes.FindAll(note => note.CalculateVisibility(NoteTime, approachTime, HitWindow));
+		var visibleNotes = Notes.FindAll(note => note.CalculateVisibility(SyncManager.NoteTime, approachTime));
 		visibleNotes.TrimExcess();
 		visibleNotes.Reverse();
 		NoteRenderer.SetNotes(visibleNotes.ToArray());
-		NoteTime += delta;
 	}
 	public override void _PhysicsProcess(float delta)
 	{

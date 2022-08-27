@@ -10,19 +10,17 @@ public class Game : Spatial
 	public Spatial Cursor;
 	public Spatial GhostCursor;
 
-	public AudioStreamPlayer MusicPlayer;
-
 	public NoteManager NoteManager;
-	public MultiMeshInstance NoteRenderer;
+	public SyncManager SyncManager;
 
 	public override void _Ready()
 	{
 		Camera = GetNode<GameCamera>("Camera");
 		Cursor = GetNode<Spatial>("Cursor");
 		GhostCursor = GetNode<Spatial>("GhostCursor");
-		MusicPlayer = GetNode<AudioStreamPlayer>("Music");
 
 		NoteManager = GetNode<NoteManager>("NoteManager");
+		SyncManager = GetNode<SyncManager>("SyncManager");
 
 		Camera.Cursor = Cursor;
 		Camera.GhostCursor = GhostCursor;
@@ -33,6 +31,6 @@ public class Game : Spatial
 			return;
 		}
 
-		MusicPlayer.Stream = LoadedMap.LoadAudio();
+		SyncManager.SetStream(LoadedMap.LoadAudio());
 	}
 }

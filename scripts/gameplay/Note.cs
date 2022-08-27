@@ -3,6 +3,8 @@ using System;
 
 public class Note : Reference
 {
+	internal static float HitWindow = 1.75f / 30f;
+
 	public static float AABB = (1.75f + 0.525f) / 2f;
 	public float X;
 	public float Y;
@@ -19,15 +21,21 @@ public class Note : Reference
 		Color = new Color(i % 2 == 0 ? "#ff0000" : "#00ffff");
 		Hit = false;
 	}
-	public bool CalculateVisibility(float noteTime, float approachTime, float hitWindow)
+	public bool CalculateVisibility(double noteTime, double approachTime)
 	{
 		if (Hit)
 			return false;
-		return CalculateTime(noteTime, approachTime) <= 1 && (noteTime - T) <= hitWindow;
+		return CalculateTime(noteTime, approachTime) <= 1 && InHitWindow(noteTime, true);
 	}
-	public float CalculateTime(float noteTime, float approachTime)
+	public double CalculateTime(double noteTime, double approachTime)
 	{
 		return (T - noteTime) / approachTime;
+	}
+	public bool InHitWindow(double noteTime, bool inclusive)
+	{
+		if (inclusive)
+			return (noteTime - T) <= HitWindow;
+		return (noteTime - T) >= 0 && (noteTime - T) <= HitWindow;
 	}
 	public bool IsTouching(Vector2 cursorPosition)
 	{
