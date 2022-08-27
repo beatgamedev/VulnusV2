@@ -11,7 +11,7 @@ public class SyncManager : Node
 	public double NoteTime;
 	public double SongTime;
 	public bool SongPlaying;
-	public ulong SongPlayingAt;
+	public double SongPlayingAt;
 	public double SongPlayingOffset;
 
 	public override void _Ready()
@@ -20,9 +20,9 @@ public class SyncManager : Node
 		NoteTime = 0f;
 		SongTime = -1f;
 	}
-	private ulong GetTimeSeconds()
+	private double GetTimeSeconds()
 	{
-		return OS.GetTicksUsec();
+		return OS.GetTicksUsec() / 1000000.0d;
 	}
 	private double GetAudioDelay()
 	{
@@ -55,10 +55,10 @@ public class SyncManager : Node
 			var songTime = GetTimeSeconds() - SongPlayingAt;
 			SongTime = Math.Max(0.0, songTime - SongPlayingOffset);
 			var difference = SongTime - (AudioPlayer.GetPlaybackPosition() + AudioServer.GetTimeSinceLastMix());
-			if (Math.Abs(difference) > 0.002)
+			if (difference > 0.002)
 			{
 				GD.Print($"Resynced! {Math.Round(difference * 1000)}ms");
-				SongPlayingOffset -= difference;
+				SongPlayingOffset += difference;
 			}
 		}
 		if (SongPlaying && !AudioPlayer.Playing)
