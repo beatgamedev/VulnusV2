@@ -42,6 +42,11 @@ public class Game : Spatial
 		SyncManager.SetStream(LoadedMap.LoadAudio());
 		SyncManager.Connect("Ended", this, nameof(GameEnded));
 	}
+	public override void _PhysicsProcess(float delta)
+	{
+		if (Input.IsActionJustPressed("skip") && SyncManager.CanSkip())
+			SyncManager.AttemptSkip();
+	}
 	public void GameEnded()
 	{
 		Ended = true;

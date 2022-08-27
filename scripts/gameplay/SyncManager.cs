@@ -57,20 +57,15 @@ public class SyncManager : Node
 			AudioPlayer.Play();
 		NoteTime = SongTime;
 	}
-	public override void _Input(InputEvent @event)
+	public void AttemptSkip()
 	{
-		if (!(@event is InputEventAction))
-			return;
-		var input = @event as InputEventAction;
-		if (input.Action == "skip")
+		if (CanSkip())
 		{
 			var skippableTime = SkippableTime();
-			if (CanSkip())
-			{
-				SkippedTime += skippableTime;
-				AudioPlayer.Seek((float)(SongTime + skippableTime));
-				SongTime += skippableTime;
-			}
+			GD.Print($"Attempting to skip {SkippableTime()}s");
+			SkippedTime += skippableTime;
+			AudioPlayer.Seek((float)(SongTime + skippableTime));
+			SongTime += skippableTime;
 		}
 	}
 	public bool CanSkip()
@@ -81,8 +76,11 @@ public class SyncManager : Node
 	}
 	public double SkippableTime()
 	{
-		if (NoteManager.NextNote == null)
-			return (double)AudioPlayer.Stream.GetLength() - NoteTime - 1f;
+		var skipToEnd = (double)AudioPlayer.Stream.GetLength() - NoteTime - 1f;
+		if (NoteManager.LastNote == null && NoteManager.NextNote == null)
+			return skipToEnd;
+		if (NoteManager.LastNote != null && NoteManager.LastNote.Index == (NoteManager.Notes.Count - 1))
+			return skipToEnd;
 		return NoteManager.NextNote.T - NoteTime - 1f;
 	}
 	[Signal]
@@ -98,7 +96,7 @@ public class SyncManager : Node
 	}
 	private void PlayAudio()
 	{
-		SongPlayingAt = GetTimeSeconds();
+		SongPlayingAt = GetTimeSeconds() - SongTime;
 		SongPlayingOffset = GetAudioDelay();
 		AudioPlayer.Play((float)SongTime);
 	}

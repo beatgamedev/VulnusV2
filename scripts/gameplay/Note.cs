@@ -10,9 +10,9 @@ public class Note : Reference
 	public float Y;
 	public float T;
 	public Color Color;
-	public uint Index;
+	public int Index;
 	public bool Hit;
-	public Note(float x, float y, float t, uint i)
+	public Note(float x, float y, float t, int i)
 	{
 		X = x;
 		Y = y;

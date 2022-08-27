@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public class NoteManager : Node
@@ -10,6 +11,7 @@ public class NoteManager : Node
 	public GameCamera Camera;
 
 	public List<Note> Notes;
+	public List<Note> OrderedNotes;
 	public NoteRenderer NoteRenderer;
 	public SyncManager SyncManager;
 
@@ -23,12 +25,13 @@ public class NoteManager : Node
 		NoteRenderer = GetNode<NoteRenderer>("NoteRenderer");
 		SyncManager = Game.GetNode<SyncManager>("SyncManager");
 		Notes = new List<Note>();
-		uint i = 0;
+		var sorted = Game.LoadedMapData.Notes.OrderBy(note => note.T).ToList();
 		foreach (Map.Note noteData in Game.LoadedMapData.Notes)
 		{
+			var i = sorted.IndexOf(noteData);
 			Notes.Add(new Note(noteData.X * 2, noteData.Y * 2, noteData.T, i));
-			i++;
 		}
+		OrderedNotes = Notes.OrderBy(note => note.T).ToList();
 		if (Notes.Count > 0)
 			NextNote = Notes[0];
 	}
@@ -60,11 +63,11 @@ public class NoteManager : Node
 			if (didHitreg)
 			{
 				note.Hit = true;
-				if (Notes.Count > note.Index)
-					NextNote = Notes[(int)note.Index + 1];
-				else
-					NextNote = null;
 				LastNote = note;
+				if (note.Index < Notes.Count - 1 && (NextNote == null || note.Index >= NextNote.Index))
+					NextNote = OrderedNotes[(int)note.Index + 1];
+				else if (note.Index >= Notes.Count - 1)
+					NextNote = null;
 			}
 			continue;
 		}
