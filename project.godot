@@ -57,6 +57,13 @@ options={
  ]
 }
 
+[layer_names]
+
+3d_render/layer_1="Playarea"
+3d_render/layer_2="HUD"
+3d_render/layer_3="Notes"
+3d_render/layer_4="Obstacles"
+
 [physics]
 
 common/physics_fps=120

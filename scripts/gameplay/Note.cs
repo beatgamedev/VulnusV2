@@ -7,12 +7,16 @@ public class Note : Reference
 	public float X;
 	public float Y;
 	public float T;
+	public Color Color;
+	public uint Index;
 	public bool Hit;
-	public Note(float x, float y, float t)
+	public Note(float x, float y, float t, uint i)
 	{
 		X = x;
 		Y = y;
 		T = t;
+		Index = i;
+		Color = new Color(i % 2 == 0 ? "#ff0000" : "#00ffff");
 		Hit = false;
 	}
 	public bool CalculateVisibility(float noteTime, float approachTime, float hitWindow)

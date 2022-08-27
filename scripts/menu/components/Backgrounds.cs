@@ -5,7 +5,12 @@ using System.Collections.Generic;
 public class Backgrounds : Control
 {
 	public TextureRect Texture;
-	public List<Texture> Textures;
+	public List<Texture>
+		Textures = new List<Texture>{
+			(StreamTexture)GD.Load("res://assets/backgrounds/coffee.jpg"),
+			(StreamTexture)GD.Load("res://assets/backgrounds/gok.png"),
+			(StreamTexture)GD.Load("res://assets/backgrounds/sunset.png")
+		};
 	private int background = 0;
 	private Tween tween;
 	private DateTimeOffset lastChange = DateTimeOffset.Now;
@@ -14,25 +19,6 @@ public class Backgrounds : Control
 		tween = new Tween();
 		AddChild(tween);
 		Texture = GetNode<TextureRect>("Texture");
-		Textures = new List<Texture>();
-		var dir = new Directory();
-		dir.Open("res://assets/backgrounds");
-		dir.ListDirBegin(true, true);
-		string file = "placeholder";
-		while (file != "")
-		{
-			file = dir.GetNext();
-			if (file.Extension() == "import" || file.GetFile() == "")
-				continue;
-			try
-			{
-				var image = dir.GetCurrentDir().PlusFile(file);
-				var texture = (StreamTexture)GD.Load(image);
-				Textures.Add(texture);
-			}
-			catch { }
-		}
-		dir.ListDirEnd();
 		Texture.Texture = Textures[0];
 	}
 	public override void _Process(float delta)
