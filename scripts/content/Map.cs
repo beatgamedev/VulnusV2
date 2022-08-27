@@ -48,8 +48,11 @@ public class Map : MapVersion
 	[Serializable, JsonObject]
 	public class Note
 	{
+		[JsonProperty("_x")]
 		public float X;
+		[JsonProperty("_y")]
 		public float Y;
+		[JsonProperty("_time")]
 		public float T;
 	}
 	[Serializable, JsonObject(MemberSerialization.OptIn)]
@@ -65,7 +68,7 @@ public class Map : MapVersion
 		{
 			if (Data != null) return;
 			var file = new File();
-			GD.Print(file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read));
+			GD.Print(map.Hash, " ", file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read));
 			var data = JsonConvert.DeserializeObject<MapData>(file.GetAsText());
 			this.Data = data;
 			file.Close();
