@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class Settings
 {
+	public static bool AnyPause = false;
 	public static int CameraMode = 0;
 	public static float MouseSensitivity = 1f;
 	public static int ApproachMode = 0;
@@ -75,6 +76,7 @@ public static class Settings
 	[Serializable]
 	private class SerializedSettings
 	{
+		public bool AnyPause = false;
 		public int CameraMode = 0;
 		public float MouseSensitivity = 1f;
 		public int ApproachMode = 0;
