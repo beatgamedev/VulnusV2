@@ -18,7 +18,8 @@ public class MapDetails : View
 	}
 	public void OnPlayPressed()
 	{
-
+		GetNode<AudioStreamPlayer>("MusicPreview").Stop();
+		Global.Instance.GotoScene("res://scenes/Game.tscn");
 	}
 	public void OnMapSelected(string hash)
 	{
@@ -48,6 +49,7 @@ public class MapDetails : View
 		preview.Stream = null;
 		preview.Stream = map.LoadAudio();
 		preview.Play(preview.Stream.GetLength() / 3);
+		Game.LoadedMap = currentMap;
 	}
 	public void OnDifficultySelected(int idx)
 	{
@@ -55,6 +57,7 @@ public class MapDetails : View
 		if (diff == currentDifficulty) return;
 		diff.Load(currentMap);
 		currentDifficulty = diff;
+		Game.LoadedMapData = currentDifficulty.Data;
 	}
 	public override async void OnShow()
 	{
