@@ -5,7 +5,6 @@ namespace Discord
 {
 	public class DiscordW
 	{
-		private static bool Disabled = false;
 		public static long ClientId { get; private set; } = 954573999088730154;
 		public bool Disposed { get; private set; } = false;
 		private Discord Discord = new Discord(ClientId, (ulong)CreateFlags.NoRequireDiscord);
@@ -24,8 +23,8 @@ namespace Discord
 		}
 		public void RunCallbacks()
 		{
-			if (!Disabled)
-				this.Discord?.RunCallbacks();
+			if (this.Discord == null) return;
+			this.Discord?.RunCallbacks();
 		}
 	}
 	public class ActivityW
