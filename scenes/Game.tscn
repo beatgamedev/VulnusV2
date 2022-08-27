@@ -3,13 +3,19 @@
 [ext_resource path="res://assets/skin/Block.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/gameplay/GameCamera.cs" type="Script" id=2]
 
-[sub_resource type="MultiMesh" id=1]
-mesh = ExtResource( 1 )
-
 [sub_resource type="Environment" id=2]
 background_mode = 1
+ambient_light_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="MultiMesh" id=1]
+instance_count = 1
+mesh = ExtResource( 1 )
+transform_2d_array = PoolVector2Array( 1, 0, 0, 1, 0, 0 )
 
 [node name="Game" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
@@ -21,6 +27,3 @@ transform = Transform( 0.875, 0, 0, 0, 0.875, 0, 0, 0, 0.875, 0, 0, -0.1 )
 layers = 3
 cast_shadow = 0
 multimesh = SubResource( 1 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
