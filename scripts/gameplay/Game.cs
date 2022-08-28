@@ -44,6 +44,12 @@ public class Game : Spatial
 
 		NoteManager.Connect("NoteHit", this, nameof(OnNoteHit));
 		NoteManager.Connect("NoteMiss", this, nameof(OnNoteMiss));
+
+		var activity = new Discord.ActivityW();
+		activity.State = "Playing a map";
+		activity.Details = LoadedMap.Name;
+		activity.StartTimestamp = DateTime.UtcNow;
+		Global.Discord.SetActivity(activity);
 	}
 	public override void _PhysicsProcess(float delta)
 	{
