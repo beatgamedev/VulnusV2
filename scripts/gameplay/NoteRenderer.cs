@@ -29,9 +29,7 @@ public class NoteRenderer : MultiMeshInstance
 	public void ManualUpdate()
 	{
 		if (Notes.Length > Multimesh.InstanceCount)
-		{
 			Multimesh.InstanceCount = Notes.Length;
-		}
 		Multimesh.VisibleInstanceCount = Notes.Length;
 	}
 	public void SetNotes(Note[] notes)
