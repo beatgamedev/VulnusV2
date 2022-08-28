@@ -90,6 +90,7 @@ namespace Discord
 			activity.Assets.LargeImage = "vulnus";
 			activity.Assets.LargeText = "Vulnus";
 			activity.Assets.SmallImage = "beatgamedev";
+			if (startTimestamp != null) activity.Timestamps.Start = ((DateTimeOffset)startTimestamp).ToUnixTimeSeconds();
 			if (endTimestamp != null) activity.Timestamps.End = ((DateTimeOffset)endTimestamp).ToUnixTimeSeconds();
 			activity.State = state;
 			activity.Details = details;
