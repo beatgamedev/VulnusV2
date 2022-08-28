@@ -49,6 +49,8 @@ public class Game : Spatial
 	{
 		if (Input.IsActionJustPressed("skip") && SyncManager.CanSkip())
 			SyncManager.AttemptSkip();
+		if (Input.IsActionJustPressed("force_end"))
+			GameEnded();
 	}
 	public void OnNoteHit(Note note)
 	{
@@ -75,6 +77,7 @@ public class Game : Spatial
 	public void GameEnded()
 	{
 		Ended = true;
+		SyncManager.AudioPlayer.Stop();
 		Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
 	}
 }

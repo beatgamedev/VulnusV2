@@ -28,14 +28,6 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 2 )
 
 [node name="Debug" parent="." instance=ExtResource( 1 )]
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-margin_left = 0.0
-margin_top = -64.0
-margin_right = 192.0
-margin_bottom = 0.0
 mouse_filter = 2
 
 [node name="Beta" type="Control" parent="."]
