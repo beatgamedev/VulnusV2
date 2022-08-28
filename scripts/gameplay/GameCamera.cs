@@ -27,7 +27,7 @@ public class GameCamera : Godot.Camera
 			return;
 		var input = @event as InputEventMouseMotion;
 		Rotation = new Vector3(Mathf.Deg2Rad(Pitch), Mathf.Deg2Rad(Yaw), 0);
-		Translation = new Vector3(0, 0, 7) + new Vector3(ClampedCursorPosition.x, ClampedCursorPosition.y, 0) / 4f - Transform.basis.z / 2f;
+		Translation = new Vector3(0, 0, 7) + new Vector3(ClampedCursorPosition.x, ClampedCursorPosition.y, 0) / 4f + Transform.basis.z / 2f;
 		var relative = input.Relative * Settings.MouseSensitivity;
 		if (Settings.CameraMode == 0)
 		{
