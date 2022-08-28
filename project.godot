@@ -37,13 +37,10 @@ window/size/test_width=1024
 window/size/test_height=576
 window/vsync/use_vsync=false
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/godot-openxr/plugin.cfg" )
-
 [gdnative]
 
 singletons=[ "res://addons/godot-openxr/config/godot_openxr.gdnlib" ]
+singletons_disabled=[ "res://addons/godot-openxr/config/godot_openxr.gdnlib" ]
 
 [gui]
 
@@ -73,6 +70,11 @@ force_end={
  ]
 }
 
+[input_devices]
+
+pointing/ios/touch_delay=0.0
+buffering/agile_event_flushing=true
+
 [layer_names]
 
 3d_render/layer_1="Playarea"
@@ -88,12 +90,12 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/filters/sharpen_intensity=0.4
 quality/driver/fallback_to_gles2=true
 threads/thread_model=2
 vram_compression/import_etc=true
 quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0.0941176, 0.188235, 1 )
-quality/filters/msaa=1
+quality/filters/msaa=2
 quality/filters/use_fxaa=true
+quality/filters/use_debanding=true
 environment/default_environment="res://assets/environments/Environment.tres"
