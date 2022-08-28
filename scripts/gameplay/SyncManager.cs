@@ -63,8 +63,11 @@ public class SyncManager : Node
 		{
 			var skippableTime = SkippableTime();
 			GD.Print($"Attempting to skip {SkippableTime()}s");
-			SkippedTime += skippableTime;
-			AudioPlayer.Seek((float)(SongTime + skippableTime));
+			if (SongPlaying)
+			{
+				SkippedTime += skippableTime;
+				AudioPlayer.Seek((float)(SongTime + skippableTime));
+			}
 			SongTime += skippableTime;
 		}
 	}
