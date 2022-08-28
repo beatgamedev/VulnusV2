@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/skin/Block.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/gameplay/GameCamera.cs" type="Script" id=2]
@@ -9,9 +9,12 @@
 [ext_resource path="res://scripts/gameplay/NoteRenderer.cs" type="Script" id=7]
 [ext_resource path="res://scripts/gameplay/SyncManager.cs" type="Script" id=8]
 [ext_resource path="res://scripts/gameplay/HUDManager.cs" type="Script" id=9]
+[ext_resource path="res://prefabs/hud/LeftPanel.tscn" type="PackedScene" id=10]
+[ext_resource path="res://prefabs/hud/RightPanel.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
+background_color = Color( 0.12549, 0.12549, 0.12549, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_sky_contribution = 0.0
 
@@ -34,6 +37,7 @@ albedo_texture = ExtResource( 3 )
 
 [sub_resource type="SpatialMaterial" id=9]
 render_priority = 1
+flags_transparent = true
 vertex_color_use_as_albedo = true
 
 [sub_resource type="MultiMesh" id=8]
@@ -41,6 +45,25 @@ transform_format = 1
 instance_count = 1
 mesh = ExtResource( 1 )
 transform_array = PoolVector3Array( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[sub_resource type="QuadMesh" id=11]
+size = Vector2( 1, 2 )
+
+[sub_resource type="ViewportTexture" id=13]
+viewport_path = NodePath("HUD/LeftHUD")
+
+[sub_resource type="SpatialMaterial" id=12]
+resource_local_to_scene = true
+flags_transparent = true
+albedo_texture = SubResource( 13 )
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("HUD/RightHUD")
+
+[sub_resource type="SpatialMaterial" id=15]
+resource_local_to_scene = true
+flags_transparent = true
+albedo_texture = SubResource( 14 )
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 4 )
@@ -90,3 +113,35 @@ script = ExtResource( 7 )
 
 [node name="HUD" type="Spatial" parent="."]
 script = ExtResource( 9 )
+
+[node name="LeftHUD" type="Viewport" parent="HUD"]
+size = Vector2( 360, 720 )
+transparent_bg = true
+disable_3d = true
+render_target_v_flip = true
+render_target_clear_mode = 2
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+
+[node name="Panel" parent="HUD/LeftHUD" instance=ExtResource( 10 )]
+
+[node name="RightHUD" type="Viewport" parent="HUD"]
+size = Vector2( 360, 720 )
+transparent_bg = true
+disable_3d = true
+render_target_v_flip = true
+render_target_clear_mode = 2
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+
+[node name="Panel" parent="HUD/RightHUD" instance=ExtResource( 11 )]
+
+[node name="LeftPanel" type="MeshInstance" parent="HUD"]
+transform = Transform( 6.9282, 0, 0.5, 0, 8, 0, -4, 0, 0.866025, -14, 1, -16 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 12 )
+
+[node name="RightPanel" type="MeshInstance" parent="HUD"]
+transform = Transform( 6.9282, 0, -0.5, 0, 8, 0, 4, 0, 0.866025, 14, 1, -16 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 15 )
