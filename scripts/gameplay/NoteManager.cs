@@ -29,7 +29,7 @@ public class NoteManager : Node
 		foreach (NoteData noteData in Game.LoadedMapData.Notes)
 		{
 			var i = sorted.IndexOf(noteData);
-			Notes.Add(new Note(noteData.X * 2, noteData.Y * 2, noteData.T, i));
+			Notes.Add(new Note(noteData.X * -2, noteData.Y * 2, noteData.T, i));
 		}
 		OrderedNotes = Notes.OrderBy(note => note.T).ToList();
 		if (Notes.Count > 0)
