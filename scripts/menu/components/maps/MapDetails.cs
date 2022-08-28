@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 public class MapDetails : View
 {
-	private Map currentMap;
-	private Map.Difficulty currentDifficulty;
+	private BeatmapSet currentMap;
+	private Beatmap currentDifficulty;
 	private MapList mapList;
 	public override void _Ready()
 	{
@@ -32,7 +32,7 @@ public class MapDetails : View
 		}
 		if (!this.IsActive)
 			SetActive(true);
-		var map = MapLoader.LoadedMaps.Find(m => m.Hash == hash);
+		var map = BeatmapLoader.LoadedMaps.Find(m => m.Hash == hash);
 		currentMap = map;
 		GetNode<TextureRect>("Cover").Texture = map.LoadCover();
 		GetNode<Label>("Title").Text = map.Name;

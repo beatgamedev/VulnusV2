@@ -26,7 +26,7 @@ public class NoteManager : Node
 		SyncManager = Game.GetNode<SyncManager>("SyncManager");
 		Notes = new List<Note>();
 		var sorted = Game.LoadedMapData.Notes.OrderBy(note => note.T).ToList();
-		foreach (Map.Note noteData in Game.LoadedMapData.Notes)
+		foreach (NoteData noteData in Game.LoadedMapData.Notes)
 		{
 			var i = sorted.IndexOf(noteData);
 			Notes.Add(new Note(noteData.X * 2, noteData.Y * 2, noteData.T, i));

@@ -3,7 +3,7 @@ using System;
 
 public class MapList : Control
 {
-	public Map SelectedMap { get; private set; }
+	public BeatmapSet SelectedMap { get; private set; }
 	private MapButton[] mapButtons;
 	private VBoxContainer content;
 	private float scrollSpeed = 0;
@@ -12,9 +12,9 @@ public class MapList : Control
 	public override void _Ready()
 	{
 		content = GetNode<VBoxContainer>("Content");
-		mapButtons = new MapButton[MapLoader.LoadedMaps.Count];
+		mapButtons = new MapButton[BeatmapLoader.LoadedMaps.Count];
 		int i = 0;
-		foreach (Map map in MapLoader.LoadedMaps)
+		foreach (BeatmapSet map in BeatmapLoader.LoadedMaps)
 		{
 			var btn = MapButton.Create();
 			btn.Map = map;
@@ -38,7 +38,7 @@ public class MapList : Control
 	public delegate void MapSelected(string hash);
 	public override void _Process(float delta)
 	{
-		var mapSize = (-64f * (MapLoader.LoadedMaps.Count - 1)) + (this.RectSize.y - 112);
+		var mapSize = (-64f * (BeatmapLoader.LoadedMaps.Count - 1)) + (this.RectSize.y - 112);
 		scrollPosition = Mathf.Clamp(scrollPosition + (scrollSpeed * scrollSensitivity * delta / 0.2f), Mathf.Min(mapSize, 0f), 0f);
 		content.RectPosition = new Vector2(content.RectPosition.x, scrollPosition);
 		scrollSpeed -= scrollSpeed * delta / 0.1f;

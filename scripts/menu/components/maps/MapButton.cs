@@ -3,7 +3,7 @@ using System;
 
 public class MapButton : Button
 {
-	public Map Map;
+	public BeatmapSet Map;
 	private Tween tween;
 	public void ManualUpdate()
 	{

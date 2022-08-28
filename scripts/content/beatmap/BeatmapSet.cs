@@ -7,15 +7,11 @@ using Newtonsoft.Json;
 using File = Godot.File;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class MapVersion
+public class BeatmapSet
 {
 	public static int LatestFormat = 2;
 	[JsonProperty("_version")]
 	public int FormatVersion;
-}
-[Serializable, JsonObject(MemberSerialization.OptIn)]
-public class Map : MapVersion
-{
 	[NonSerialized]
 	public string Hash;
 	[NonSerialized]
@@ -33,7 +29,7 @@ public class Map : MapVersion
 	}
 	[JsonProperty("_difficulties")]
 	public List<string> _difficulties;
-	public List<Difficulty> Difficulties;
+	public List<Beatmap> Difficulties;
 	[JsonProperty("_mappers")]
 	public List<string> _mappers;
 	public string Mappers
@@ -45,46 +41,11 @@ public class Map : MapVersion
 	}
 	[JsonProperty("_music")]
 	public string Music;
-	[Serializable, JsonObject]
-	public class Note
+	public static BeatmapSet Load(string json)
 	{
-		[JsonProperty("_x")]
-		public float X;
-		[JsonProperty("_y")]
-		public float Y;
-		[JsonProperty("_time")]
-		public float T;
+		return JsonConvert.DeserializeObject<BeatmapSet>(json);
 	}
-	[Serializable, JsonObject(MemberSerialization.OptIn)]
-	public class Difficulty
-	{
-		[JsonProperty("_name")]
-		public string Name;
-		[JsonIgnore]
-		public string Path;
-		[NonSerialized, JsonIgnore]
-		public MapData Data;
-		public void Load(Map map)
-		{
-			if (Data != null) return;
-			var file = new File();
-			GD.Print(map.Hash, " ", file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read));
-			var data = JsonConvert.DeserializeObject<MapData>(file.GetAsText());
-			this.Data = data;
-			file.Close();
-		}
-	}
-	[JsonObject]
-	public class MapData : Difficulty
-	{
-		[JsonProperty("_notes")]
-		public List<Note> Notes;
-	}
-	public static Map Load(string json)
-	{
-		return JsonConvert.DeserializeObject<Map>(json);
-	}
-	public static Map LoadFromPath(string path, string hash)
+	public static BeatmapSet LoadFromPath(string path, string hash)
 	{
 		path = path.Replace("user://", OS.GetUserDataDir());
 		var file = new File();
@@ -94,21 +55,21 @@ public class Map : MapVersion
 			var deserializer = new BinaryFormatter();
 			var buffer = file.GetBuffer((long)file.GetLen());
 			var stream = new MemoryStream(buffer);
-			var cachedMap = (Map)deserializer.Deserialize(stream);
+			var cachedMap = (BeatmapSet)deserializer.Deserialize(stream);
 			cachedMap.Path = path;
 			cachedMap.Hash = hash;
 			return cachedMap;
 		}
 		// GD.Print("Loading map without cache: " + path);
 		file.Open(path.PlusFile("meta.json"), File.ModeFlags.Read);
-		var map = Map.Load(file.GetAsText());
+		var map = BeatmapSet.Load(file.GetAsText());
 		map.Path = path;
-		map.Difficulties = new List<Difficulty>();
+		map.Difficulties = new List<Beatmap>();
 		foreach (string difficulty in map._difficulties)
 		{
 			var diffFile = new File();
 			diffFile.Open(path.PlusFile(difficulty), File.ModeFlags.Read);
-			var diff = JsonConvert.DeserializeObject<Difficulty>(diffFile.GetAsText());
+			var diff = JsonConvert.DeserializeObject<Beatmap>(diffFile.GetAsText());
 			diff.Path = difficulty;
 			map.Difficulties.Add(diff);
 			diffFile.Close();

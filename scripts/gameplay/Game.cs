@@ -3,8 +3,8 @@ using System;
 
 public class Game : Spatial
 {
-	public static Map LoadedMap;
-	public static Map.MapData LoadedMapData;
+	public static BeatmapSet LoadedMap;
+	public static BeatmapData LoadedMapData;
 
 	public static Score Score;
 

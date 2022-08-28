@@ -5,9 +5,9 @@ using System.IO.Compression;
 using System.Collections.Generic;
 using File = Godot.File;
 using Directory = Godot.Directory;
-public static class MapLoader
+public static class BeatmapLoader
 {
-	public static List<Map> LoadedMaps = new List<Map>();
+	public static List<BeatmapSet> LoadedMaps = new List<BeatmapSet>();
 	public static bool LoadMapsFromDirectory(string directory)
 	{
 		GD.Print("Loading maps from " + directory);
@@ -59,8 +59,8 @@ public static class MapLoader
 					}
 					try
 					{
-						var map = Map.LoadFromPath(cachePath.PlusFile(hash), hash);
-						if (map.FormatVersion > Map.LatestFormat)
+						var map = BeatmapSet.LoadFromPath(cachePath.PlusFile(hash), hash);
+						if (map.FormatVersion > BeatmapSet.LatestFormat)
 							throw new Exception("Unsupported version");
 						LoadedMaps.Add(map); // Load map from cache
 					}
