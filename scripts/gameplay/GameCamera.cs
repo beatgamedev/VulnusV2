@@ -42,7 +42,7 @@ public class GameCamera : Godot.Camera
 		{
 			Yaw = 0f;
 			Pitch = 0f;
-			CursorPosition += new Vector2(relative.x, -relative.y) * 0.1875f;
+			CursorPosition += new Vector2(relative.x, -relative.y) * 0.1675f;
 		}
 		ClampedCursorPosition = new Vector2(Mathf.Clamp(CursorPosition.x, -clamp, clamp), Mathf.Clamp(CursorPosition.y, -clamp, clamp));
 		if (Cursor != null)
