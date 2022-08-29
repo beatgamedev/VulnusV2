@@ -51,6 +51,7 @@ transform_array = PoolVector3Array( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 size = Vector2( 1, 2 )
 
 [sub_resource type="ViewportTexture" id=13]
+flags = 4
 viewport_path = NodePath("HUD/LeftHUD")
 
 [sub_resource type="SpatialMaterial" id=12]
@@ -60,6 +61,7 @@ flags_transparent = true
 albedo_texture = SubResource( 13 )
 
 [sub_resource type="ViewportTexture" id=14]
+flags = 4
 viewport_path = NodePath("HUD/RightHUD")
 
 [sub_resource type="SpatialMaterial" id=15]
@@ -120,7 +122,11 @@ script = ExtResource( 9 )
 
 [node name="LeftHUD" type="Viewport" parent="HUD"]
 size = Vector2( 360, 720 )
+size_override_stretch = true
 transparent_bg = true
+handle_input_locally = false
+msaa = 1
+fxaa = true
 disable_3d = true
 render_target_v_flip = true
 gui_disable_input = true
@@ -130,7 +136,11 @@ gui_snap_controls_to_pixels = false
 
 [node name="RightHUD" type="Viewport" parent="HUD"]
 size = Vector2( 360, 720 )
+size_override_stretch = true
 transparent_bg = true
+handle_input_locally = false
+msaa = 1
+fxaa = true
 disable_3d = true
 render_target_v_flip = true
 gui_disable_input = true
@@ -139,11 +149,11 @@ gui_snap_controls_to_pixels = false
 [node name="UI" parent="HUD/RightHUD" instance=ExtResource( 11 )]
 
 [node name="LeftPanel" type="MeshInstance" parent="HUD"]
-transform = Transform( 10.3923, 0, 0.5, 0, 12, 0, -6, 0, 0.866025, -22, 0, -26 )
+transform = Transform( 8.66025, 0, 0.5, 0, 10, 0, -5, 0, 0.866025, -22, 0, -28 )
 mesh = SubResource( 11 )
 material/0 = SubResource( 12 )
 
 [node name="RightPanel" type="MeshInstance" parent="HUD"]
-transform = Transform( 10.3923, 0, -0.5, 0, 12, 0, 6, 0, 0.866025, 22, 0, -26 )
+transform = Transform( 8.66025, 0, -0.5, 0, 10, 0, 5, 0, 0.866025, 22, 0, -28 )
 mesh = SubResource( 11 )
 material/0 = SubResource( 15 )
