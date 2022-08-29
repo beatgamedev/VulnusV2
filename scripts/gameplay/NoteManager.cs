@@ -51,7 +51,7 @@ public class NoteManager : Node
 	public override void _PhysicsProcess(float delta)
 	{
 		var approachTime = Settings.ApproachTime;
-		var visibleNotes = Notes.FindAll(note => note.CalculateTime(SyncManager.NoteTime, approachTime) <= 0f);
+		var visibleNotes = Notes.FindAll(note => note.CalculateTime(SyncManager.NoteTime, approachTime) <= 0f && !note.Hit);
 		foreach (Note note in visibleNotes)
 		{
 			bool didHitreg = false;
@@ -59,15 +59,16 @@ public class NoteManager : Node
 			{
 				EmitSignal(nameof(NoteHit), note);
 				didHitreg = true;
+				note.Hit = true;
 			}
 			if (!note.Hit && !note.InHitWindow(SyncManager.NoteTime, true))
 			{
 				EmitSignal(nameof(NoteMiss), note);
 				didHitreg = true;
+				note.Hit = true;
 			}
 			if (didHitreg)
 			{
-				note.Hit = true;
 				LastNote = note;
 				if (note.Index < Notes.Count - 1 && (NextNote == null || note.Index >= NextNote.Index))
 					NextNote = OrderedNotes[(int)note.Index + 1];
