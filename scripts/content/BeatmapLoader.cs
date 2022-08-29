@@ -8,8 +8,10 @@ using Directory = Godot.Directory;
 public static class BeatmapLoader
 {
 	public static List<BeatmapSet> LoadedMaps = new List<BeatmapSet>();
-	public static bool LoadMapsFromDirectory(string directory)
+	public static bool LoadMapsFromDirectory(string directory, bool reset = false)
 	{
+		if (reset)
+			LoadedMaps = new List<BeatmapSet>();
 		GD.Print("Loading maps from " + directory);
 		// Get a list of cached maps
 		var cachePath = directory.PlusFile(".cache");
@@ -60,8 +62,6 @@ public static class BeatmapLoader
 					try
 					{
 						var map = BeatmapSet.LoadFromPath(cachePath.PlusFile(hash), hash);
-						if (map.FormatVersion > BeatmapSet.LatestFormat)
-							throw new Exception("Unsupported version");
 						LoadedMaps.Add(map); // Load map from cache
 					}
 					catch (Exception e)

@@ -56,7 +56,7 @@ public class Startup : Node
 	public void LoadMaps()
 	{
 		var start = OS.GetTicksUsec();
-		bool loaded = BeatmapLoader.LoadMapsFromDirectory(OS.GetUserDataDir().PlusFile("maps"));
+		bool loaded = BeatmapLoader.LoadMapsFromDirectory(Global.MapPath);
 		var end = OS.GetTicksUsec();
 		if (!loaded)
 		{

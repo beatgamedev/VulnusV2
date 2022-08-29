@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Global : Node
 {
+	public static string MapPath = OS.GetUserDataDir().PlusFile("maps");
+
 	public static Global Instance;
 	public static Discord.DiscordW Discord;
 	public static StreamTexture Matt;
@@ -12,6 +14,8 @@ public class Global : Node
 	public Dictionary<string, Control> Overlays { get; private set; }
 	public Global() : base()
 	{
+		if (!System.IO.Directory.Exists(MapPath))
+			System.IO.Directory.CreateDirectory(MapPath);
 		Instance = this;
 		SquirrelW.Run();
 		Discord = new Discord.DiscordW();

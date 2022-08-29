@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://assets/images/soundspaceplus.png" type="Texture" id=12]
 [ext_resource path="res://assets/images/vulnus.png" type="Texture" id=13]
 [ext_resource path="res://scripts/menu/components/options/Imports.cs" type="Script" id=14]
+[ext_resource path="res://addons/native_dialogs/bin/native_dialog_select_folder.gdns" type="Script" id=15]
+[ext_resource path="res://addons/native_dialogs/bin/native_dialog_open_file.gdns" type="Script" id=16]
 
 [sub_resource type="DynamicFont" id=3]
 size = 18
@@ -99,7 +101,6 @@ theme = ExtResource( 5 )
 tab_align = 0
 
 [node name="Gameplay" type="Control" parent="Content"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -404,6 +405,7 @@ anchor_bottom = 1.0
 margin_top = 30.0
 
 [node name="Import" type="Control" parent="Content"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -469,7 +471,7 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
 custom_fonts/font = SubResource( 7 )
-text = "Vulnus v1 Maps"
+text = "Vulnus v1 Map"
 valign = 1
 
 [node name="SSPConfig" type="Button" parent="Content/Import/ImportButtons"]
@@ -501,12 +503,10 @@ text = "Sound Space Plus Settings"
 valign = 1
 
 [node name="SSPMap" type="Button" parent="Content/Import/ImportButtons"]
-modulate = Color( 1, 1, 1, 0.501961 )
 margin_top = 201.0
 margin_right = 320.0
 margin_bottom = 249.0
 rect_min_size = Vector2( 0, 48 )
-disabled = true
 
 [node name="TextureRect" type="TextureRect" parent="Content/Import/ImportButtons/SSPMap"]
 anchor_bottom = 1.0
@@ -525,8 +525,14 @@ margin_top = 8.0
 margin_right = -8.0
 margin_bottom = -8.0
 custom_fonts/font = SubResource( 7 )
-text = "Sound Space Plus Maps"
+text = "Sound Space Plus Map"
 valign = 1
+
+[node name="FolderDialog" type="Node" parent="Content/Import/ImportButtons"]
+script = ExtResource( 15 )
+
+[node name="FileDialog" type="Node" parent="Content/Import/ImportButtons"]
+script = ExtResource( 16 )
 
 [node name="RankStatus" type="Label" parent="."]
 anchor_top = 1.0
