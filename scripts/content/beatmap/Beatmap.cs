@@ -21,11 +21,12 @@ public class Beatmap : BeatmapInfo
 	public string Name;
 	[NonSerialized]
 	public BeatmapData Data;
-	public void Load(BeatmapSet map)
+	public Error Load(BeatmapSet map)
 	{
-		if (Data != null) return;
+		if (Data != null) return Error.Ok;
 		var file = new File();
-		GD.Print(map.Hash, " ", file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read));
+		var err = file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read);
+		GD.Print(map.Hash, " ", err);
 		var json = file.GetAsText();
 		var version = JsonConvert.DeserializeObject<BeatmapInfo>(json);
 		BeatmapData data;
@@ -38,6 +39,7 @@ public class Beatmap : BeatmapInfo
 		this.Playable = FormatVersion <= BeatmapInfo.LatestFormat;
 		this.Data = data;
 		file.Close();
+		return err;
 	}
 }
 public class BeatmapData
