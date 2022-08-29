@@ -10,6 +10,7 @@ public class Note : Reference
 	public float Y;
 	public float T;
 	public Color Color;
+	public NoteData Data;
 	public int Index;
 	public bool Hit;
 	public Note(float x, float y, float t, int i)
@@ -18,7 +19,6 @@ public class Note : Reference
 		Y = y;
 		T = t;
 		Index = i;
-		Color = new Color(i % 2 == 0 ? "#ff0000" : "#00ffff");
 		Hit = false;
 	}
 	public bool CalculateVisibility(double noteTime, double approachTime)
