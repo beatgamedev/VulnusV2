@@ -46,6 +46,7 @@ public static class Settings
 		var path = OS.GetUserDataDir().PlusFile("settings.bin");
 		var file = new Godot.File();
 		var settings = new SerializedSettings();
+		var defaultSettings = new SerializedSettings();
 		if (file.FileExists(path))
 		{
 			file.Open(path, Godot.File.ModeFlags.Read);
@@ -57,7 +58,10 @@ public static class Settings
 		}
 		foreach (FieldInfo field in typeof(SerializedSettings).GetFields())
 		{
-			typeof(Settings).GetField(field.Name).SetValue(null, field.GetValue(settings));
+			var value = field.GetValue(settings);
+			if (value == null)
+				value = field.GetValue(defaultSettings);
+			typeof(Settings).GetField(field.Name).SetValue(null, value);
 		}
 	}
 	public static void SaveSettings()
