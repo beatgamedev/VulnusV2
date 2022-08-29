@@ -8,8 +8,8 @@ public class LeftPanel : Panel
 	public override void _Ready()
 	{
 		Ranks.Add(100, "SS");
-		Ranks.Add(95, "SS");
-		Ranks.Add(90, "S");
+		Ranks.Add(98, "SS");
+		Ranks.Add(95, "S");
 		Ranks.Add(80, "A");
 		Ranks.Add(75, "B");
 		Ranks.Add(60, "C");
