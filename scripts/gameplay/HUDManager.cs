@@ -11,11 +11,13 @@ public class HUDManager : Node
 		LeftPanel = GetNode<LeftPanel>("LeftHUD/UI");
 		RightPanel = GetNode<RightPanel>("RightHUD/UI");
 		RightPanel.UpdateMultiplier(1, 0);
-		RightPanel.UpdateAccuracy(0, 1);
+		RightPanel.UpdateCombo(0, 0);
+		// RightPanel.UpdateAccuracy(0, 1);
 	}
 	public void ManualUpdate(Score score)
 	{
 		RightPanel.UpdateMultiplier(score.Multiplier, score.Miniplier);
-		RightPanel.UpdateAccuracy(score.Misses, score.Total);
+		RightPanel.UpdateCombo(score.Combo, score.Misses);
+		// RightPanel.UpdateAccuracy(score.Misses, score.Total);
 	}
 }
