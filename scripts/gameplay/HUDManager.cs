@@ -3,19 +3,19 @@ using System;
 
 public class HUDManager : Node
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+	public LeftPanel LeftPanel;
+	public RightPanel RightPanel;
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
-    }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	public override void _Ready()
+	{
+		LeftPanel = GetNode<LeftPanel>("LeftHUD/UI");
+		RightPanel = GetNode<RightPanel>("RightHUD/UI");
+		RightPanel.UpdateMultiplier(1, 0);
+		RightPanel.UpdateAccuracy(0, 1);
+	}
+	public void ManualUpdate(Score score)
+	{
+		RightPanel.UpdateMultiplier(score.Multiplier, score.Miniplier);
+		RightPanel.UpdateAccuracy(score.Misses, score.Total);
+	}
 }
