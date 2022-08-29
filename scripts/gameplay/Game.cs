@@ -58,6 +58,20 @@ public class Game : Spatial
 		if (Input.IsActionJustPressed("force_end"))
 			GameEnded();
 	}
+	public override void _EnterTree()
+	{
+		Options opt = (Options)Global.Instance.Overlays["Options"];
+		opt.CanOpen = false;
+		if (opt.IsActive)
+		{
+			opt.SetActive(false);
+		}
+	}
+	public override void _ExitTree()
+	{
+		Options opt = (Options)Global.Instance.Overlays["Options"]; 
+		opt.CanOpen = true;
+	}
 	public void OnNoteHit(Note note)
 	{
 		Score.Points += 25 * Score.Multiplier;

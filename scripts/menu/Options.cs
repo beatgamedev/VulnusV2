@@ -3,6 +3,7 @@ using System;
 
 public class Options : View
 {
+	public bool CanOpen = true;
 	private bool moving = false;
 	public override void _Ready()
 	{
@@ -13,7 +14,7 @@ public class Options : View
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-		if (Input.IsActionJustPressed("options"))
+		if (CanOpen && Input.IsActionJustPressed("options"))
 		{
 			SetActive(!IsActive);
 		}
