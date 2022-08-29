@@ -9,7 +9,6 @@ public partial class BeatmapInfo
 	public static int LatestFormat = 1;
 	[JsonProperty("_version")]
 	public int FormatVersion;
-	[NonSerialized]
 	public string Path;
 	[NonSerialized]
 	public bool Playable;
@@ -27,6 +26,8 @@ public class Beatmap : BeatmapInfo
 		var file = new File();
 		var err = file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read);
 		GD.Print(map.Hash, " ", err);
+		if (err != Error.Ok)
+			return err;
 		var json = file.GetAsText();
 		var version = JsonConvert.DeserializeObject<BeatmapInfo>(json);
 		BeatmapData data;

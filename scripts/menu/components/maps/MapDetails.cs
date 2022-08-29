@@ -34,6 +34,7 @@ public class MapDetails : View
 			SetActive(true);
 		var map = BeatmapLoader.LoadedMaps.Find(m => m.Hash == hash);
 		currentMap = map;
+		GetNode<Button>("Play").Visible = false;
 		GetNode<TextureRect>("Cover").Texture = map.LoadCover();
 		GetNode<Label>("Title").Text = map.Name;
 		GetNode<Label>("Mappers").Text = map.Mappers;
