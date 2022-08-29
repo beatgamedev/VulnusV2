@@ -16,6 +16,8 @@ public class Game : Spatial
 	public NoteManager NoteManager;
 	public SyncManager SyncManager;
 
+	public HUDManager HUDManager;
+
 	public bool Ended;
 
 	public override void _Ready()
@@ -26,6 +28,8 @@ public class Game : Spatial
 
 		NoteManager = GetNode<NoteManager>("NoteManager");
 		SyncManager = GetNode<SyncManager>("SyncManager");
+
+		HUDManager = GetNode<HUDManager>("HUD");
 
 		Score = new Score();
 
@@ -77,7 +81,7 @@ public class Game : Spatial
 	{
 		Score.Points += 25 * Score.Multiplier;
 		Score.Miniplier += 1;
-		if (Score.Miniplier >= 8)
+		if (Score.Miniplier >= 8 && Score.Multiplier < 8)
 		{
 			Score.Miniplier = 0;
 			Score.Multiplier = Mathf.Min(8, Score.Multiplier + 1);
@@ -86,6 +90,7 @@ public class Game : Spatial
 		if (Score.Combo > Score.HighestCombo)
 			Score.HighestCombo = Score.Combo;
 		Score.Total += 1;
+		HUDManager.ManualUpdate(Score);
 	}
 	public void OnNoteMiss(Note note)
 	{
@@ -94,6 +99,7 @@ public class Game : Spatial
 		Score.Combo = 0;
 		Score.Misses += 1;
 		Score.Total += 1;
+		HUDManager.ManualUpdate(Score);
 	}
 	public void GameEnded()
 	{
