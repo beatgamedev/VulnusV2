@@ -28,7 +28,7 @@ public class GameCamera : Godot.Camera
 		var input = @event as InputEventMouseMotion;
 		Rotation = new Vector3(Mathf.Deg2Rad(Pitch), Mathf.Deg2Rad(Yaw), 0);
 		Translation = new Vector3(0, 0, 7) + new Vector3(ClampedCursorPosition.x, ClampedCursorPosition.y, 0) / 4f + Transform.basis.z / 2f;
-		var relative = input.Relative * Settings.MouseSensitivity;
+		var relative = input.Relative * Settings.MouseSensitivity / 2f;
 		if (Settings.CameraMode == 0)
 		{
 			Yaw = Mathf.Wrap(Yaw - relative.x, -180f, 180f);
