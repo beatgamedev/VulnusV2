@@ -7,15 +7,19 @@ using Newtonsoft.Json;
 using File = Godot.File;
 
 [Serializable, JsonObject(MemberSerialization.OptIn)]
-public class BeatmapSet
+public partial class BeatmapSetInfo
 {
-	public static int LatestFormat = 2;
+	public static int LatestFormat = 1;
 	[JsonProperty("_version")]
 	public int FormatVersion;
 	[NonSerialized]
 	public string Hash;
 	[NonSerialized]
 	public string Path;
+}
+[Serializable, JsonObject(MemberSerialization.OptIn)]
+public class BeatmapSet : BeatmapSetInfo
+{
 	[JsonProperty("_artist")]
 	public string Artist;
 	[JsonProperty("_title")]
@@ -43,7 +47,15 @@ public class BeatmapSet
 	public string Music;
 	public static BeatmapSet Load(string json)
 	{
-		return JsonConvert.DeserializeObject<BeatmapSet>(json);
+		var version = JsonConvert.DeserializeObject<BeatmapSetInfo>(json);
+		BeatmapSet map;
+		switch (version.FormatVersion)
+		{
+			default:
+				map = JsonConvert.DeserializeObject<BeatmapSet>(json);
+				break;
+		}
+		return map;
 	}
 	public static BeatmapSet LoadFromPath(string path, string hash)
 	{
