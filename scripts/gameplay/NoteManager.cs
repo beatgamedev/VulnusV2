@@ -26,13 +26,15 @@ public class NoteManager : Node
 		SyncManager = Game.GetNode<SyncManager>("SyncManager");
 		Notes = new List<Note>();
 		var sorted = Game.LoadedMapData.Notes.OrderBy(note => note.T).ToList();
+		int mapIndex = 0;
 		foreach (NoteData noteData in Game.LoadedMapData.Notes)
 		{
 			var i = sorted.IndexOf(noteData);
 			var note = new Note(noteData.X * -2, noteData.Y * 2, noteData.T, i);
 			note.Data = noteData;
-			note.Color = new Color(i % 2 == 0 ? "#ff0000" : "#00ffff");
+			note.Color = new Color(mapIndex % 2 == 0 ? "#ff0000" : "#00ffff");
 			Notes.Add(note);
+			mapIndex++;
 		}
 		OrderedNotes = Notes.OrderBy(note => note.T).ToList();
 		if (Notes.Count > 0)
