@@ -9,6 +9,7 @@ public class HUDManager : Node
 	public override void _Ready()
 	{
 		LeftPanel = GetNode<LeftPanel>("LeftHUD/UI");
+		LeftPanel.UpdateScore(0);
 		LeftPanel.UpdateAccuracy(0, 1);
 		RightPanel = GetNode<RightPanel>("RightHUD/UI");
 		RightPanel.UpdateMultiplier(1, 0);
