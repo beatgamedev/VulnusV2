@@ -49,7 +49,7 @@ public class MapDetails : View
 		preview.Stream = null;
 		preview.Stream = map.LoadAudio();
 		preview.Play(preview.Stream.GetLength() / 3);
-		Game.LoadedMap = currentMap;
+		Game.LoadedMapset = currentMap;
 	}
 	public void OnDifficultySelected(int idx)
 	{
@@ -57,6 +57,7 @@ public class MapDetails : View
 		if (diff == currentDifficulty) return;
 		diff.Load(currentMap);
 		currentDifficulty = diff;
+		Game.LoadedMap = currentDifficulty;
 		Game.LoadedMapData = currentDifficulty.Data;
 	}
 	public override async void OnShow()

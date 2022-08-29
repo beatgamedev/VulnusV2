@@ -3,7 +3,8 @@ using System;
 
 public class Game : Spatial
 {
-	public static BeatmapSet LoadedMap;
+	public static BeatmapSet LoadedMapset;
+	public static Beatmap LoadedMap;
 	public static BeatmapData LoadedMapData;
 
 	public static Score Score;
@@ -33,13 +34,13 @@ public class Game : Spatial
 		Camera.Cursor = Cursor;
 		Camera.GhostCursor = GhostCursor;
 
-		if (LoadedMap == null || LoadedMapData == null)
+		if (LoadedMapset == null || LoadedMapData == null)
 		{
 			Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
 			return;
 		}
 
-		SyncManager.SetStream(LoadedMap.LoadAudio());
+		SyncManager.SetStream(LoadedMapset.LoadAudio());
 		SyncManager.Connect("Ended", this, nameof(GameEnded));
 
 		NoteManager.Connect("NoteHit", this, nameof(OnNoteHit));
@@ -47,7 +48,7 @@ public class Game : Spatial
 
 		Global.Discord.SetActivity(new Discord.ActivityW(
 			state: "Playing a map",
-			details: $"{LoadedMap.Name} - {LoadedMapData.Name}",
+			details: $"{LoadedMapset.Name} - {LoadedMap.Name}",
 			startTimestamp: DateTime.Now
 		));
 	}
@@ -69,7 +70,7 @@ public class Game : Spatial
 	}
 	public override void _ExitTree()
 	{
-		Options opt = (Options)Global.Instance.Overlays["Options"]; 
+		Options opt = (Options)Global.Instance.Overlays["Options"];
 		opt.CanOpen = true;
 	}
 	public void OnNoteHit(Note note)
