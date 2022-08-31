@@ -15,9 +15,8 @@ public class MenuHandler : Control
 			view.Visible = false;
 		}
 		Views = views;
-		CallDeferred(nameof(GoTo), 0);
+		CallDeferred(nameof(GoTo), Game.Score == null ? 0 : 1);
 		Global.Discord.SetActivity(new Discord.ActivityW(
-			state: "Selecting a map",
 			startTimestamp: DateTime.Now
 		));
 	}
