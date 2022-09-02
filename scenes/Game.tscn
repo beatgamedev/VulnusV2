@@ -5,10 +5,10 @@
 [ext_resource path="res://assets/skin/cursor.png" type="Texture" id=3]
 [ext_resource path="res://scripts/gameplay/Game.cs" type="Script" id=4]
 [ext_resource path="res://assets/skin/grid_minimal.png" type="Texture" id=5]
-[ext_resource path="res://scripts/gameplay/NoteManager.cs" type="Script" id=6]
-[ext_resource path="res://scripts/gameplay/NoteRenderer.cs" type="Script" id=7]
-[ext_resource path="res://scripts/gameplay/SyncManager.cs" type="Script" id=8]
-[ext_resource path="res://scripts/gameplay/HUDManager.cs" type="Script" id=9]
+[ext_resource path="res://scripts/gameplay/managers/NoteManager.cs" type="Script" id=6]
+[ext_resource path="res://scripts/gameplay/managers/NoteRenderer.cs" type="Script" id=7]
+[ext_resource path="res://scripts/gameplay/managers/SyncManager.cs" type="Script" id=8]
+[ext_resource path="res://scripts/gameplay/managers/HUDManager.cs" type="Script" id=9]
 [ext_resource path="res://prefabs/hud/LeftPanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://prefabs/hud/RightPanel.tscn" type="PackedScene" id=11]
 
@@ -20,20 +20,19 @@ ambient_light_sky_contribution = 0.0
 auto_exposure_scale = 0.15
 auto_exposure_max_luma = 0.5
 auto_exposure_speed = 0.2
+ssao_edge_sharpness = 3.0
 dof_blur_near_enabled = true
 dof_blur_near_distance = 1.0
 dof_blur_near_transition = 0.5
 glow_enabled = true
-glow_levels/2 = true
-glow_levels/4 = true
-glow_levels/6 = true
-glow_intensity = 0.7
-glow_strength = 0.5
-glow_bloom = 0.7
+glow_levels/1 = true
+glow_levels/3 = false
+glow_intensity = 0.5
+glow_strength = 0.8
+glow_bloom = 0.2
 glow_blend_mode = 1
 glow_hdr_threshold = 0.8
 glow_bicubic_upscale = true
-glow_high_quality = true
 
 [sub_resource type="PlaneMesh" id=3]
 
@@ -58,6 +57,11 @@ albedo_texture = ExtResource( 3 )
 render_priority = 2
 flags_transparent = true
 vertex_color_use_as_albedo = true
+emission_enabled = true
+emission = Color( 0, 0, 0, 1 )
+emission_energy = 1.0
+emission_operator = 1
+emission_on_uv2 = false
 
 [sub_resource type="MultiMesh" id=8]
 transform_format = 1
@@ -143,7 +147,7 @@ size = Vector2( 360, 720 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
-msaa = 1
+msaa = 3
 fxaa = true
 disable_3d = true
 render_target_v_flip = true
@@ -157,7 +161,7 @@ size = Vector2( 360, 720 )
 size_override_stretch = true
 transparent_bg = true
 handle_input_locally = false
-msaa = 1
+msaa = 3
 fxaa = true
 disable_3d = true
 render_target_v_flip = true
@@ -168,10 +172,12 @@ gui_snap_controls_to_pixels = false
 
 [node name="LeftPanel" type="MeshInstance" parent="HUD"]
 transform = Transform( 8.66025, 0, 0.5, 0, 10, 0, -5, 0, 0.866025, -22, 0, -28 )
+layers = 3
 mesh = SubResource( 11 )
 material/0 = SubResource( 12 )
 
 [node name="RightPanel" type="MeshInstance" parent="HUD"]
 transform = Transform( 8.66025, 0, -0.5, 0, 10, 0, 5, 0, 0.866025, 22, 0, -28 )
+layers = 3
 mesh = SubResource( 11 )
 material/0 = SubResource( 15 )

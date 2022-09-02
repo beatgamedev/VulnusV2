@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scripts/gameplay/RightPanel.cs" type="Script" id=1]
+[ext_resource path="res://scripts/gameplay/hud/RightPanel.cs" type="Script" id=1]
 [ext_resource path="res://assets/skin/progress.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=4]
