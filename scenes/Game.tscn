@@ -14,8 +14,26 @@
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
+background_energy = 0.0
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_sky_contribution = 0.0
+auto_exposure_scale = 0.15
+auto_exposure_max_luma = 0.5
+auto_exposure_speed = 0.2
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.0
+dof_blur_near_transition = 0.5
+glow_enabled = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_levels/6 = true
+glow_intensity = 0.7
+glow_strength = 0.5
+glow_bloom = 0.7
+glow_blend_mode = 1
+glow_hdr_threshold = 0.8
+glow_bicubic_upscale = true
+glow_high_quality = true
 
 [sub_resource type="PlaneMesh" id=3]
 
