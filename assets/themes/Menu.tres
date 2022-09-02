@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=24 format=2]
+[gd_resource type="Theme" load_steps=25 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
 
@@ -39,6 +39,10 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id=26]
+content_margin_left = 8.0
+content_margin_right = 4.0
 
 [sub_resource type="ImageTexture" id=11]
 
@@ -175,6 +179,12 @@ Button/styles/focus = SubResource( 2 )
 Button/styles/hover = SubResource( 5 )
 Button/styles/normal = SubResource( 5 )
 Button/styles/pressed = SubResource( 22 )
+CheckButton/styles/disabled = SubResource( 26 )
+CheckButton/styles/focus = SubResource( 26 )
+CheckButton/styles/hover = SubResource( 26 )
+CheckButton/styles/hover_pressed = SubResource( 26 )
+CheckButton/styles/normal = SubResource( 26 )
+CheckButton/styles/pressed = SubResource( 26 )
 HSlider/icons/grabber = SubResource( 11 )
 HSlider/icons/grabber_disabled = SubResource( 11 )
 HSlider/icons/grabber_highlight = SubResource( 11 )
