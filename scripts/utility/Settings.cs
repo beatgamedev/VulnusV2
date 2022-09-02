@@ -18,6 +18,7 @@ public static class Settings
 	public static float RenderScale = 1f;
 	public static float UIScale = 1f;
 	public static bool CursorDrift = false;
+	public static int Bloom = 0;
 	public static void UpdateSettings(bool loading = false)
 	{
 		if (loading)
@@ -103,6 +104,8 @@ public static class Settings
 		public float UIScale;
 		[OptionalField(VersionAdded = 2)]
 		public bool CursorDrift;
+		[OptionalField(VersionAdded = 2)]
+		public int Bloom;
 		[OnDeserializing()]
 		internal void OnDeserializing(StreamingContext context)
 		{
@@ -117,6 +120,7 @@ public static class Settings
 			RenderScale = 1f;
 			UIScale = 1f;
 			CursorDrift = false;
+			Bloom = 0;
 		}
 	}
 }
