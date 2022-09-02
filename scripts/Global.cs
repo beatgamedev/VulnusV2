@@ -64,4 +64,13 @@ public class Global : Node
 		GetTree().CurrentScene = CurrentScene;
 		callback?.Invoke(CurrentScene);
 	}
+	public void FinishedLoading()
+	{
+		ViewportSizeChanged();
+		GetViewport().Connect("size_changed", this, nameof(ViewportSizeChanged));
+	}
+	public void ViewportSizeChanged()
+	{
+		GetViewport().Size = OS.WindowSize * Settings.RenderScale;
+	}
 }

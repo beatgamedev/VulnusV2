@@ -42,6 +42,7 @@ public class Startup : Node
 		Global.Instance.AddOverlay();
 		EmitSignal(nameof(StageReached), "Loading maps", false);
 		LoadMaps();
+		Global.Instance.FinishedLoading();
 		EmitSignal(nameof(StageReached), "All done", true);
 	}
 	public override void _Process(float delta)
