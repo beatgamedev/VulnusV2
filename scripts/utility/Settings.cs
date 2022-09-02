@@ -94,7 +94,7 @@ public static class Settings
 		public float MouseSensitivity;
 		public int ApproachMode;
 		public float ApproachDistance;
-		public float ApproachTim;
+		public float ApproachTime;
 		public float ApproachRate;
 		public int[] Volume;
 		[OptionalField(VersionAdded = 2)]
