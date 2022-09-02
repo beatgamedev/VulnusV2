@@ -26,13 +26,13 @@ public class Slider : Control
 	}
 	public void SetValue(float value)
 	{
-		GetNode<Label>("Label").Text = $"{Label} ({value})";
+		GetNode<Label>("Label").Text = $"{Label} ({value}{Suffix})";
 		Value = value;
 		GetNode<Godot.Slider>("Slider").Value = value;
 	}
 	public void OnValueChanged(float value)
 	{
-		GetNode<Label>("Label").Text = $"{Label} ({value})";
+		GetNode<Label>("Label").Text = $"{Label} ({value}{Suffix})";
 		Value = value;
 		EmitSignal(nameof(ValueChanged), value);
 	}
