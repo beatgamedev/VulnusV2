@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -40,6 +40,11 @@ size = 32
 use_filter = true
 font_data = ExtResource( 7 )
 
+[sub_resource type="DynamicFont" id=7]
+size = 20
+use_filter = true
+font_data = ExtResource( 1 )
+
 [sub_resource type="DynamicFont" id=2]
 size = 20
 use_filter = true
@@ -74,6 +79,7 @@ anchor_bottom = 1.0
 margin_top = 72.0
 
 [node name="MainMenu" type="Control" parent="ViewContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
@@ -328,6 +334,100 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
+
+[node name="Results" type="Control" parent="ViewContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MapInfo" type="Panel" parent="ViewContainer/Results"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -384.0
+margin_top = -225.0
+margin_right = 384.0
+margin_bottom = -65.0
+
+[node name="Title" type="Label" parent="ViewContainer/Results/MapInfo"]
+anchor_right = 1.0
+margin_left = 160.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = 80.0
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 4 )
+text = "Fucking Disgusting Scum - Seifuku Yangire"
+valign = 2
+autowrap = true
+
+[node name="Mappers" type="Label" parent="ViewContainer/Results/MapInfo"]
+anchor_right = 1.0
+margin_left = 160.0
+margin_top = 80.0
+margin_right = -16.0
+margin_bottom = 112.0
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 5 )
+text = "DyamoDash"
+autowrap = true
+
+[node name="Difficulty" type="Label" parent="ViewContainer/Results/MapInfo"]
+anchor_right = 1.0
+margin_left = 160.68
+margin_top = 108.536
+margin_right = -15.3199
+margin_bottom = 140.536
+custom_constants/line_spacing = 0
+custom_fonts/font = SubResource( 7 )
+text = "Official Ver."
+autowrap = true
+
+[node name="Cover" type="TextureRect" parent="ViewContainer/Results/MapInfo"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 152.0
+margin_bottom = 152.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
+[node name="Retry" type="Button" parent="ViewContainer/Results"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -288.0
+margin_top = 16.0
+margin_right = -32.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="ViewContainer/Results/Retry"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 6 )
+text = "RETRY"
+align = 1
+valign = 1
+
+[node name="Return" type="Button" parent="ViewContainer/Results"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 32.0
+margin_top = 16.0
+margin_right = 288.0
+margin_bottom = 64.0
+
+[node name="Label" type="Label" parent="ViewContainer/Results/Return"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 6 )
+text = "RETURN"
+align = 1
+valign = 1
 
 [node name="Topbar" type="ColorRect" parent="."]
 anchor_right = 1.0
