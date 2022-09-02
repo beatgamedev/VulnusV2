@@ -3,6 +3,7 @@
 .import/
 export.cfg
 export_presets.cfg
+override.cfg
 *.import
 
 # Mono-specific ignores
