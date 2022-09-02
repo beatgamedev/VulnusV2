@@ -106,7 +106,7 @@ anchor_bottom = 1.0
 margin_top = 26.0
 
 [node name="Camera" type="Control" parent="Content/Gameplay"]
-anchor_right = 0.5
+anchor_right = 1.0
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
@@ -125,8 +125,10 @@ align = 1
 valign = 1
 
 [node name="Mode" type="Control" parent="Content/Gameplay/Camera"]
-anchor_right = 1.0
+anchor_right = 0.5
+margin_left = 8.0
 margin_top = 30.0
+margin_right = -8.0
 margin_bottom = 62.0
 script = ExtResource( 8 )
 
@@ -147,8 +149,10 @@ items = [ "Spin", null, false, 1, null, "Lock", null, false, 2, null ]
 selected = 0
 
 [node name="Sensitivity" type="Control" parent="Content/Gameplay/Camera"]
-anchor_right = 1.0
+anchor_right = 0.5
+margin_left = 8.0
 margin_top = 66.0
+margin_right = -8.0
 margin_bottom = 98.0
 script = ExtResource( 9 )
 
@@ -169,6 +173,21 @@ max_value = 10.0
 step = 0.01
 value = 1.0
 allow_greater = true
+
+[node name="Drift" type="CheckButton" parent="Content/Gameplay/Camera"]
+anchor_left = 0.5
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 30.0
+margin_right = -8.0
+margin_bottom = 62.0
+focus_mode = 0
+action_mode = 0
+text = "Cursor Drift"
+flat = true
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Approach" type="Control" parent="Content/Gameplay"]
 anchor_right = 0.5
@@ -191,6 +210,7 @@ valign = 1
 
 [node name="Method" type="Control" parent="Content/Gameplay/Approach"]
 anchor_right = 1.0
+margin_left = 8.0
 margin_top = 30.0
 margin_bottom = 62.0
 script = ExtResource( 8 )
@@ -213,6 +233,7 @@ selected = 0
 
 [node name="Distance" type="Control" parent="Content/Gameplay/Approach"]
 anchor_right = 1.0
+margin_left = 8.0
 margin_top = 66.0
 margin_bottom = 98.0
 script = ExtResource( 9 )
@@ -238,6 +259,7 @@ suffix = "m"
 
 [node name="Time" type="Control" parent="Content/Gameplay/Approach"]
 anchor_right = 1.0
+margin_left = 8.0
 margin_top = 102.0
 margin_bottom = 134.0
 script = ExtResource( 9 )
@@ -263,6 +285,7 @@ suffix = "s"
 
 [node name="Speed" type="Control" parent="Content/Gameplay/Approach"]
 anchor_right = 1.0
+margin_left = 8.0
 margin_top = 138.0
 margin_bottom = 170.0
 script = ExtResource( 9 )

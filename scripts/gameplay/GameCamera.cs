@@ -45,6 +45,8 @@ public class GameCamera : Godot.Camera
 			CursorPosition += new Vector2(relative.x, -relative.y) * 0.1675f;
 		}
 		ClampedCursorPosition = new Vector2(Mathf.Clamp(CursorPosition.x, -clamp, clamp), Mathf.Clamp(CursorPosition.y, -clamp, clamp));
+		if (Settings.CursorDrift)
+			CursorPosition = ClampedCursorPosition;
 		if (Cursor != null)
 			Cursor.Translation = new Vector3(ClampedCursorPosition.x, ClampedCursorPosition.y, 0);
 		if (GhostCursor != null)
