@@ -19,6 +19,7 @@ public static class Settings
 	public static float UIScale = 1f;
 	public static bool CursorDrift = false;
 	public static int Bloom = 0;
+	public static int FPSLimit = 0;
 	public static void UpdateSettings(bool loading = false)
 	{
 		if (loading)
@@ -26,6 +27,7 @@ public static class Settings
 		else
 			SaveSettings();
 		Global.Instance.ViewportSizeChanged();
+		Engine.TargetFps = FPSLimit;
 		switch (ApproachMode)
 		{
 			case 0:
@@ -106,6 +108,8 @@ public static class Settings
 		public bool CursorDrift;
 		[OptionalField(VersionAdded = 2)]
 		public int Bloom;
+		[OptionalField(VersionAdded = 2)]
+		public int FPSLimit;
 		[OnDeserializing()]
 		internal void OnDeserializing(StreamingContext context)
 		{
@@ -121,6 +125,7 @@ public static class Settings
 			UIScale = 1f;
 			CursorDrift = false;
 			Bloom = 0;
+			FPSLimit = 0;
 		}
 	}
 }

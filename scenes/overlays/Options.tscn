@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/images/settings.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_select_folder.gdns" type="Script" id=15]
 [ext_resource path="res://addons/native_dialogs/bin/native_dialog_open_file.gdns" type="Script" id=16]
 [ext_resource path="res://scripts/menu/components/options/RenderSettings.cs" type="Script" id=17]
+[ext_resource path="res://scripts/menu/components/options/PostSettings.cs" type="Script" id=18]
 
 [sub_resource type="DynamicFont" id=3]
 size = 18
@@ -102,7 +103,6 @@ theme = ExtResource( 5 )
 tab_align = 0
 
 [node name="Gameplay" type="Control" parent="Content"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -311,6 +311,7 @@ editable = false
 suffix = "m/s"
 
 [node name="Visual" type="Control" parent="Content"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -320,7 +321,7 @@ anchor_right = 0.5
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = 70.0
+margin_bottom = 105.0
 script = ExtResource( 17 )
 __meta__ = {
 "_edit_group_": true
@@ -346,12 +347,36 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="FPS" type="Control" parent="Content/Visual/Render"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 66.0
+margin_right = -8.0
+margin_bottom = 98.0
+script = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="Content/Visual/Render/FPS"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+text = "FPS Limit"
+valign = 1
+
+[node name="SpinBox" type="SpinBox" parent="Content/Visual/Render/FPS"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+max_value = 360.0
+allow_greater = true
+
 [node name="Post" type="Control" parent="Content/Visual"]
 anchor_right = 0.5
 margin_left = 8.0
-margin_top = 74.0
+margin_top = 112.0
 margin_right = -8.0
-margin_bottom = 136.0
+margin_bottom = 174.0
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
 }

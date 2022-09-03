@@ -10,6 +10,12 @@ public class RenderSettings : Control
 		GetNode<CheckButton>("GLES2").Disabled = (usedDriver != projDriver) || !OS.HasFeature("pc");
 		GetNode<CheckButton>("GLES2").Pressed = (usedDriver == OS.VideoDriver.Gles2) || (projDriver == OS.VideoDriver.Gles2);
 		GetNode<CheckButton>("GLES2").Connect("pressed", this, nameof(OnButtonPressed));
+		GetNode<DecimalInput>("FPS").Connect("ValueChanged", this, nameof(OnValueChanged));
+	}
+	public void OnValueChanged(float value)
+	{
+		Settings.FPSLimit = Mathf.RoundToInt(value);
+		Settings.UpdateSettings();
 	}
 	public void OnButtonPressed()
 	{
