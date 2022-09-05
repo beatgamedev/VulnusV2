@@ -100,4 +100,5 @@ vram_compression/import_etc=true
 quality/filters/use_nearest_mipmap_filter=true
 environment/default_clear_color=Color( 0, 0.0941176, 0.188235, 1 )
 quality/filters/msaa=1
+quality/filters/use_debanding=true
 environment/default_environment="res://assets/environments/Environment.tres"
