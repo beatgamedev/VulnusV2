@@ -12,8 +12,7 @@ public class EnvironmentEffects : WorldEnvironment
 			Environment.GlowIntensity = 1.2f;
 		Environment.GlowHighQuality = Settings.Bloom == 0;
 		Environment.GlowBicubicUpscale = Settings.Bloom == 0;
-		Environment.GlowLevels__4 = Settings.Bloom == 0;
+		Environment.GlowLevels__3 = Settings.Bloom == 0;
 		Environment.GlowLevels__6 = Settings.Bloom == 0;
-		Environment.GlowLevels__7 = Settings.Bloom == 0;
 	}
 }

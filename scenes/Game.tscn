@@ -30,11 +30,12 @@ glow_levels/1 = true
 glow_levels/5 = false
 glow_levels/6 = true
 glow_levels/7 = true
-glow_intensity = 0.5
+glow_intensity = 0.6
 glow_strength = 0.8
-glow_bloom = 0.1
+glow_bloom = 0.05
 glow_blend_mode = 0
 glow_hdr_threshold = 0.8
+glow_hdr_scale = 1.8
 glow_bicubic_upscale = true
 glow_high_quality = true
 adjustment_enabled = true
@@ -43,6 +44,7 @@ adjustment_enabled = true
 
 [sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
+albedo_color = Color( 1.2, 1.2, 1.2, 1 )
 albedo_texture = ExtResource( 5 )
 
 [sub_resource type="PlaneMesh" id=6]
@@ -62,11 +64,6 @@ albedo_texture = ExtResource( 3 )
 render_priority = 2
 flags_transparent = true
 vertex_color_use_as_albedo = true
-emission_enabled = true
-emission = Color( 0, 0, 0, 1 )
-emission_energy = 1.0
-emission_operator = 1
-emission_on_uv2 = false
 
 [sub_resource type="MultiMesh" id=8]
 transform_format = 1
@@ -83,8 +80,8 @@ viewport_path = NodePath("HUD/LeftHUD")
 
 [sub_resource type="SpatialMaterial" id=12]
 resource_local_to_scene = true
-render_priority = 1
 flags_transparent = true
+albedo_color = Color( 1.2, 1.2, 1.2, 1 )
 albedo_texture = SubResource( 13 )
 
 [sub_resource type="ViewportTexture" id=14]
@@ -94,20 +91,21 @@ viewport_path = NodePath("HUD/RightHUD")
 [sub_resource type="SpatialMaterial" id=15]
 resource_local_to_scene = true
 flags_transparent = true
+albedo_color = Color( 1.2, 1.2, 1.2, 1 )
 albedo_texture = SubResource( 14 )
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 4 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+script = ExtResource( 12 )
 
 [node name="SyncManager" type="Node" parent="."]
 script = ExtResource( 8 )
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="SyncManager"]
 bus = "Music"
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 2 )
-script = ExtResource( 12 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
