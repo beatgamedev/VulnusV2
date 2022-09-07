@@ -53,7 +53,8 @@ public class Game : Spatial
 		Global.Discord.SetActivity(new Discord.ActivityW(
 			state: "Playing a map",
 			details: $"{LoadedMapset.Name} - {LoadedMap.Name}",
-			startTimestamp: DateTime.Now
+			startTimestamp: DateTime.Now,
+			endTimestamp: DateTime.Now.AddSeconds(SyncManager.AudioPlayer.Stream.GetLength())
 		));
 	}
 	public override void _PhysicsProcess(float delta)
