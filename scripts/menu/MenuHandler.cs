@@ -9,13 +9,13 @@ public class MenuHandler : Control
 	public override void _Ready()
 	{
 		var viewContainer = GetNode<Control>("ViewContainer");
-		View[] views = { viewContainer.GetNode<View>("MainMenu"), viewContainer.GetNode<View>("Singleplayer") };
+		View[] views = { viewContainer.GetNode<View>("MainMenu"), viewContainer.GetNode<View>("Singleplayer"), viewContainer.GetNode<View>("Results") };
 		foreach (View view in views)
 		{
 			view.Visible = false;
 		}
 		Views = views;
-		CallDeferred(nameof(GoTo), Game.Score == null ? 0 : 1);
+		CallDeferred(nameof(GoTo), Game.Score == null ? 0 : 2);
 		Global.Discord.SetActivity(new Discord.ActivityW(
 			startTimestamp: DateTime.Now
 		));
