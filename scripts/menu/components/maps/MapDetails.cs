@@ -10,11 +10,17 @@ public class MapDetails : View
 	public override void _Ready()
 	{
 		base._Ready();
-		SetActive(false);
 		mapList = GetParent().GetNode<MapList>("MapList");
 		mapList.Connect("MapSelected", this, nameof(OnMapSelected));
 		GetNode<OptionButton>("Difficulty").Connect("item_selected", this, nameof(OnDifficultySelected));
 		GetNode<Button>("Play").Connect("pressed", this, nameof(OnPlayPressed));
+		if (Game.Score == null)
+		{
+			SetActive(false);
+			return;
+		}
+		OnMapSelected(Game.LoadedMapset.Hash);
+		OnDifficultySelected(Game.LoadedMapset.Difficulties.IndexOf(Game.LoadedMap));
 	}
 	public void OnPlayPressed()
 	{
