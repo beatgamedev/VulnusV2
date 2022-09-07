@@ -66,11 +66,12 @@ public class Global : Node
 	}
 	public void FinishedLoading()
 	{
-		ViewportSizeChanged();
-		GetViewport().Connect("size_changed", this, nameof(ViewportSizeChanged));
+		ViewportChanged();
+		GetViewport().Connect("size_changed", this, nameof(ViewportChanged));
 	}
-	public void ViewportSizeChanged()
+	public void ViewportChanged()
 	{
 		GetViewport().Size = OS.WindowSize * Settings.RenderScale;
+		GetViewport().Debanding = Settings.Debanding;
 	}
 }

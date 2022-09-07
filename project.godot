@@ -37,6 +37,10 @@ window/size/test_width=1024
 window/size/test_height=576
 window/vsync/use_vsync=false
 
+[editor]
+
+script_templates_search_path="res://templates"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/native_dialogs/plugin.cfg" )

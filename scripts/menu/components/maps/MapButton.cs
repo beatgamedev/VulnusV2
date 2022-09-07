@@ -4,7 +4,6 @@ using System;
 public class MapButton : Button
 {
 	public BeatmapSet Map;
-	private Tween tween;
 	public void ManualUpdate()
 	{
 		if (Map == null)

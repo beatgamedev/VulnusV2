@@ -20,13 +20,16 @@ public static class Settings
 	public static bool CursorDrift = false;
 	public static int Bloom = 0;
 	public static int FPSLimit = 0;
+	public static bool VSync = false;
+	public static bool Debanding = true;
 	public static void UpdateSettings(bool loading = false)
 	{
 		if (loading)
 			LoadSettings();
 		else
 			SaveSettings();
-		Global.Instance.ViewportSizeChanged();
+		Global.Instance.ViewportChanged();
+		OS.VsyncEnabled = VSync;
 		Engine.TargetFps = FPSLimit;
 		switch (ApproachMode)
 		{
@@ -110,6 +113,10 @@ public static class Settings
 		public int Bloom;
 		[OptionalField(VersionAdded = 2)]
 		public int FPSLimit;
+		[OptionalField(VersionAdded = 2)]
+		public bool VSync;
+		[OptionalField(VersionAdded = 2)]
+		public bool Debanding;
 		[OnDeserializing()]
 		internal void OnDeserializing(StreamingContext context)
 		{
@@ -126,6 +133,8 @@ public static class Settings
 			CursorDrift = false;
 			Bloom = 0;
 			FPSLimit = 0;
+			VSync = false;
+			Debanding = true;
 		}
 	}
 }

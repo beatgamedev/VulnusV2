@@ -103,6 +103,7 @@ theme = ExtResource( 5 )
 tab_align = 0
 
 [node name="Gameplay" type="Control" parent="Content"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -311,7 +312,6 @@ editable = false
 suffix = "m/s"
 
 [node name="Visual" type="Control" parent="Content"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -321,11 +321,8 @@ anchor_right = 0.5
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = 105.0
+margin_bottom = 142.0
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Label" type="Label" parent="Content/Visual/Render"]
 anchor_right = 1.0
@@ -335,25 +332,16 @@ text = "Rendering"
 align = 1
 valign = 1
 
-[node name="GLES2" type="CheckButton" parent="Content/Visual/Render"]
-anchor_right = 1.0
-margin_left = 8.0
-margin_top = 30.0
-margin_bottom = 62.0
-focus_mode = 0
-text = "Force GLES2"
-flat = true
-__meta__ = {
-"_editor_description_": ""
-}
-
 [node name="FPS" type="Control" parent="Content/Visual/Render"]
 anchor_right = 1.0
 margin_left = 8.0
-margin_top = 66.0
+margin_top = 30.0
 margin_right = -8.0
-margin_bottom = 98.0
+margin_bottom = 62.0
 script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Label" type="Label" parent="Content/Visual/Render/FPS"]
 anchor_right = 1.0
@@ -370,12 +358,37 @@ margin_left = -128.0
 max_value = 360.0
 allow_greater = true
 
+[node name="VSync" type="CheckButton" parent="Content/Visual/Render"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 66.0
+margin_bottom = 98.0
+focus_mode = 0
+text = "VSync"
+flat = true
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="Debanding" type="CheckButton" parent="Content/Visual/Render"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 102.0
+margin_bottom = 134.0
+text = "Debanding"
+flat = true
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
 [node name="Post" type="Control" parent="Content/Visual"]
 anchor_right = 0.5
 margin_left = 8.0
-margin_top = 112.0
+margin_top = 142.0
 margin_right = -8.0
-margin_bottom = 174.0
+margin_bottom = 204.0
 script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
