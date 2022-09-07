@@ -62,7 +62,10 @@ public class Game : Spatial
 		if (Input.IsActionJustPressed("skip") && SyncManager.CanSkip())
 			SyncManager.AttemptSkip();
 		if (Input.IsActionJustPressed("force_end"))
+		{
+			Score.Health = 0;
 			GameEnded();
+		}
 	}
 	public override void _EnterTree()
 	{
@@ -91,6 +94,7 @@ public class Game : Spatial
 		if (Score.Combo > Score.HighestCombo)
 			Score.HighestCombo = Score.Combo;
 		Score.Total += 1;
+		Score.Health = Math.Min(10, Score.Health + 10.0 / 8.0);
 		HUDManager.ManualUpdate(Score);
 	}
 	public void OnNoteMiss(Note note)
@@ -100,6 +104,12 @@ public class Game : Spatial
 		Score.Combo = 0;
 		Score.Misses += 1;
 		Score.Total += 1;
+		Score.Health = Math.Max(0, Score.Health - 2);
+		if (Score.Health <= 0)
+		{
+			GameEnded();
+			return;
+		}
 		HUDManager.ManualUpdate(Score);
 	}
 	public void GameEnded()

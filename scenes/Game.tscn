@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://assets/skin/Block.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://scripts/gameplay/GameCamera.cs" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://prefabs/hud/LeftPanel.tscn" type="PackedScene" id=10]
 [ext_resource path="res://prefabs/hud/RightPanel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scripts/gameplay/EnvironmentEffects.cs" type="Script" id=12]
+[ext_resource path="res://prefabs/hud/Health.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
@@ -94,7 +95,21 @@ flags_transparent = true
 albedo_color = Color( 1.2, 1.2, 1.2, 1 )
 albedo_texture = SubResource( 14 )
 
+[sub_resource type="QuadMesh" id=16]
+size = Vector2( 6, 0.1 )
+
+[sub_resource type="ViewportTexture" id=17]
+flags = 4
+viewport_path = NodePath("HUD/HealthHUD")
+
+[sub_resource type="SpatialMaterial" id=18]
+resource_local_to_scene = true
+render_priority = 1
+albedo_color = Color( 1.2, 1.2, 1.2, 1 )
+albedo_texture = SubResource( 17 )
+
 [node name="Game" type="Spatial"]
+process_priority = 2
 script = ExtResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -133,9 +148,11 @@ mesh = SubResource( 6 )
 material/0 = SubResource( 7 )
 
 [node name="NoteManager" type="Node" parent="."]
+process_priority = 1
 script = ExtResource( 6 )
 
 [node name="NoteRenderer" type="MultiMeshInstance" parent="NoteManager"]
+process_priority = 1
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.15 )
 layers = 4
 material_override = SubResource( 9 )
@@ -174,6 +191,19 @@ gui_snap_controls_to_pixels = false
 
 [node name="UI" parent="HUD/RightHUD" instance=ExtResource( 11 )]
 
+[node name="HealthHUD" type="Viewport" parent="HUD"]
+size = Vector2( 600, 10 )
+size_override_stretch = true
+handle_input_locally = false
+msaa = 3
+fxaa = true
+disable_3d = true
+render_target_v_flip = true
+gui_disable_input = true
+gui_snap_controls_to_pixels = false
+
+[node name="UI" parent="HUD/HealthHUD" instance=ExtResource( 13 )]
+
 [node name="LeftPanel" type="MeshInstance" parent="HUD"]
 transform = Transform( 8.66025, 0, 0.5, 0, 10, 0, -5, 0, 0.866025, -22, 0, -28 )
 layers = 3
@@ -185,3 +215,9 @@ transform = Transform( 8.66025, 0, -0.5, 0, 10, 0, 5, 0, 0.866025, 22, 0, -28 )
 layers = 3
 mesh = SubResource( 11 )
 material/0 = SubResource( 15 )
+
+[node name="HealthPanel" type="MeshInstance" parent="HUD"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -3.5, -0.5 )
+layers = 3
+mesh = SubResource( 16 )
+material/0 = SubResource( 18 )
