@@ -16,6 +16,10 @@ public class Singleplayer : View
 		bottomBar = GetNode<Control>("BottomBar");
 		var backBtn = bottomBar.GetNode<Button>("Back");
 		backBtn.Connect("pressed", menu, nameof(MenuHandler.GoTo), new Godot.Collections.Array(0));
+		if (Game.Score == null)
+			return;
+		GetNode<MapDetails>("MapDetails").OnMapSelected(Game.LoadedMapset.Hash);
+		GetNode<MapDetails>("MapDetails").OnDifficultySelected(Game.LoadedMapset.Difficulties.IndexOf(Game.LoadedMap));
 	}
 	public override void OnShow()
 	{
