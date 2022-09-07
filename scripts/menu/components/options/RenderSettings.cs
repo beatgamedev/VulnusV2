@@ -9,6 +9,7 @@ public class RenderSettings : Control
 		GetNode<CheckButton>("VSync").Pressed = Settings.VSync;
 		GetNode<CheckButton>("VSync").Connect("pressed", this, nameof(OnButtonPressed), new Godot.Collections.Array(0));
 		GetNode<CheckButton>("Debanding").Pressed = Settings.Debanding;
+		GetNode<CheckButton>("Debanding").Connect("pressed", this, nameof(OnButtonPressed), new Godot.Collections.Array(1));
 		GetNode<DecimalInput>("FPS").SetValue(Settings.FPSLimit);
 		GetNode<DecimalInput>("FPS").Connect("ValueChanged", this, nameof(OnValueChanged));
 		GetNode<Slider>("RenderScale").SetValue(Settings.RenderScale * 100f);
