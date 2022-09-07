@@ -11,7 +11,6 @@ public class SyncManager : Node
 
 	public double NoteTime;
 	public double SongTime;
-	public double SkippedTime;
 	public bool SongPlaying;
 	public double SongPlayingAt;
 	public double SongPlayingOffset;
@@ -27,7 +26,6 @@ public class SyncManager : Node
 
 		NoteTime = 0f;
 		SongTime = -1f;
-		SkippedTime = 0;
 	}
 	public override void _Process(float delta)
 	{
@@ -45,7 +43,7 @@ public class SyncManager : Node
 		else
 		{
 			var songTime = GetTimeSeconds() - SongPlayingAt;
-			SongTime = Math.Max(0.0, songTime - SongPlayingOffset) + SkippedTime;
+			SongTime = Math.Max(0.0, songTime - SongPlayingOffset);
 			var difference = SongTime - (AudioPlayer.GetPlaybackPosition() + AudioServer.GetTimeSinceLastMix());
 			if (difference > 0.002)
 			{
@@ -65,7 +63,7 @@ public class SyncManager : Node
 			GD.Print($"Attempting to skip {SkippableTime()}s");
 			if (SongPlaying)
 			{
-				SkippedTime += skippableTime;
+				SongPlayingAt -= skippableTime;
 				AudioPlayer.Seek((float)(SongTime + skippableTime));
 			}
 			SongTime += skippableTime;
