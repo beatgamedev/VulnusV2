@@ -11,10 +11,17 @@ public class RenderSettings : Control
 		GetNode<CheckButton>("Debanding").Pressed = Settings.Debanding;
 		GetNode<DecimalInput>("FPS").SetValue(Settings.FPSLimit);
 		GetNode<DecimalInput>("FPS").Connect("ValueChanged", this, nameof(OnValueChanged));
+		GetNode<Slider>("RenderScale").SetValue(Settings.RenderScale * 100f);
+		// GetNode<Slider>("RenderScale").Connect("ValueChanged", this, nameof(OnSliderChanged));
 	}
 	public void OnValueChanged(float value)
 	{
 		Settings.FPSLimit = Mathf.RoundToInt(value);
+		Settings.UpdateSettings();
+	}
+	public void OnSliderChanged(float value)
+	{
+		Settings.RenderScale = value / 100f;
 		Settings.UpdateSettings();
 	}
 	public void OnButtonPressed(int btn)

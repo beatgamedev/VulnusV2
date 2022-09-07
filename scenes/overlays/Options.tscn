@@ -321,7 +321,7 @@ anchor_right = 0.5
 margin_left = 8.0
 margin_top = 8.0
 margin_right = -8.0
-margin_bottom = 142.0
+margin_bottom = 178.0
 script = ExtResource( 17 )
 
 [node name="Label" type="Label" parent="Content/Visual/Render"]
@@ -383,12 +383,44 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="RenderScale" type="Control" parent="Content/Visual/Render"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_top = 132.0
+margin_right = -8.0
+margin_bottom = 170.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+Label = "Render Scale"
+Suffix = "%"
+Value = 100.0
+Max = 200.0
+Min = 50.0
+
+[node name="Slider" type="HSlider" parent="Content/Visual/Render/RenderScale"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+value = 100.0
+editable = false
+scrollable = false
+
+[node name="Label" type="Label" parent="Content/Visual/Render/RenderScale"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_bottom = -16.0
+text = "Render Scale (100%)"
+
 [node name="Post" type="Control" parent="Content/Visual"]
 anchor_right = 0.5
 margin_left = 8.0
-margin_top = 142.0
+margin_top = 182.0
 margin_right = -8.0
-margin_bottom = 204.0
+margin_bottom = 244.0
 script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
