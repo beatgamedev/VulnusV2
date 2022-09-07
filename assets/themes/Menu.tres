@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=25 format=2]
+[gd_resource type="Theme" load_steps=26 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
 
@@ -113,6 +113,13 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id=18]
 content_margin_left = 4.0
 content_margin_right = 4.0
@@ -199,6 +206,7 @@ OptionButton/styles/focus = SubResource( 15 )
 OptionButton/styles/hover = SubResource( 14 )
 OptionButton/styles/normal = SubResource( 14 )
 OptionButton/styles/pressed = SubResource( 24 )
+Panel/styles/panel = SubResource( 27 )
 PopupMenu/styles/hover = SubResource( 18 )
 PopupMenu/styles/panel = SubResource( 16 )
 PopupPanel/styles/panel = SubResource( 17 )
