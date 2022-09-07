@@ -8,4 +8,7 @@
 	<PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
 	<PackageReference Include="Clowd.Squirrel" Version="2.9.42" />
   </ItemGroup>
+  <ItemGroup>
+	<Compile Remove="templates/*.cs" />
+  </ItemGroup>
 </Project>
