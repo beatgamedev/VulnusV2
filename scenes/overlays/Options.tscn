@@ -397,7 +397,7 @@ Label = "Render Scale"
 Suffix = "%"
 Value = 100.0
 Max = 200.0
-Min = 50.0
+Min = 5.0
 
 [node name="Slider" type="HSlider" parent="Content/Visual/Render/RenderScale"]
 anchor_top = 1.0
