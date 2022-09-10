@@ -13,7 +13,7 @@ public class RenderSettings : Control
 		GetNode<DecimalInput>("FPS").SetValue(Settings.FPSLimit);
 		GetNode<DecimalInput>("FPS").Connect("ValueChanged", this, nameof(OnValueChanged));
 		GetNode<Slider>("RenderScale").SetValue(Settings.RenderScale * 100f);
-		// GetNode<Slider>("RenderScale").Connect("ValueChanged", this, nameof(OnSliderChanged));
+		GetNode<Slider>("RenderScale").Connect("ValueChanged", this, nameof(OnSliderChanged));
 	}
 	public void OnValueChanged(float value)
 	{

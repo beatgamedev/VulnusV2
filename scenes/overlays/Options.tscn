@@ -103,7 +103,6 @@ theme = ExtResource( 5 )
 tab_align = 0
 
 [node name="Gameplay" type="Control" parent="Content"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -312,6 +311,7 @@ editable = false
 suffix = "m/s"
 
 [node name="Visual" type="Control" parent="Content"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 26.0
@@ -405,8 +405,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -16.0
 value = 100.0
-editable = false
-scrollable = false
 
 [node name="Label" type="Label" parent="Content/Visual/Render/RenderScale"]
 anchor_right = 1.0
