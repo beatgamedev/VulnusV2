@@ -7,7 +7,14 @@ namespace Discord
 	{
 		public static long ClientId { get; private set; } = 954573999088730154;
 		public bool Disposed { get; private set; } = false;
-		private Discord Discord = new Discord(ClientId, (ulong)CreateFlags.NoRequireDiscord);
+		private Discord Discord;
+		public DiscordW() {
+			try {
+				Discord = new Discord(ClientId, (ulong)CreateFlags.NoRequireDiscord);
+			} catch (ResultException e) {
+				GD.PrintErr($"No Discord | {e.Message}");
+			}
+		}
 		public void Dispose()
 		{
 			if (Disposed) return;
@@ -24,14 +31,7 @@ namespace Discord
 		public void RunCallbacks()
 		{
 			if (this.Discord == null) return;
-			try
-			{
-				this.Discord?.RunCallbacks();
-			}
-			catch
-			{
-				Dispose();
-			}
+			this.Discord?.RunCallbacks();
 		}
 	}
 	public class ActivityW
