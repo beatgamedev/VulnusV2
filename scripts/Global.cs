@@ -23,7 +23,7 @@ public class Global : Node
 	}
 	public override void _Ready()
 	{
-		Input.SetUseAccumulatedInput(false);
+		Input.UseAccumulatedInput = false;
 		Matt = (StreamTexture)GD.Load("res://assets/images/matt.jpg");
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);

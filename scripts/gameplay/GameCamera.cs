@@ -15,11 +15,11 @@ public class GameCamera : Godot.Camera
 		Yaw = 0f;
 		Pitch = 0f;
 		CursorPosition = new Vector2();
-		Input.SetMouseMode(Input.MouseMode.Captured);
+		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 	public override void _ExitTree()
 	{
-		Input.SetMouseMode(Input.MouseMode.Visible);
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 	public override void _Input(InputEvent @event)
 	{
