@@ -61,7 +61,6 @@ public class MapDetails : View
 	public void OnDifficultySelected(int idx)
 	{
 		var diff = currentMap.Difficulties[idx];
-		if (diff == currentDifficulty) return;
 		GetNode<Button>("Play").Visible = diff.Load(currentMap) == Error.Ok;
 		currentDifficulty = diff;
 		Game.LoadedMap = currentDifficulty;
