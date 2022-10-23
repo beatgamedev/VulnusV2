@@ -228,6 +228,7 @@ valign = 1
 anchor_right = 1.0
 margin_left = 8.0
 margin_top = 30.0
+margin_right = -8.0
 margin_bottom = 62.0
 script = ExtResource( 8 )
 
@@ -251,6 +252,7 @@ selected = 0
 anchor_right = 1.0
 margin_left = 8.0
 margin_top = 66.0
+margin_right = -8.0
 margin_bottom = 98.0
 script = ExtResource( 9 )
 
@@ -277,6 +279,7 @@ suffix = "m"
 anchor_right = 1.0
 margin_left = 8.0
 margin_top = 102.0
+margin_right = -8.0
 margin_bottom = 134.0
 script = ExtResource( 9 )
 
@@ -303,6 +306,7 @@ suffix = "s"
 anchor_right = 1.0
 margin_left = 8.0
 margin_top = 138.0
+margin_right = -8.0
 margin_bottom = 170.0
 script = ExtResource( 9 )
 
