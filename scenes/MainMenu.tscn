@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/images/vulnus.png" type="Texture" id=9]
 [ext_resource path="res://scripts/menu/MenuHandler.cs" type="Script" id=10]
 [ext_resource path="res://scripts/menu/Singleplayer.cs" type="Script" id=11]
-[ext_resource path="res://scripts/menu/components/maps/MapList.cs" type="Script" id=12]
+[ext_resource path="res://prefabs/menu/MapList.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/menu/components/maps/MapDetails.cs" type="Script" id=13]
 [ext_resource path="res://scripts/menu/components/Backgrounds.cs" type="Script" id=14]
 [ext_resource path="res://scripts/menu/Results.cs" type="Script" id=15]
@@ -20,6 +20,14 @@
 size = 20
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 0.501961 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 0.501961 )
+skew = Vector2( 0.1, 0 )
+expand_margin_left = 32.0
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
@@ -76,6 +84,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 6 )
 script = ExtResource( 10 )
+__meta__ = {
+"_edit_vertical_guides_": [ -88.0 ]
+}
 
 [node name="Background" type="Control" parent="."]
 anchor_right = 1.0
@@ -242,30 +253,26 @@ custom_fonts/font = SubResource( 1 )
 text = "Quit Vulnus"
 valign = 1
 
+[node name="News" type="Panel" parent="ViewContainer/MainMenu"]
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 192.0
+custom_styles/panel = SubResource( 12 )
+
 [node name="Singleplayer" type="Control" parent="ViewContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 11 )
 
-[node name="MapList" type="Control" parent="ViewContainer/Singleplayer"]
-anchor_left = 0.5
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 64.0
-rect_clip_content = true
-script = ExtResource( 12 )
+[node name="MapList" parent="ViewContainer/Singleplayer" instance=ExtResource( 12 )]
 
-[node name="Content" type="VBoxContainer" parent="ViewContainer/Singleplayer/MapList"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/separation = 0
-
-[node name="MapDetails" type="ColorRect" parent="ViewContainer/Singleplayer"]
+[node name="MapDetails" type="Panel" parent="ViewContainer/Singleplayer"]
 anchor_right = 0.5
 anchor_bottom = 1.0
+margin_right = -32.0
 margin_bottom = -48.0
-color = Color( 0.188235, 0.188235, 0.188235, 0.376471 )
+custom_styles/panel = SubResource( 13 )
 script = ExtResource( 13 )
 
 [node name="Title" type="Label" parent="ViewContainer/Singleplayer/MapDetails"]
@@ -357,6 +364,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
 
 [node name="Results" type="Control" parent="ViewContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 15 )
