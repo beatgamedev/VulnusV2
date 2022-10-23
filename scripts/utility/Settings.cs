@@ -57,6 +57,7 @@ public static class Settings
 		var path = OS.GetUserDataDir().PlusFile("settings.bin");
 		var file = new Godot.File();
 		var settings = new SerializedSettings();
+		settings.SetDefaults();
 		if (file.FileExists(path))
 		{
 			file.Open(path, Godot.File.ModeFlags.Read);
@@ -118,7 +119,11 @@ public static class Settings
 		[OptionalField(VersionAdded = 2)]
 		public bool Debanding;
 		[OnDeserializing()]
-		internal void OnDeserializing(StreamingContext context)
+		internal void OnDeserializing(StreamingContext ctx)
+		{
+			SetDefaults();
+		}
+		public void SetDefaults()
 		{
 			AnyPause = false;
 			CameraMode = 0;
