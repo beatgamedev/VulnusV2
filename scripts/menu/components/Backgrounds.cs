@@ -10,14 +10,12 @@ public class Backgrounds : Control
 	public List<Texture>
 		Textures = new List<Texture>{
 			(StreamTexture)GD.Load("res://assets/backgrounds/coffee.jpg"),
-			(StreamTexture)GD.Load("res://assets/backgrounds/gok.png"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/sunset.png"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/animegril.jpg"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/awesomeassstreet.jpg"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/coolcity.jpg"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/flyingship.jpg"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/funnyasstree.jpg"),
-			(StreamTexture)GD.Load("res://assets/backgrounds/greybganimegirl.jpg"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/skyclouds.jpg"),
 			(StreamTexture)GD.Load("res://assets/backgrounds/treewithswing.jpg")
 		};

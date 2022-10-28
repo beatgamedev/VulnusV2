@@ -21,7 +21,7 @@ public class Singleplayer : View
 	{
 		base.OnShow();
 		tween.StopAll();
-		tween.InterpolateProperty(mapList, "anchor_left", 0.8, 0.5, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
+		tween.InterpolateProperty(mapList, "modulate:a", 0, 1, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
 		tween.InterpolateProperty(bottomBar, "margin_top", 0, -48, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();
 	}

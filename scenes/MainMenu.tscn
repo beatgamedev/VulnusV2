@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -15,6 +15,11 @@
 [ext_resource path="res://scripts/menu/components/maps/MapDetails.cs" type="Script" id=13]
 [ext_resource path="res://scripts/menu/components/Backgrounds.cs" type="Script" id=14]
 [ext_resource path="res://scripts/menu/Results.cs" type="Script" id=15]
+[ext_resource path="res://assets/shaders/blur.gdshader" type="Shader" id=16]
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 16 )
+shader_param/blur_amount = 2.0
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -94,6 +99,7 @@ anchor_bottom = 1.0
 script = ExtResource( 14 )
 
 [node name="Texture" type="TextureRect" parent="Background"]
+modulate = Color( 1, 1, 1, 0.784314 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 5 )
@@ -101,9 +107,9 @@ expand = true
 stretch_mode = 7
 
 [node name="Colour" type="ColorRect" parent="Background"]
+material = SubResource( 14 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 1, 1, 0.12549 )
 
 [node name="ViewContainer" type="Control" parent="."]
 anchor_right = 1.0
@@ -266,6 +272,8 @@ anchor_bottom = 1.0
 script = ExtResource( 11 )
 
 [node name="MapList" parent="ViewContainer/Singleplayer" instance=ExtResource( 12 )]
+margin_left = -576.0
+margin_bottom = -48.0
 
 [node name="MapDetails" type="Panel" parent="ViewContainer/Singleplayer"]
 anchor_right = 0.5

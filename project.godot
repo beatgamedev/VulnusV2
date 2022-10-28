@@ -34,8 +34,8 @@ Global="*res://scripts/Global.cs"
 
 window/size/width=1280
 window/size/height=720
-window/size/test_width=1024
-window/size/test_height=576
+window/size/test_width=1280
+window/size/test_height=720
 window/vsync/use_vsync=false
 
 [editor]
@@ -94,6 +94,10 @@ buffering/agile_event_flushing=true
 3d_render/layer_2="HUD"
 3d_render/layer_3="Notes"
 3d_render/layer_4="Obstacles"
+
+[mono]
+
+project/assembly_name="Vulnus"
 
 [physics]
 
