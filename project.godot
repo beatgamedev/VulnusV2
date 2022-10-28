@@ -95,6 +95,10 @@ buffering/agile_event_flushing=true
 3d_render/layer_3="Notes"
 3d_render/layer_4="Obstacles"
 
+[mono]
+
+project/assembly_name="Vulnus"
+
 [physics]
 
 common/physics_fps=120
