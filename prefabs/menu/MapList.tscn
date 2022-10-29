@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://scripts/menu/components/maps/MapList.cs" type="Script" id=1]
 [ext_resource path="res://assets/themes/Menu.tres" type="Theme" id=2]
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/images/matt.jpg" type="Texture" id=4]
 [ext_resource path="res://scripts/menu/components/maps/MapsetButton.cs" type="Script" id=5]
+[ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/shaders/mask.gdshader" type="Shader" id=7]
 
 [sub_resource type="Gradient" id=3]
@@ -59,7 +60,7 @@ shader = ExtResource( 7 )
 shader_param/mask_texture = SubResource( 13 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 24
+size = 22
 use_filter = true
 font_data = ExtResource( 3 )
 
@@ -67,6 +68,11 @@ font_data = ExtResource( 3 )
 size = 18
 use_filter = true
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 14
+use_filter = true
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 0.627451 )
@@ -91,9 +97,7 @@ size = 22
 use_filter = true
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=18]
-use_filter = true
-font_data = ExtResource( 3 )
+[sub_resource type="ShaderMaterial" id=21]
 
 [sub_resource type="Gradient" id=8]
 interpolation_mode = 2
@@ -102,6 +106,13 @@ colors = PoolColorArray( 0.0941176, 0.0941176, 0.0941176, 1, 0.0941176, 0.094117
 [sub_resource type="GradientTexture" id=9]
 gradient = SubResource( 8 )
 width = 64
+
+[sub_resource type="StreamTexture" id=23]
+
+[sub_resource type="DynamicFont" id=22]
+extra_spacing_top = -4
+extra_spacing_bottom = -4
+font_data = ExtResource( 6 )
 
 [node name="MapList" type="Control"]
 anchor_left = 1.0
@@ -122,6 +133,8 @@ expand = true
 [node name="Anchor" type="Control" parent="Content"]
 anchor_left = 1.0
 anchor_right = 1.0
+margin_top = 64.0
+margin_bottom = 64.0
 
 [node name="Mapset" type="Button" parent="Content/Anchor"]
 anchor_left = 1.0
@@ -154,25 +167,34 @@ stretch_mode = 7
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = 8.0
 margin_right = -7.0
-margin_bottom = -16.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 6 )
-text = "The Name Of the Song"
-valign = 2
+text = "The Name of the Song"
+valign = 1
 clip_text = true
 
 [node name="Artist" type="Label" parent="Content/Anchor/Mapset/Title"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -24.0
+margin_bottom = -40.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 14 )
 text = "The Artist"
 valign = 1
 
+[node name="Mapper" type="Label" parent="Content/Anchor/Mapset/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 48.0
+margin_bottom = -5.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 18 )
+text = "Mapper 1, Mapper 2"
+valign = 1
+
 [node name="Maps" type="VBoxContainer" parent="Content/Anchor/Mapset"]
+visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -204,17 +226,8 @@ custom_fonts/font = SubResource( 17 )
 text = "Difficulty Name"
 clip_text = true
 
-[node name="Mapper" type="Label" parent="Content/Anchor/Mapset/Maps/Map/Title"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 16.0
-margin_bottom = -3.0
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 18 )
-text = "Mapper 1, Mapper 2"
-valign = 2
-
 [node name="Cover" type="TextureRect" parent="Content/Anchor/Mapset/Maps/Map"]
+visible = false
 show_behind_parent = true
 material = SubResource( 11 )
 anchor_right = 1.0
@@ -225,6 +238,7 @@ expand = true
 stretch_mode = 7
 
 [node name="Filters" type="ColorRect" parent="."]
+material = SubResource( 21 )
 anchor_right = 1.0
 margin_bottom = 64.0
 color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
@@ -232,8 +246,69 @@ color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 [node name="Gradient" type="TextureRect" parent="Filters"]
 margin_left = 640.0
 margin_top = 64.0
-margin_right = 664.0
+margin_right = 656.0
 margin_bottom = 704.0
 rect_rotation = 90.0
 texture = SubResource( 9 )
 expand = true
+
+[node name="Sort" type="OptionButton" parent="Filters"]
+anchor_right = 0.5
+margin_left = 96.0
+margin_top = 8.0
+margin_right = -16.0
+margin_bottom = 30.0
+custom_icons/arrow = SubResource( 23 )
+text = "Title (asc.)"
+items = [ "Title (asc.)", null, false, 0, null, "Title (dsc.)", null, false, 1, null, "Artist (asc.)", null, false, 2, null, "Artist (dsc.)", null, false, 3, null, "Difficulty (asc.)", null, false, 4, null, "Difficulty (dsc.)", null, false, 5, null ]
+selected = 0
+
+[node name="Label" type="Label" parent="Filters/Sort"]
+anchor_bottom = 1.0
+margin_left = -80.0
+text = "Sort by: "
+align = 2
+
+[node name="Group" type="OptionButton" parent="Filters"]
+anchor_right = 0.5
+margin_left = 400.0
+margin_top = 8.0
+margin_right = 288.0
+margin_bottom = 30.0
+custom_icons/arrow = SubResource( 23 )
+text = "Ungrouped"
+items = [ "Ungrouped", null, false, 0, null, "Difficulty", null, false, 1, null, "Artist", null, false, 2, null ]
+selected = 0
+
+[node name="Label" type="Label" parent="Filters/Group"]
+anchor_bottom = 1.0
+margin_left = -80.0
+text = "Group by: "
+align = 2
+
+[node name="List" type="OptionButton" parent="Filters"]
+anchor_right = 0.5
+margin_left = 400.0
+margin_top = 40.0
+margin_right = 288.0
+margin_bottom = 62.0
+custom_icons/arrow = SubResource( 23 )
+text = "N/A"
+items = [ "N/A", null, false, 0, null ]
+selected = 0
+
+[node name="Label" type="Label" parent="Filters/List"]
+anchor_bottom = 1.0
+margin_left = -80.0
+text = "Playlist: "
+align = 2
+
+[node name="Search" type="LineEdit" parent="Filters"]
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = -24.0
+margin_right = -16.0
+custom_fonts/font = SubResource( 22 )
+placeholder_text = "Search for a song, artist, or mapper"

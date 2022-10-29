@@ -3,7 +3,6 @@ using System;
 
 public class MapsetButton : Button
 {
-	public bool Selected = false;
 	public BeatmapSet Mapset;
 	public void ManualUpdate()
 	{
@@ -12,5 +11,6 @@ public class MapsetButton : Button
 		GetNode<TextureRect>("Cover").Texture = Mapset.LoadCover();
 		GetNode<Label>("Title").Text = Mapset.Title;
 		GetNode<Label>("Title/Artist").Text = Mapset.Artist;
+		GetNode<Label>("Title/Mapper").Text = Mapset.Mappers;
 	}
 }

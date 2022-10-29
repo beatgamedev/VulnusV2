@@ -272,7 +272,6 @@ anchor_bottom = 1.0
 script = ExtResource( 11 )
 
 [node name="MapList" parent="ViewContainer/Singleplayer" instance=ExtResource( 12 )]
-margin_left = -576.0
 margin_bottom = -48.0
 
 [node name="MapDetails" type="Panel" parent="ViewContainer/Singleplayer"]
