@@ -50,13 +50,13 @@ interpolation_mode = 2
 offsets = PoolRealArray( 0, 0.1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=13]
+[sub_resource type="GradientTexture" id=24]
 gradient = SubResource( 12 )
 width = 256
 
 [sub_resource type="ShaderMaterial" id=11]
 shader = ExtResource( 7 )
-shader_param/mask_texture = SubResource( 13 )
+shader_param/mask_texture = SubResource( 24 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 22
@@ -216,13 +216,14 @@ toggle_mode = true
 [node name="Title" type="Label" parent="Content/Anchor/Mapset/Maps/Map"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
+margin_left = 16.0
 margin_top = 4.0
 margin_right = -8.0
 margin_bottom = -4.0
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 17 )
-text = "Difficulty Name"
+text = "0.0* - Difficulty Name"
+valign = 1
 clip_text = true
 
 [node name="Cover" type="TextureRect" parent="Content/Anchor/Mapset/Maps/Map"]

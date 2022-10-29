@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://scripts/menu/components/Backgrounds.cs" type="Script" id=14]
 [ext_resource path="res://scripts/menu/Results.cs" type="Script" id=15]
 [ext_resource path="res://assets/shaders/blur.gdshader" type="Shader" id=16]
+[ext_resource path="res://assets/shaders/mask.gdshader" type="Shader" id=17]
+[ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=18]
 
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 16 )
@@ -38,25 +40,54 @@ colors = PoolColorArray( 0.141176, 0.141176, 0.141176, 0.784314, 0.141176, 0.141
 gradient = SubResource( 15 )
 width = 256
 
-[sub_resource type="DynamicFont" id=3]
-size = 32
-use_filter = true
-font_data = ExtResource( 7 )
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
-[sub_resource type="DynamicFont" id=4]
-size = 24
-use_filter = true
-font_data = ExtResource( 7 )
+[sub_resource type="Gradient" id=18]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.1, 0.9, 1 )
+colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 18 )
+width = 256
+
+[sub_resource type="ShaderMaterial" id=19]
+shader = ExtResource( 17 )
+shader_param/mask_texture = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=20]
 size = 22
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=7]
-size = 20
+[sub_resource type="DynamicFont" id=21]
+size = 18
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=22]
+use_filter = true
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=23]
+size = 18
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+use_filter = true
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 64
@@ -110,10 +141,15 @@ texture = ExtResource( 5 )
 expand = true
 stretch_mode = 7
 
-[node name="Colour" type="ColorRect" parent="Background"]
+[node name="Blur" type="ColorRect" parent="Background"]
 material = SubResource( 14 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Overlay" type="ColorRect" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.282353 )
 
 [node name="ViewContainer" type="Control" parent="."]
 anchor_right = 1.0
@@ -267,7 +303,7 @@ valign = 1
 anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 192.0
+margin_left = 64.0
 custom_styles/panel = SubResource( 12 )
 
 [node name="Singleplayer" type="Control" parent="ViewContainer"]
@@ -279,8 +315,8 @@ script = ExtResource( 11 )
 margin_bottom = -48.0
 
 [node name="MapDetails" type="TextureRect" parent="ViewContainer/Singleplayer"]
-anchor_right = 0.5
 anchor_bottom = 1.0
+margin_right = 640.0
 margin_bottom = -48.0
 texture = SubResource( 16 )
 expand = true
@@ -288,6 +324,68 @@ script = ExtResource( 13 )
 
 [node name="MusicPreview" type="AudioStreamPlayer" parent="ViewContainer/Singleplayer/MapDetails"]
 bus = "Music"
+
+[node name="Map" type="Panel" parent="ViewContainer/Singleplayer/MapDetails"]
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 608.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 0, 72 )
+rect_pivot_offset = Vector2( 576, 0 )
+custom_styles/panel = SubResource( 17 )
+
+[node name="Cover" type="TextureRect" parent="ViewContainer/Singleplayer/MapDetails/Map"]
+modulate = Color( 1, 1, 1, 0.627451 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 2.0
+margin_right = -24.0
+margin_bottom = -2.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+
+[node name="Title" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_right = -32.0
+margin_bottom = -24.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 20 )
+text = "The Name of the Song"
+valign = 1
+clip_text = true
+
+[node name="Artist" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -40.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 21 )
+text = "The Artist"
+valign = 1
+
+[node name="Mapper" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 48.0
+margin_bottom = -5.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 22 )
+text = "Mapper 1, Mapper 2"
+valign = 1
+
+[node name="Difficulty" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 80.0
+margin_right = -32.0
+custom_fonts/font = SubResource( 23 )
+text = "0.0* - Difficulty Name"
 
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0
@@ -298,14 +396,13 @@ color = Color( 0.12549, 0.12549, 0.12549, 1 )
 
 [node name="Back" type="Button" parent="ViewContainer/Singleplayer/BottomBar"]
 anchor_bottom = 1.0
-margin_top = -16.0
-margin_right = 128.0
+margin_right = 192.0
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/BottomBar/Back"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_fonts/font = SubResource( 3 )
-text = "BACK"
+text = "GO BACK"
 align = 1
 valign = 1
 __meta__ = {
@@ -326,72 +423,24 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -384.0
-margin_top = -192.0
 margin_right = 384.0
-margin_bottom = 128.0
-
-[node name="Map" type="Control" parent="ViewContainer/Results/Info"]
-anchor_right = 1.0
-margin_bottom = 160.0
-
-[node name="Title" type="Label" parent="ViewContainer/Results/Info/Map"]
-anchor_right = 1.0
-margin_left = 160.0
-margin_top = 8.0
-margin_right = -16.0
-margin_bottom = 80.0
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 4 )
-text = "Fucking Disgusting Scum - Seifuku Yangire"
-valign = 2
-autowrap = true
-
-[node name="Mappers" type="Label" parent="ViewContainer/Results/Info/Map"]
-anchor_right = 1.0
-margin_left = 160.0
-margin_top = 80.0
-margin_right = -16.0
-margin_bottom = 112.0
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 5 )
-text = "DyamoDash"
-autowrap = true
-
-[node name="Difficulty" type="Label" parent="ViewContainer/Results/Info/Map"]
-anchor_right = 1.0
-margin_left = 160.68
-margin_top = 108.536
-margin_right = -15.3199
-margin_bottom = 140.536
-custom_constants/line_spacing = 0
-custom_fonts/font = SubResource( 7 )
-text = "Official Ver."
-autowrap = true
-
-[node name="Cover" type="TextureRect" parent="ViewContainer/Results/Info/Map"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 152.0
-margin_bottom = 152.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
+margin_bottom = 244.0
 
 [node name="Rank" type="Label" parent="ViewContainer/Results/Info"]
-margin_left = 96.0
-margin_top = 152.0
-margin_right = 288.0
-margin_bottom = 243.0
+margin_left = 64.0
+margin_top = 23.0
+margin_right = 256.0
+margin_bottom = 114.0
 custom_fonts/font = SubResource( 8 )
 text = "SS"
 align = 1
 valign = 1
 
 [node name="Score" type="Label" parent="ViewContainer/Results/Info"]
-margin_left = 256.0
-margin_top = 188.0
-margin_right = 512.0
-margin_bottom = 229.0
+margin_left = 224.0
+margin_top = 59.0
+margin_right = 480.0
+margin_bottom = 100.0
 custom_fonts/font = SubResource( 9 )
 text = "9,999,999"
 align = 1
@@ -409,10 +458,10 @@ align = 1
 valign = 2
 
 [node name="Combo" type="Label" parent="ViewContainer/Results/Info"]
-margin_left = 256.0
-margin_top = 244.0
-margin_right = 512.0
-margin_bottom = 285.0
+margin_left = 224.0
+margin_top = 115.0
+margin_right = 480.0
+margin_bottom = 156.0
 custom_fonts/font = SubResource( 9 )
 text = "9,999,999"
 align = 1
@@ -430,10 +479,10 @@ align = 1
 valign = 2
 
 [node name="Hits" type="Label" parent="ViewContainer/Results/Info"]
-margin_left = 456.0
-margin_top = 188.0
-margin_right = 712.0
-margin_bottom = 229.0
+margin_left = 424.0
+margin_top = 59.0
+margin_right = 680.0
+margin_bottom = 100.0
 custom_fonts/font = SubResource( 9 )
 text = "9,999,999"
 align = 1
@@ -451,10 +500,10 @@ align = 1
 valign = 2
 
 [node name="Misses" type="Label" parent="ViewContainer/Results/Info"]
-margin_left = 456.0
-margin_top = 244.0
-margin_right = 712.0
-margin_bottom = 285.0
+margin_left = 424.0
+margin_top = 115.0
+margin_right = 680.0
+margin_bottom = 156.0
 custom_fonts/font = SubResource( 9 )
 text = "9,999,999"
 align = 1
@@ -472,14 +521,80 @@ align = 1
 valign = 2
 
 [node name="Accuracy" type="Label" parent="ViewContainer/Results/Info"]
-margin_left = 96.0
-margin_top = 243.0
-margin_right = 288.0
-margin_bottom = 285.0
+margin_left = 64.0
+margin_top = 114.0
+margin_right = 256.0
+margin_bottom = 156.0
 custom_fonts/font = SubResource( 11 )
 text = "99.99%"
 align = 1
 valign = 1
+
+[node name="Map" type="Panel" parent="ViewContainer/Results"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -288.0
+margin_top = -140.0
+margin_right = 288.0
+margin_bottom = -28.0
+rect_min_size = Vector2( 0, 72 )
+rect_pivot_offset = Vector2( 576, 0 )
+custom_styles/panel = SubResource( 17 )
+
+[node name="Cover" type="TextureRect" parent="ViewContainer/Results/Map"]
+modulate = Color( 1, 1, 1, 0.627451 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 2.0
+margin_right = -24.0
+margin_bottom = -2.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+
+[node name="Title" type="Label" parent="ViewContainer/Results/Map"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_right = -32.0
+margin_bottom = -24.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 20 )
+text = "The Name of the Song"
+valign = 1
+clip_text = true
+
+[node name="Artist" type="Label" parent="ViewContainer/Results/Map/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -40.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 21 )
+text = "The Artist"
+valign = 1
+
+[node name="Mapper" type="Label" parent="ViewContainer/Results/Map/Title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 48.0
+margin_bottom = -5.0
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 22 )
+text = "Mapper 1, Mapper 2"
+valign = 1
+
+[node name="Difficulty" type="Label" parent="ViewContainer/Results/Map"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 80.0
+margin_right = -32.0
+custom_fonts/font = SubResource( 23 )
+text = "0.0* - Difficulty Name"
 
 [node name="Retry" type="Button" parent="ViewContainer/Results"]
 anchor_left = 0.5
@@ -487,9 +602,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -288.0
-margin_top = 144.0
+margin_top = 180.0
 margin_right = -32.0
-margin_bottom = 192.0
+margin_bottom = 228.0
 
 [node name="Label" type="Label" parent="ViewContainer/Results/Retry"]
 anchor_right = 1.0
@@ -505,9 +620,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 32.0
-margin_top = 144.0
+margin_top = 180.0
 margin_right = 288.0
-margin_bottom = 192.0
+margin_bottom = 228.0
 
 [node name="Label" type="Label" parent="ViewContainer/Results/Return"]
 anchor_right = 1.0

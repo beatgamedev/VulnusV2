@@ -97,7 +97,9 @@ buffering/agile_event_flushing=true
 
 [mono]
 
+runtime/unhandled_exception_policy=1
 project/assembly_name="Vulnus"
+export/aot/enabled=true
 
 [physics]
 
