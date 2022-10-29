@@ -9,7 +9,6 @@
 [ext_resource path="res://assets/shaders/mask.gdshader" type="Shader" id=7]
 
 [sub_resource type="Gradient" id=3]
-interpolation_mode = 2
 offsets = PoolRealArray( 0, 2 )
 colors = PoolColorArray( 0, 0, 0, 0, 0, 0, 0, 1 )
 
