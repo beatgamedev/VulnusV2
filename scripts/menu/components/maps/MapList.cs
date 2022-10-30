@@ -3,33 +3,27 @@ using System;
 
 public class MapList : Control
 {
-	public BeatmapSet SelectedMap { get; private set; }
+	public BeatmapSet SelectedMapset { get; private set; }
+	public Beatmap SelectedMap { get; private set; }
 	private MapsetButton origin;
-	private MapsetButton[] mapButtons;
+	private MapsetButton[] mapButtons = new MapsetButton[0];
 	private Control content;
 	private Control anchor;
+	private int offset = 0;
+	private int visible = 0;
+	private int selected = 0;
+	[Signal]
+	public delegate void MapsetSelected(BeatmapSet mapset);
+	[Signal]
+	public delegate void MapSelected(Beatmap map);
 	public override void _Ready()
 	{
 		content = GetNode<Control>("Content");
 		anchor = content.GetNode<Control>("Anchor");
 		origin = anchor.GetNode<MapsetButton>("Mapset");
 		origin.Visible = false;
-		mapButtons = new MapsetButton[BeatmapLoader.LoadedMaps.Count];
-		int i = 0;
-		foreach (BeatmapSet map in BeatmapLoader.LoadedMaps)
-		{
-			MapsetButton btn = (MapsetButton)origin.Duplicate();
-			btn.Visible = true;
-			btn.Mapset = map;
-			btn.ManualUpdate();
-			anchor.AddChild(btn);
-			btn.RectPosition = btn.RectPosition + new Vector2(0,72*i);
-			mapButtons[i] = btn;
-			i++;
-		}
 	}
-	[Signal]
-	public delegate void MapsetSelected(BeatmapSet mapset);
-	[Signal]
-	public delegate void MapSelected(Beatmap map);
+	public void RenderButtons() {
+		
+	}
 }
