@@ -1,14 +1,18 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class MapList : Control
 {
+	public List<BeatmapSet> RootMaps = BeatmapLoader.LoadedMaps;
+	public List<BeatmapSet> DisplayedMaps { get; private set; }
 	public BeatmapSet SelectedMapset { get; private set; }
 	public Beatmap SelectedMap { get; private set; }
 	private MapsetButton origin;
 	private MapsetButton[] mapButtons = new MapsetButton[0];
 	private Control content;
 	private Control anchor;
+	private Control filters;
 	private int offset = 0;
 	private int visible = 0;
 	private int selected = 0;
@@ -22,8 +26,30 @@ public class MapList : Control
 		anchor = content.GetNode<Control>("Anchor");
 		origin = anchor.GetNode<MapsetButton>("Mapset");
 		origin.Visible = false;
+		filters = GetNode<Control>("Filters");
+		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
 	}
-	public void RenderButtons() {
-		
+	public void SearchChanged(string search)
+	{
+		UpdateDisplayed(true);
+	}
+	public void UpdateDisplayed(bool render = false)
+	{
+		DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => { return set.Name.Match(filters.GetNode<LineEdit>("Search").Text, false); });
+		if (!render)
+			return;
+		RenderButtons();
+	}
+	public void Expand(MapsetButton button, bool animate = true)
+	{
+
+	}
+	public void Collapse(MapsetButton button, bool animate = true)
+	{
+
+	}
+	public void RenderButtons()
+	{
+
 	}
 }

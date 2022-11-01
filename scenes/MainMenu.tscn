@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -22,6 +22,10 @@
 [sub_resource type="ShaderMaterial" id=14]
 shader = ExtResource( 16 )
 shader_param/blur_amount = 2.0
+
+[sub_resource type="StyleBoxFlat" id=25]
+
+[sub_resource type="ShaderMaterial" id=26]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -157,10 +161,106 @@ anchor_bottom = 1.0
 margin_top = 72.0
 
 [node name="MainMenu" type="Control" parent="ViewContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 8 )
+
+[node name="LockedAwayForever" type="AspectRatioContainer" parent="ViewContainer/MainMenu"]
+visible = false
+anchor_left = 0.35
+anchor_right = 0.65
+anchor_bottom = 1.0
+margin_left = -32.0
+margin_right = 32.0
+ratio = 1.25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/MainMenu/LockedAwayForever"]
+margin_top = 144.8
+margin_right = 448.0
+margin_bottom = 503.2
+custom_constants/separation = 8
+
+[node name="Play" type="Button" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer"]
+margin_right = 330.0
+margin_bottom = 358.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+custom_constants/hseparation = 8
+custom_styles/hover = SubResource( 25 )
+custom_styles/pressed = SubResource( 25 )
+custom_styles/focus = SubResource( 25 )
+custom_styles/disabled = SubResource( 25 )
+custom_styles/normal = SubResource( 25 )
+
+[node name="Cover" type="TextureRect" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer/Play"]
+modulate = Color( 0.501961, 0.501961, 0.501961, 0.282353 )
+material = SubResource( 26 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 2.0
+margin_right = -26.0
+margin_bottom = -2.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+
+[node name="Image" type="TextureRect" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer/Play"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.65
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer"]
+margin_left = 338.0
+margin_right = 448.0
+margin_bottom = 358.0
+size_flags_horizontal = 3
+custom_constants/separation = 4
+alignment = 1
+
+[node name="Settings" type="Button" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer/VBoxContainer"]
+margin_right = 110.0
+margin_bottom = 177.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 8
+custom_styles/hover = SubResource( 25 )
+custom_styles/pressed = SubResource( 25 )
+custom_styles/focus = SubResource( 25 )
+custom_styles/disabled = SubResource( 25 )
+custom_styles/normal = SubResource( 25 )
+
+[node name="Image" type="TextureRect" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer/VBoxContainer/Settings"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.65
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="Quit" type="Button" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer/VBoxContainer"]
+margin_top = 181.0
+margin_right = 110.0
+margin_bottom = 358.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/hseparation = 8
+custom_styles/hover = SubResource( 25 )
+custom_styles/pressed = SubResource( 25 )
+custom_styles/focus = SubResource( 25 )
+custom_styles/disabled = SubResource( 25 )
+custom_styles/normal = SubResource( 25 )
+
+[node name="Image" type="TextureRect" parent="ViewContainer/MainMenu/LockedAwayForever/HBoxContainer/VBoxContainer/Quit"]
+anchor_top = 0.35
+anchor_right = 1.0
+anchor_bottom = 0.65
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
 
 [node name="Sidebar" type="Control" parent="ViewContainer/MainMenu"]
 anchor_right = 0.3
@@ -307,6 +407,7 @@ margin_left = 64.0
 custom_styles/panel = SubResource( 12 )
 
 [node name="Singleplayer" type="Control" parent="ViewContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 11 )
