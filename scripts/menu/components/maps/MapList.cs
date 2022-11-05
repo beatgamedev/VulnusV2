@@ -29,6 +29,12 @@ public class MapList : Control
 		filters = GetNode<Control>("Filters");
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
 	}
+	private MapsetButton newButton()
+	{
+		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
+		newBtn.Visible = true;
+		return newBtn;
+	}
 	public void SearchChanged(string search)
 	{
 		UpdateDisplayed(true);
@@ -50,6 +56,13 @@ public class MapList : Control
 	}
 	public void RenderButtons()
 	{
+		Array.Resize(ref mapButtons, DisplayedMaps.Count);
+		for (int i = 0; i < DisplayedMaps.Count; i++)
+		{
+			if (mapButtons[i] == null)
+				mapButtons[i] = newButton();
+			var btn = mapButtons[i];
 
+		}
 	}
 }

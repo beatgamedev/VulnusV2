@@ -14,7 +14,6 @@
 [ext_resource path="res://scripts/menu/components/options/RenderSettings.cs" type="Script" id=17]
 [ext_resource path="res://scripts/menu/components/options/PostSettings.cs" type="Script" id=18]
 
-
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 corner_radius_top_left = 8
@@ -116,7 +115,7 @@ tab_align = 0
 [node name="Gameplay" type="Control" parent="Content"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 26.0
+margin_top = 25.0
 
 [node name="Grid" type="GridContainer" parent="Content/Gameplay"]
 anchor_right = 1.0
@@ -133,7 +132,7 @@ columns = 2
 
 [node name="Approach" type="Panel" parent="Content/Gameplay/Grid"]
 margin_right = 296.0
-margin_bottom = 270.0
+margin_bottom = 271.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -257,7 +256,7 @@ suffix = "m/s"
 [node name="Camera" type="Panel" parent="Content/Gameplay/Grid"]
 margin_left = 312.0
 margin_right = 608.0
-margin_bottom = 270.0
+margin_bottom = 271.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
