@@ -33,6 +33,7 @@ public class MapList : Control
 	{
 		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
 		newBtn.Visible = true;
+		anchor.AddChild(newBtn);
 		return newBtn;
 	}
 	public void SearchChanged(string search)
@@ -56,13 +57,15 @@ public class MapList : Control
 	}
 	public void RenderButtons()
 	{
-		Array.Resize(ref mapButtons, DisplayedMaps.Count);
-		for (int i = 0; i < DisplayedMaps.Count; i++)
+		visible = Math.Min(DisplayedMaps.Count - offset, (int)Math.Ceiling(content.RectSize.y / 72));
+		Array.Resize(ref mapButtons, visible);
+		for (int i = 0; i < visible; i++)
 		{
 			if (mapButtons[i] == null)
 				mapButtons[i] = newButton();
 			var btn = mapButtons[i];
-			anchor.AddChild(btn);
+			btn.Mapset = DisplayedMaps[offset + i];
+			btn.Update();
 		}
 	}
 }
