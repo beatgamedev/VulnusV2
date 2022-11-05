@@ -237,6 +237,8 @@ stretch_mode = 7
 
 [node name="Tween" type="Tween" parent="Content/Anchor/Mapset"]
 
+[node name="Tween" type="Tween" parent="Content/Anchor"]
+
 [node name="Filters" type="ColorRect" parent="."]
 material = SubResource( 21 )
 anchor_right = 1.0
