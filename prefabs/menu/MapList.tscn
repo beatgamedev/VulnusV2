@@ -150,12 +150,22 @@ custom_styles/normal = SubResource( 1 )
 toggle_mode = true
 script = ExtResource( 5 )
 
-[node name="Cover" type="TextureRect" parent="Content/Anchor/Mapset"]
+[node name="Cover" type="Control" parent="Content/Anchor/Mapset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_bottom = -2.0
+rect_clip_content = true
+
+[node name="Image" type="TextureRect" parent="Content/Anchor/Mapset/Cover"]
+modulate = Color( 0.784314, 0.784314, 0.784314, 0.501961 )
 show_behind_parent = true
 material = SubResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
+margin_left = 64.0
+margin_top = -36.0
+margin_bottom = 40.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 7

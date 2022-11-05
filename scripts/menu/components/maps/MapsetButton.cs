@@ -8,7 +8,7 @@ public class MapsetButton : Button
 	{
 		if (Mapset == null)
 			return;
-		GetNode<TextureRect>("Cover").Texture = Mapset.LoadCover();
+		GetNode<TextureRect>("Cover/Image").Texture = Mapset.LoadCover();
 		GetNode<Label>("Title").Text = Mapset.Title;
 		GetNode<Label>("Title/Artist").Text = Mapset.Artist;
 		GetNode<Label>("Title/Mapper").Text = Mapset.Mappers;

@@ -33,7 +33,7 @@ public class MapList : Control
 	}
 	public override void _Process(float delta)
 	{
-		anchor.RectPosition = new Vector2(anchor.RectPosition.x, scrollf * 72);
+		anchor.RectPosition = new Vector2(anchor.RectPosition.x, -scrollf * 76);
 		base._Process(delta);
 	}
 	public override void _GuiInput(InputEvent @event)
@@ -42,16 +42,18 @@ public class MapList : Control
 			return;
 		var ev = (InputEventMouseButton)@event;
 		if (ev.ButtonIndex == (int)ButtonList.WheelUp)
-			Scroll(-1f);
+			Scroll(-1);
 		else if (ev.ButtonIndex == (int)ButtonList.WheelDown)
-			Scroll(1f);
+			Scroll(1);
 	}
-	public void Scroll(float amount)
+	public void Scroll(int amount)
 	{
+		scroll += amount;
+		offset += amount;
+		RenderButtons();
 		var tween = anchor.GetNode<Tween>("Tween");
 		tween.StopAll();
-		tween.InterpolateProperty(this, nameof(scrollf), scrollf, scroll + amount, 0.2f, Tween.TransitionType.Cubic);
-		scroll += amount;
+		tween.InterpolateProperty(this, nameof(scrollf), scroll - amount, scroll, 0.1f);
 		tween.Start();
 	}
 	private MapsetButton newButton()
@@ -109,8 +111,10 @@ public class MapList : Control
 			btn.Mapset = DisplayedMaps[offset + i];
 			if (btn.Mapset == SelectedMapset)
 				Expand(btn, false);
+			else
+				Collapse(btn, false);
 			btn.ManualUpdate(true);
-			btn.RectPosition += new Vector2(0, (offset + i) * 72) - new Vector2(0, btn.RectPosition.y);
+			btn.RectPosition = new Vector2(btn.RectPosition.x, (offset + i) * 76);
 		}
 	}
 }
