@@ -14,6 +14,7 @@ public class MapList : Control
 	private Control anchor;
 	private Control filters;
 	private float scroll = 0;
+	private float scrollf = 0;
 	private int offset = 0;
 	private int visible = 0;
 	[Signal]
@@ -30,21 +31,26 @@ public class MapList : Control
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
 		RootMaps = BeatmapLoader.LoadedMaps;
 	}
+	public override void _Process(float delta)
+	{
+		anchor.RectPosition = new Vector2(anchor.RectPosition.x, scrollf * 72);
+		base._Process(delta);
+	}
 	public override void _GuiInput(InputEvent @event)
 	{
 		if (!(@event is InputEventMouseButton))
 			return;
 		var ev = (InputEventMouseButton)@event;
 		if (ev.ButtonIndex == (int)ButtonList.WheelUp)
-			Scroll(-1.5f);
+			Scroll(-1f);
 		else if (ev.ButtonIndex == (int)ButtonList.WheelDown)
-			Scroll(1.5f);
+			Scroll(1f);
 	}
 	public void Scroll(float amount)
 	{
 		var tween = anchor.GetNode<Tween>("Tween");
 		tween.StopAll();
-		tween.InterpolateProperty(anchor, "rect_position:y", scroll * 72, (scroll + amount) * 72, 0.1f, Tween.TransitionType.Sine);
+		tween.InterpolateProperty(this, nameof(scrollf), scrollf, scroll + amount, 0.2f, Tween.TransitionType.Cubic);
 		scroll += amount;
 		tween.Start();
 	}
