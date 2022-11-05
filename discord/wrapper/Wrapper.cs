@@ -8,15 +8,20 @@ namespace Discord
 		public static long ClientId { get; private set; } = 954573999088730154;
 		public bool Disposed { get; private set; } = false;
 		private Discord Discord;
-		public DiscordW() {
-			try {
+		public DiscordW()
+		{
+			try
+			{
 				Discord = new Discord(ClientId, (ulong)CreateFlags.NoRequireDiscord);
-			} catch (ResultException e) {
+			}
+			catch (ResultException e)
+			{
 				GD.PrintErr($"No Discord | {e.Message}");
 			}
 		}
 		public void Dispose()
 		{
+			if (this.Disposed) return;
 			if (Disposed) return;
 			Disposed = true;
 			this.Discord?.Dispose();
@@ -24,12 +29,14 @@ namespace Discord
 		}
 		public void SetActivity(ActivityW activity)
 		{
+			if (this.Disposed) return;
 			if (this.Discord == null) return;
 			var activityManager = this.Discord.GetActivityManager();
 			activityManager.UpdateActivity(activity.Activity, (result) => { });
 		}
 		public void RunCallbacks()
 		{
+			if (this.Disposed) return;
 			if (this.Discord == null) return;
 			this.Discord?.RunCallbacks();
 		}
