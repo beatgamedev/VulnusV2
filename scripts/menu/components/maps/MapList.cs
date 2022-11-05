@@ -28,6 +28,7 @@ public class MapList : Control
 		origin.Visible = false;
 		filters = GetNode<Control>("Filters");
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
+		RootMaps = BeatmapLoader.LoadedMaps;
 	}
 	private MapsetButton newButton()
 	{
@@ -40,9 +41,21 @@ public class MapList : Control
 	{
 		UpdateDisplayed(true);
 	}
+	private bool IsSimilar(BeatmapSet set, string search)
+	{
+		var name = set.Name.ToLower().Trim();
+		search = search.ToLower().Trim();
+		return name.Contains(search)
+			|| name.Similarity(search) >= 0.5;
+	}
 	public void UpdateDisplayed(bool render = false)
 	{
-		DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => { return set.Name.Match(filters.GetNode<LineEdit>("Search").Text, false); });
+		var search = filters.GetNode<LineEdit>("Search").Text.Trim();
+		if (search != "")
+			DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => IsSimilar(set, search));
+		else
+			DisplayedMaps = RootMaps;
+		GD.Print(search, DisplayedMaps.Count);
 		if (!render)
 			return;
 		RenderButtons();
@@ -58,6 +71,11 @@ public class MapList : Control
 	public void RenderButtons()
 	{
 		visible = Math.Min(DisplayedMaps.Count - offset, (int)Math.Ceiling(content.RectSize.y / 72));
+		for (int i = 0; i < mapButtons.Length; i++)
+		{
+			if (i >= visible)
+				mapButtons[i].QueueFree();
+		}
 		Array.Resize(ref mapButtons, visible);
 		for (int i = 0; i < visible; i++)
 		{
@@ -65,7 +83,8 @@ public class MapList : Control
 				mapButtons[i] = newButton();
 			var btn = mapButtons[i];
 			btn.Mapset = DisplayedMaps[offset + i];
-			btn.Update();
+			btn.ManualUpdate(true);
+			btn.RectPosition += new Vector2(0, (offset + i) * 72) - new Vector2(0, btn.RectPosition.y);
 		}
 	}
 }
