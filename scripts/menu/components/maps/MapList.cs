@@ -62,7 +62,7 @@ public class MapList : Control
 			if (mapButtons[i] == null)
 				mapButtons[i] = newButton();
 			var btn = mapButtons[i];
-
+			anchor.AddChild(btn);
 		}
 	}
 }
