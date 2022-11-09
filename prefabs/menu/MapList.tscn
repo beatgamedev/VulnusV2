@@ -147,7 +147,6 @@ custom_styles/pressed = SubResource( 19 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/disabled = SubResource( 15 )
 custom_styles/normal = SubResource( 1 )
-toggle_mode = true
 script = ExtResource( 5 )
 
 [node name="Cover" type="Control" parent="Content/Anchor/Mapset"]
@@ -156,6 +155,7 @@ anchor_bottom = 1.0
 margin_top = 2.0
 margin_bottom = -2.0
 rect_clip_content = true
+mouse_filter = 2
 
 [node name="Image" type="TextureRect" parent="Content/Anchor/Mapset/Cover"]
 modulate = Color( 0.784314, 0.784314, 0.784314, 0.501961 )
@@ -166,6 +166,7 @@ anchor_bottom = 1.0
 margin_left = 64.0
 margin_top = -36.0
 margin_bottom = 40.0
+mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 7
@@ -206,7 +207,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
-margin_bottom = 64.0
+margin_bottom = 56.0
+rect_clip_content = true
+size_flags_vertical = 2
 custom_constants/separation = 0
 
 [node name="Map" type="Button" parent="Content/Anchor/Mapset/Maps"]
@@ -241,6 +244,7 @@ material = SubResource( 11 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 24.0
+mouse_filter = 2
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 7

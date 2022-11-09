@@ -17,6 +17,8 @@ public class MapList : Control
 	private float scrollf = 0;
 	private int offset = 0;
 	private int visible = 0;
+	private int buttonOffset = 0;
+	private int buttonOffsetAt = 0;
 	[Signal]
 	public delegate void MapsetSelected(BeatmapSet mapset);
 	[Signal]
@@ -59,9 +61,15 @@ public class MapList : Control
 	private MapsetButton newButton()
 	{
 		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
+		newBtn.Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(newBtn));
 		newBtn.Visible = true;
 		anchor.AddChild(newBtn);
 		return newBtn;
+	}
+	private void btnPressed(MapsetButton btn)
+	{
+		SelectedMapset = btn.Mapset;
+		RenderButtons();
 	}
 	public void SearchChanged(string search)
 	{
@@ -86,13 +94,20 @@ public class MapList : Control
 			return;
 		RenderButtons();
 	}
-	public void Expand(MapsetButton button, bool animate = true)
+	public void UpdateButton(MapsetButton button, int buttonIndex, bool animate = true)
 	{
-
-	}
-	public void Collapse(MapsetButton button, bool animate = true)
-	{
-
+		if (button.Mapset == SelectedMapset)
+		{
+			button.ManualUpdate(true);
+			button.Expand(animate);
+			buttonOffsetAt = buttonIndex;
+			buttonOffset = (int)button.GetNode<VBoxContainer>("Maps").RectSize.y;
+		}
+		else
+		{
+			button.ManualUpdate();
+			button.Collapse(animate);
+		}
 	}
 	public void RenderButtons()
 	{
@@ -109,12 +124,9 @@ public class MapList : Control
 				mapButtons[i] = newButton();
 			var btn = mapButtons[i];
 			btn.Mapset = DisplayedMaps[offset + i];
-			if (btn.Mapset == SelectedMapset)
-				Expand(btn, false);
-			else
-				Collapse(btn, false);
-			btn.ManualUpdate(true);
-			btn.RectPosition = new Vector2(btn.RectPosition.x, (offset + i) * 76);
+			UpdateButton(btn, i, false);
+			int thisOffset = buttonOffsetAt < i ? buttonOffset : 0;
+			btn.RectPosition = new Vector2(btn.RectPosition.x, thisOffset + (offset + i) * 76);
 		}
 	}
 }
