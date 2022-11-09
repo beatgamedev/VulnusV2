@@ -7,12 +7,19 @@ public class MapsetButton : Button
 	public bool Expanded { get; private set; }
 	private Control list;
 	private Control origin;
+	[Signal]
+	public delegate void MapSelected(Beatmap map);
 	public override void _Ready()
 	{
 		list = GetNode<VBoxContainer>("Maps");
 		origin = list.GetNode<Button>("Map");
 		origin.Visible = false;
 		Collapse();
+	}
+	private void btnPressed(Button button)
+	{
+		Beatmap map = Mapset.Difficulties[button.Name.ToInt()];
+		EmitSignal(nameof(MapSelected), map);
 	}
 	public void ManualUpdate(bool resetButtons = false)
 	{
@@ -49,6 +56,7 @@ public class MapsetButton : Button
 			if (i >= children)
 			{
 				btn = (Button)origin.Duplicate();
+				btn.Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(btn));
 				btn.Visible = true;
 				list.AddChild(btn);
 			}

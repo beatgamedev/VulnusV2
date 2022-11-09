@@ -52,6 +52,7 @@ public class MapList : Control
 	{
 		scroll += amount;
 		offset += amount;
+		buttonOffsetAt -= amount;
 		RenderButtons();
 		var tween = anchor.GetNode<Tween>("Tween");
 		tween.StopAll();
@@ -61,14 +62,25 @@ public class MapList : Control
 	private MapsetButton newButton()
 	{
 		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
+		newBtn.Connect("MapSelected", this, nameof(mapSelected));
 		newBtn.Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(newBtn));
 		newBtn.Visible = true;
 		anchor.AddChild(newBtn);
 		return newBtn;
 	}
+	private void mapSelected(Beatmap map)
+	{
+		GD.Print(map.Name);
+		SelectedMap = map;
+		EmitSignal(nameof(MapSelected), SelectedMap);
+	}
 	private void btnPressed(MapsetButton btn)
 	{
+		GD.Print(btn.Mapset.Name);
 		SelectedMapset = btn.Mapset;
+		EmitSignal(nameof(MapsetSelected), SelectedMapset);
+		int buttonIndex = Array.IndexOf(mapButtons, btn);
+		buttonOffsetAt = buttonIndex;
 		RenderButtons();
 	}
 	public void SearchChanged(string search)
@@ -89,7 +101,6 @@ public class MapList : Control
 			DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => IsSimilar(set, search));
 		else
 			DisplayedMaps = RootMaps;
-		GD.Print(search, DisplayedMaps.Count);
 		if (!render)
 			return;
 		RenderButtons();
@@ -100,14 +111,11 @@ public class MapList : Control
 		{
 			button.ManualUpdate(true);
 			button.Expand(animate);
-			buttonOffsetAt = buttonIndex;
 			buttonOffset = (int)button.GetNode<VBoxContainer>("Maps").RectSize.y;
+			return;
 		}
-		else
-		{
-			button.ManualUpdate();
-			button.Collapse(animate);
-		}
+		button.ManualUpdate();
+		button.Collapse(animate);
 	}
 	public void RenderButtons()
 	{
