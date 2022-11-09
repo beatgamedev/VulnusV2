@@ -28,7 +28,7 @@ public class BeatmapSet : BeatmapSetInfo
 	{
 		get
 		{
-			return $"{Title} - {Artist}";
+			return $"{Artist} - {Title}";
 		}
 	}
 	[JsonProperty("_difficulties")]
