@@ -19,10 +19,8 @@ public class MapList : Control
 	private int visible = 0;
 	private int buttonOffset = 0;
 	private int buttonOffsetAt = 0;
-	[Signal]
-	public delegate void MapsetSelected(BeatmapSet mapset);
-	[Signal]
-	public delegate void MapSelected(Beatmap map);
+	public Action<Beatmap> MapSelected;
+	public Action<BeatmapSet> MapsetSelected;
 	public override void _Ready()
 	{
 		content = GetNode<Control>("Content");
@@ -50,6 +48,10 @@ public class MapList : Control
 	}
 	public void Scroll(int amount)
 	{
+		if (scroll + amount < 0)
+			return;
+		if (scroll + amount > visible)
+			return;
 		scroll += amount;
 		offset += amount;
 		buttonOffsetAt -= amount;
@@ -62,7 +64,8 @@ public class MapList : Control
 	private MapsetButton newButton()
 	{
 		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
-		newBtn.Connect("MapSelected", this, nameof(mapSelected));
+		// newBtn.Connect("MapSelected", this, nameof(mapSelected));
+		newBtn.MapSelected += mapSelected;
 		newBtn.Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(newBtn));
 		newBtn.Visible = true;
 		anchor.AddChild(newBtn);
@@ -72,13 +75,13 @@ public class MapList : Control
 	{
 		GD.Print(map.Name);
 		SelectedMap = map;
-		EmitSignal(nameof(MapSelected), SelectedMap);
+		MapSelected(SelectedMap);
 	}
 	private void btnPressed(MapsetButton btn)
 	{
 		GD.Print(btn.Mapset.Name);
 		SelectedMapset = btn.Mapset;
-		EmitSignal(nameof(MapsetSelected), SelectedMapset);
+		MapsetSelected(SelectedMapset);
 		int buttonIndex = Array.IndexOf(mapButtons, btn);
 		buttonOffsetAt = buttonIndex;
 		RenderButtons();
@@ -120,6 +123,11 @@ public class MapList : Control
 	public void RenderButtons()
 	{
 		visible = Math.Min(DisplayedMaps.Count - offset, (int)Math.Ceiling(content.RectSize.y / 72));
+		if (scroll > visible)
+		{
+			offset += (visible - offset);
+			scroll = visible;
+		}
 		for (int i = 0; i < mapButtons.Length; i++)
 		{
 			if (i >= visible)

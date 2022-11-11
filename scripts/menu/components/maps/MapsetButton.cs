@@ -7,8 +7,7 @@ public class MapsetButton : Button
 	public bool Expanded { get; private set; }
 	private Control list;
 	private Control origin;
-	[Signal]
-	public delegate void MapSelected(Beatmap map);
+	public Action<Beatmap> MapSelected;
 	public override void _Ready()
 	{
 		list = GetNode<VBoxContainer>("Maps");
@@ -19,7 +18,7 @@ public class MapsetButton : Button
 	private void btnPressed(Button button)
 	{
 		Beatmap map = Mapset.Difficulties[button.Name.ToInt()];
-		EmitSignal(nameof(MapSelected), map);
+		MapSelected(map);
 	}
 	public void ManualUpdate(bool resetButtons = false)
 	{
