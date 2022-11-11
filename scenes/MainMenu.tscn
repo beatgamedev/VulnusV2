@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -127,6 +127,11 @@ font_data = ExtResource( 18 )
 size = 18
 use_filter = true
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=30]
+size = 36
+use_filter = true
+font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
@@ -570,6 +575,23 @@ flip_v = true
 [node name="Details" type="Control" parent="ViewContainer/Singleplayer/MapDetails"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="Play" type="Button" parent="ViewContainer/Singleplayer/MapDetails/Details"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 160.0
+margin_top = -64.0
+margin_right = -160.0
+margin_bottom = -16.0
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 30 )
+text = "PLAY"
+align = 1
+valign = 1
 
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0

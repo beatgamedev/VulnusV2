@@ -20,7 +20,19 @@ public class MapDetails : View
 		details = GetNode<Control>("Details");
 		loading = GetNode<Control>("Loading");
 		musicPreview = GetNode<AudioStreamPlayer>("MusicPreview");
+
+		details.GetNode<Button>("Play").Connect("pressed", this, nameof(PlayMap));
+
 		SetActive(false);
+	}
+	public void PlayMap()
+	{
+		if (!currentDifficulty.Playable)
+			return;
+		Game.LoadedMapset = currentMap;
+		Game.LoadedMap = currentDifficulty;
+		Game.LoadedMapData = currentDifficulty.Data;
+		Global.Instance.GotoScene("res://scenes/Game.tscn");
 	}
 	public void MapSelected(Beatmap map)
 	{
@@ -42,7 +54,7 @@ public class MapDetails : View
 		var map = currentDifficulty;
 		Error loaded = map.Load();
 		await Task.Delay(TimeSpan.FromSeconds(1));
-		if (loaded != Error.Ok)
+		if (!map.Playable || loaded != Error.Ok)
 			SetActive(false);
 	}
 	private float circleSpin = 0f;
