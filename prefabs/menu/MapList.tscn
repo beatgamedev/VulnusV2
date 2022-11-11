@@ -117,7 +117,7 @@ font_data = ExtResource( 6 )
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -640.0
+margin_left = -800.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
@@ -130,18 +130,15 @@ texture = SubResource( 4 )
 expand = true
 
 [node name="Anchor" type="Control" parent="Content"]
-anchor_left = 1.0
 anchor_right = 1.0
 
 [node name="Mapset" type="Button" parent="Content/Anchor"]
-anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -576.0
+margin_left = 64.0
 margin_bottom = 72.0
 rect_min_size = Vector2( 0, 72 )
-rect_pivot_offset = Vector2( 576, 0 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 19 )
 custom_styles/focus = SubResource( 2 )
@@ -206,7 +203,7 @@ visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 32.0
+margin_left = 160.0
 margin_bottom = 56.0
 rect_clip_content = true
 size_flags_vertical = 2
@@ -260,10 +257,10 @@ margin_bottom = 64.0
 color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 
 [node name="Gradient" type="TextureRect" parent="Filters"]
-margin_left = 640.0
+margin_left = 800.0
 margin_top = 64.0
-margin_right = 656.0
-margin_bottom = 704.0
+margin_right = 816.0
+margin_bottom = 864.0
 rect_rotation = 90.0
 texture = SubResource( 9 )
 expand = true
@@ -286,10 +283,11 @@ text = "Sort by: "
 align = 2
 
 [node name="Group" type="OptionButton" parent="Filters"]
-anchor_right = 0.5
-margin_left = 400.0
+anchor_left = 0.5
+anchor_right = 1.0
+margin_left = 72.0
 margin_top = 8.0
-margin_right = 288.0
+margin_right = -40.0
 margin_bottom = 30.0
 custom_icons/arrow = SubResource( 23 )
 text = "Ungrouped"
@@ -303,10 +301,11 @@ text = "Group by: "
 align = 2
 
 [node name="List" type="OptionButton" parent="Filters"]
-anchor_right = 0.5
-margin_left = 400.0
+anchor_left = 0.5
+anchor_right = 1.0
+margin_left = 72.0
 margin_top = 40.0
-margin_right = 288.0
+margin_right = -40.0
 margin_bottom = 62.0
 custom_icons/arrow = SubResource( 23 )
 text = "N/A"
@@ -320,11 +319,10 @@ text = "Playlist: "
 align = 2
 
 [node name="Search" type="LineEdit" parent="Filters"]
-anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 1.0
 margin_left = 32.0
-margin_top = -24.0
+margin_top = 40.0
 margin_right = -16.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 22 )
 placeholder_text = "Search for a song, artist, or mapper"
