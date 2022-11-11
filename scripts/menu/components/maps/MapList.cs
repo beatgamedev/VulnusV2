@@ -19,8 +19,8 @@ public class MapList : Control
 	private int visible = 0;
 	private int buttonOffset = 0;
 	private int buttonOffsetAt = 0;
-	public Action<Beatmap> MapSelected;
-	public Action<BeatmapSet> MapsetSelected;
+	public Action<Beatmap> MapSelected = (Beatmap map) => { };
+	public Action<BeatmapSet> MapsetSelected = (BeatmapSet mapset) => { };
 	public override void _Ready()
 	{
 		content = GetNode<Control>("Content");
@@ -29,7 +29,6 @@ public class MapList : Control
 		origin.Visible = false;
 		filters = GetNode<Control>("Filters");
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
-		RootMaps = BeatmapLoader.LoadedMaps;
 	}
 	public override void _Process(float delta)
 	{
@@ -72,13 +71,11 @@ public class MapList : Control
 	}
 	private void mapSelected(Beatmap map)
 	{
-		GD.Print(map.Name);
 		SelectedMap = map;
 		MapSelected(SelectedMap);
 	}
 	private void btnPressed(MapsetButton btn)
 	{
-		GD.Print(btn.Mapset.Name);
 		SelectedMapset = btn.Mapset;
 		MapsetSelected(SelectedMapset);
 		int buttonIndex = Array.IndexOf(mapButtons, btn);

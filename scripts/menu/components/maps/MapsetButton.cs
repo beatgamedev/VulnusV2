@@ -7,7 +7,7 @@ public class MapsetButton : Button
 	public bool Expanded { get; private set; }
 	private Control list;
 	private Control origin;
-	public Action<Beatmap> MapSelected;
+	public Action<Beatmap> MapSelected = (Beatmap map) => { };
 	public override void _Ready()
 	{
 		list = GetNode<VBoxContainer>("Maps");
