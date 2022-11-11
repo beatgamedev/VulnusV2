@@ -64,7 +64,6 @@ public class MapList : Control
 	private MapsetButton newButton()
 	{
 		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
-		// newBtn.Connect("MapSelected", this, nameof(mapSelected));
 		newBtn.MapSelected += mapSelected;
 		newBtn.Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(newBtn));
 		newBtn.Visible = true;
