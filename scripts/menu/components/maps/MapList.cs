@@ -49,8 +49,6 @@ public class MapList : Control
 	{
 		if (scroll + amount < 0)
 			return;
-		if (scroll + amount > visible)
-			return;
 		scroll += amount;
 		offset += amount;
 		buttonOffsetAt -= amount;
@@ -95,6 +93,8 @@ public class MapList : Control
 	}
 	public void UpdateDisplayed(bool render = false)
 	{
+		offset -= (int)scroll;
+		scroll = 0;
 		var search = filters.GetNode<LineEdit>("Search").Text.Trim();
 		if (search != "")
 			DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => IsSimilar(set, search));
@@ -119,11 +119,6 @@ public class MapList : Control
 	public void RenderButtons()
 	{
 		visible = Math.Min(DisplayedMaps.Count - offset, (int)Math.Ceiling(content.RectSize.y / 72));
-		if (scroll > visible)
-		{
-			offset += (visible - offset);
-			scroll = visible;
-		}
 		for (int i = 0; i < mapButtons.Length; i++)
 		{
 			if (i >= visible)

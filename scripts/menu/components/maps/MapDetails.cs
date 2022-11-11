@@ -9,11 +9,7 @@ public class MapDetails : View
 	private MapList mapList;
 	public override void _Ready()
 	{
-		if (Game.Score == null)
-		{
-			SetActive(false);
-			return;
-		}
+
 	}
 	public override async void OnShow()
 	{
