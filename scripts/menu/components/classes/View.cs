@@ -4,7 +4,7 @@ using System;
 public partial class View : Control
 {
 	protected Tween ViewTween;
-	public override void _Ready()
+	public override void _EnterTree()
 	{
 		ViewTween = new Tween();
 		AddChild(ViewTween);
