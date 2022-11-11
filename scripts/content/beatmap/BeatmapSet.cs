@@ -70,6 +70,10 @@ public class BeatmapSet : BeatmapSetInfo
 			var cachedMap = (BeatmapSet)deserializer.Deserialize(stream);
 			cachedMap.Path = path;
 			cachedMap.Hash = hash;
+			foreach (Beatmap difficulty in cachedMap.Difficulties)
+			{
+				difficulty.Mapset = cachedMap;
+			}
 			return cachedMap;
 		}
 		// GD.Print("Loading map without cache: " + path);
@@ -83,6 +87,7 @@ public class BeatmapSet : BeatmapSetInfo
 			diffFile.Open(path.PlusFile(difficulty), File.ModeFlags.Read);
 			var diff = JsonConvert.DeserializeObject<Beatmap>(diffFile.GetAsText());
 			diff.Path = difficulty;
+			diff.Mapset = map;
 			map.Difficulties.Add(diff);
 			diffFile.Close();
 		}

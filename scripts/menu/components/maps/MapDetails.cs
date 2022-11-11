@@ -6,10 +6,60 @@ public class MapDetails : View
 {
 	private BeatmapSet currentMap;
 	private Beatmap currentDifficulty;
+	private Task loadingMap;
 	private MapList mapList;
+	private Control mapDetails;
+	private Control details;
+	private Control loading;
+	private AudioStreamPlayer musicPreview;
 	public override void _Ready()
 	{
-
+		mapList = GetParent().GetNode<MapList>("MapList");
+		mapList.MapSelected += MapSelected;
+		mapDetails = GetNode<Control>("Map");
+		details = GetNode<Control>("Details");
+		loading = GetNode<Control>("Loading");
+		musicPreview = GetNode<AudioStreamPlayer>("MusicPreview");
+		SetActive(false);
+	}
+	public void MapSelected(Beatmap map)
+	{
+		currentMap = map.Mapset;
+		currentDifficulty = map;
+		if (!this.IsActive)
+			SetActive(true);
+		mapDetails.GetNode<TextureRect>("Cover").Texture = currentMap.LoadCover();
+		mapDetails.GetNode<Label>("Title").Text = currentMap.Title;
+		mapDetails.GetNode<Label>("Title/Artist").Text = currentMap.Artist;
+		mapDetails.GetNode<Label>("Title/Mapper").Text = currentMap.Mappers;
+		mapDetails.GetNode<Label>("Difficulty").Text = map.Name;
+		musicPreview.Stream = currentMap.LoadAudio();
+		musicPreview.Play(musicPreview.Stream.GetLength() / 3f);
+		loadingMap = Task.Run(loadMap);
+	}
+	private async void loadMap()
+	{
+		var map = currentDifficulty;
+		Error loaded = map.Load();
+		await Task.Delay(TimeSpan.FromSeconds(1));
+		if (loaded != Error.Ok)
+			SetActive(false);
+	}
+	private float circleSpin = 0f;
+	public override void _Process(float delta)
+	{
+		if (currentDifficulty == null || loadingMap == null)
+			return;
+		if (!loadingMap.IsCompleted)
+		{
+			circleSpin += delta;
+			loading.GetNode<Control>("Circle").RectRotation = Mathf.Wrap(circleSpin * 90f, 0, 360);
+			loading.Visible = true;
+			details.Visible = false;
+			return;
+		}
+		loading.Visible = false;
+		details.Visible = true;
 	}
 	public override async void OnShow()
 	{

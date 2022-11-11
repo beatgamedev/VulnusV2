@@ -16,16 +16,18 @@ public partial class BeatmapInfo
 [Serializable, JsonObject(MemberSerialization.OptIn)]
 public class Beatmap : BeatmapInfo
 {
+	[NonSerialized]
+	public BeatmapSet Mapset;
 	[JsonProperty("_name")]
 	public string Name;
 	[NonSerialized]
 	public BeatmapData Data;
-	public Error Load(BeatmapSet map)
+	public Error Load()
 	{
 		if (Data != null) return Error.Ok;
 		var file = new File();
-		var err = file.Open(map.Path.PlusFile(Path), File.ModeFlags.Read);
-		GD.Print(map.Hash, " ", err);
+		var err = file.Open(Mapset.Path.PlusFile(Path), File.ModeFlags.Read);
+		GD.Print(Mapset.Hash, " ", err);
 		if (err != Error.Ok)
 			return err;
 		var json = file.GetAsText();
