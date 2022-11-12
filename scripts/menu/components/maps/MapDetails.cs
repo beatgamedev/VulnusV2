@@ -32,7 +32,11 @@ public class MapDetails : View
 		Game.LoadedMapset = currentMap;
 		Game.LoadedMap = currentDifficulty;
 		Game.LoadedMapData = currentDifficulty.Data;
-		Global.Instance.GotoScene("res://scenes/Game.tscn");
+		Global.Instance.GotoScene("res://scenes/Game.tscn", (Node scn) =>
+		{
+			var menuHandler = GetParent().GetParent<MenuHandler>();
+			menuHandler.GoTo(2);
+		});
 	}
 	public void MapSelected(Beatmap map)
 	{

@@ -5,14 +5,14 @@ public class Results : View
 {
 	public override void _Ready()
 	{
-		base._Ready();
 		if (Game.Score == null)
 			return;
 		var info = GetNode<Control>("Info");
-		var mapInfo = info.GetNode<Control>("Map");
+		var mapInfo = GetNode<Control>("Map");
 		mapInfo.GetNode<TextureRect>("Cover").Texture = Game.LoadedMapset.LoadCover();
-		mapInfo.GetNode<Label>("Title").Text = Game.LoadedMapset.Name;
-		mapInfo.GetNode<Label>("Mappers").Text = Game.LoadedMapset.Mappers;
+		mapInfo.GetNode<Label>("Title").Text = Game.LoadedMapset.Title;
+		mapInfo.GetNode<Label>("Title/Artist").Text = Game.LoadedMapset.Artist;
+		mapInfo.GetNode<Label>("Title/Mapper").Text = Game.LoadedMapset.Mappers;
 		mapInfo.GetNode<Label>("Difficulty").Text = Game.LoadedMap.Name;
 		info.GetNode<Label>("Score").Text = String.Format("{0:n0}", Game.Score.Points);
 		info.GetNode<Label>("Combo").Text = String.Format("{0:n0}", Game.Score.HighestCombo);

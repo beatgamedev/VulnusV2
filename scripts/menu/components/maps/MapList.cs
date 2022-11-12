@@ -124,7 +124,7 @@ public class MapList : Control
 			if (i >= visible)
 				mapButtons[i].QueueFree();
 		}
-		Array.Resize(ref mapButtons, visible);
+		Array.Resize(ref mapButtons, Math.Max(0,visible));
 		for (int i = 0; i < visible; i++)
 		{
 			if (mapButtons[i] == null)

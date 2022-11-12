@@ -199,18 +199,17 @@ text = "Mapper 1, Mapper 2"
 valign = 1
 
 [node name="Maps" type="VBoxContainer" parent="Content/Anchor/Mapset"]
-visible = false
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 160.0
+margin_left = 32.0
 margin_bottom = 56.0
 rect_clip_content = true
 size_flags_vertical = 2
 custom_constants/separation = 0
 
 [node name="Map" type="Button" parent="Content/Anchor/Mapset/Maps"]
-margin_right = 544.0
+margin_right = 704.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 56 )
 rect_pivot_offset = Vector2( 576, 0 )

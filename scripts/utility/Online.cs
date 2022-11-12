@@ -36,9 +36,9 @@ public static class Online
 		var formData = new StringContent($"{{\"u\":\"{username}\",\"p\":\"{password}\"}}");
 		var result = httpClient.PostSync("auth/login", formData);
 		var content = JObject.Parse(result.Content.ReadAsStringSync());
-		if ((bool)content.GetValue("success") == true)
+		if ((bool)content.GetValue("has_error") == false)
 			return OnlineResult.Success;
-		ErrorMessage = (string)content.GetValue("message");
+		ErrorMessage = (string)content.GetValue("msg");
 		return OnlineResult.LoginFailed;
 	}
 }
