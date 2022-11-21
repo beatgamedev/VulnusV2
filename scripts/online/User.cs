@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using Newtonsoft.Json.Linq;
 namespace Online
 {
@@ -14,8 +15,17 @@ namespace Online
 		}
 		public User(JObject json)
 		{
-			this.Id = (string)json["id"];
-			this.Username = (string)json["username"];
+			this.Id = (string)json.GetValue("id");
+			this.Username = (string)json.GetValue("username");
+		}
+		public static User FromId(string id)
+		{
+			var req = Core.HttpClient.GetSync($"user/{id}");
+			var content = req.Content.ReadAsJsonSync();
+			if ((string)content.GetValue("status") == "Ok")
+				return new User(content);
+			else
+				throw new Exception("User doesn't exist");
 		}
 		public void LoadAvatar()
 		{
