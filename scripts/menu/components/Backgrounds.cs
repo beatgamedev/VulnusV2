@@ -40,7 +40,7 @@ public class Backgrounds : Control
 			AddChild(transition);
 			MoveChild(transition, 1);
 			var next = Textures[Mathf.PosMod(background++, Textures.Count)];
-			if (random.Next(0, 1337) == 69)
+			if (random.Next(0, 1337420) == 69)
 				next = Global.Matt;
 			Texture.Texture = next;
 			tween.StopAll();
