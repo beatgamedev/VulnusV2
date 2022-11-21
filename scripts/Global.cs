@@ -8,7 +8,7 @@ public class Global : Node
 
 	public static Global Instance;
 	public static Discord.DiscordW Discord;
-	public static StreamTexture Matt;
+	public static Texture Matt;
 	public Node CurrentScene { get; private set; }
 	public Control Overlay { get; private set; }
 	public Dictionary<string, Control> Overlays { get; private set; }
@@ -24,7 +24,17 @@ public class Global : Node
 	public override void _Ready()
 	{
 		Input.UseAccumulatedInput = false;
-		Matt = (StreamTexture)GD.Load("res://assets/images/matt.jpg");
+		var mattPath = ProjectSettings.GlobalizePath("user://").PlusFile("matt.jpg");
+		if (System.IO.File.Exists(mattPath))
+		{
+			var image = new Image();
+			image.Load(mattPath);
+			var texture = new ImageTexture();
+			texture.CreateFromImage(image);
+			Matt = texture;
+		}
+		else
+			Matt = (StreamTexture)GD.Load("res://assets/images/matt.jpg");
 		Viewport root = GetTree().Root;
 		CurrentScene = root.GetChild(root.GetChildCount() - 1);
 	}
