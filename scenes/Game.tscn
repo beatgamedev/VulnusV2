@@ -16,7 +16,7 @@
 
 [sub_resource type="Environment" id=2]
 background_mode = 1
-background_color = Color( 0.04, 0.04, 0.04, 1 )
+background_color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_sky_contribution = 0.0
 auto_exposure_scale = 0.15
@@ -146,6 +146,7 @@ environment = SubResource( 2 )
 script = ExtResource( 12 )
 
 [node name="SyncManager" type="Node" parent="."]
+process_priority = 1
 script = ExtResource( 8 )
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="SyncManager"]
@@ -256,3 +257,5 @@ transform = Transform( -0.965926, -5.17638, 0, 0.258819, -19.3185, 0, 0, 0, 1, -
 visible = false
 mesh = SubResource( 22 )
 skeleton = NodePath("")
+
+[node name="Background" type="Spatial" parent="."]

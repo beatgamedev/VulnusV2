@@ -16,8 +16,8 @@ public class MapDetails : View
 	{
 		mapList = GetParent().GetNode<MapList>("MapList");
 		mapList.MapSelected += MapSelected;
-		mapDetails = GetNode<Control>("Map");
 		details = GetNode<Control>("Details");
+		mapDetails = details.GetNode<Control>("AspectRatioContainer/Map");
 		loading = GetNode<Control>("Loading");
 		musicPreview = GetNode<AudioStreamPlayer>("MusicPreview");
 

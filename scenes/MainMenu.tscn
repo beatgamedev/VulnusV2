@@ -495,69 +495,6 @@ script = ExtResource( 13 )
 [node name="MusicPreview" type="AudioStreamPlayer" parent="ViewContainer/Singleplayer/MapDetails"]
 bus = "Music"
 
-[node name="Map" type="Panel" parent="ViewContainer/Singleplayer/MapDetails"]
-anchor_right = 1.0
-margin_left = 64.0
-margin_top = 24.0
-margin_right = -64.0
-margin_bottom = 136.0
-rect_min_size = Vector2( 0, 72 )
-rect_pivot_offset = Vector2( 576, 0 )
-custom_styles/panel = SubResource( 17 )
-
-[node name="Cover" type="TextureRect" parent="ViewContainer/Singleplayer/MapDetails/Map"]
-modulate = Color( 1, 1, 1, 0.627451 )
-material = SubResource( 19 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 24.0
-margin_top = 2.0
-margin_right = -24.0
-margin_bottom = -2.0
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 7
-
-[node name="Title" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_right = -32.0
-margin_bottom = -24.0
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 20 )
-text = "The Name of the Song"
-valign = 1
-clip_text = true
-
-[node name="Artist" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map/Title"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = -40.0
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 21 )
-text = "The Artist"
-valign = 1
-
-[node name="Mapper" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map/Title"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 48.0
-margin_bottom = -5.0
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 22 )
-text = "Mapper 1, Mapper 2"
-valign = 1
-
-[node name="Difficulty" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Map"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 32.0
-margin_top = 80.0
-margin_right = -96.0
-custom_fonts/font = SubResource( 23 )
-text = "Difficulty Name"
-
 [node name="Loading" type="Control" parent="ViewContainer/Singleplayer/MapDetails"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -579,6 +516,76 @@ flip_v = true
 [node name="Details" type="Control" parent="ViewContainer/Singleplayer/MapDetails"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="ViewContainer/Singleplayer/MapDetails/Details"]
+anchor_right = 1.0
+margin_left = 16.0
+margin_top = 40.0
+margin_right = -16.0
+margin_bottom = 248.0
+ratio = 6.0
+stretch_mode = 0
+alignment_vertical = 0
+
+[node name="Map" type="Panel" parent="ViewContainer/Singleplayer/MapDetails/Details/AspectRatioContainer"]
+margin_right = 704.0
+margin_bottom = 117.333
+rect_min_size = Vector2( 0, 72 )
+rect_pivot_offset = Vector2( 576, 0 )
+custom_styles/panel = SubResource( 17 )
+
+[node name="Cover" type="TextureRect" parent="ViewContainer/Singleplayer/MapDetails/Details/AspectRatioContainer/Map"]
+modulate = Color( 1, 1, 1, 0.627451 )
+material = SubResource( 19 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 2.0
+margin_right = -24.0
+margin_bottom = -2.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 7
+
+[node name="Title" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/AspectRatioContainer/Map"]
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.8
+margin_left = 32.0
+margin_right = -32.0
+margin_bottom = 0.200005
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 20 )
+text = "The Name of the Song"
+valign = 1
+clip_text = true
+
+[node name="Artist" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/AspectRatioContainer/Map/Title"]
+anchor_right = 1.0
+anchor_bottom = 0.4
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 21 )
+text = "The Artist"
+valign = 2
+
+[node name="Mapper" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/AspectRatioContainer/Map/Title"]
+anchor_top = 0.6
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -0.600006
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 22 )
+text = "Mapper 1, Mapper 2"
+
+[node name="Difficulty" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/AspectRatioContainer/Map"]
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_right = -96.0
+margin_bottom = -0.399994
+custom_fonts/font = SubResource( 23 )
+text = "Difficulty Name"
 
 [node name="Play" type="Button" parent="ViewContainer/Singleplayer/MapDetails/Details"]
 anchor_top = 1.0

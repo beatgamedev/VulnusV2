@@ -37,6 +37,7 @@ window/size/height=900
 window/size/test_width=1280
 window/size/test_height=720
 window/vsync/use_vsync=false
+window/tablet_driver=""
 
 [editor]
 
@@ -95,6 +96,10 @@ buffering/agile_event_flushing=true
 3d_render/layer_3="Notes"
 3d_render/layer_4="Obstacles"
 
+[locale]
+
+locale_filter=[ 1, [ "en_GB", "en_US", "fr" ] ]
+
 [mono]
 
 runtime/unhandled_exception_policy=1
@@ -117,3 +122,5 @@ environment/default_clear_color=Color( 0, 0.0941176, 0.188235, 1 )
 quality/filters/msaa=1
 quality/filters/use_debanding=true
 environment/default_environment="res://assets/environments/Environment.tres"
+quality/intended_usage/framebuffer_allocation.Quest=2
+quality/depth/hdr.Quest=true
