@@ -18,6 +18,8 @@ public class NoteManager : Node
 	public Note NextNote;
 	public Note LastNote;
 
+	public float ApproachTime;
+
 	public override void _Ready()
 	{
 		Game = GetParent<Game>();
@@ -39,19 +41,19 @@ public class NoteManager : Node
 		OrderedNotes = Notes.OrderBy(note => note.T).ToList();
 		if (Notes.Count > 0)
 			NextNote = Notes[0];
+		ApproachTime = Settings.ApproachTime;
 	}
 	public override void _Process(float delta)
 	{
-		var approachTime = Settings.ApproachTime;
-		var visibleNotes = Notes.FindAll(note => note.CalculateVisibility(SyncManager.NoteTime, approachTime));
+		ApproachTime = Settings.ApproachTime * SyncManager.Speed;
+		var visibleNotes = Notes.FindAll(note => note.CalculateVisibility(SyncManager.NoteTime, ApproachTime));
 		visibleNotes.TrimExcess();
 		visibleNotes.Reverse();
 		NoteRenderer.SetNotes(visibleNotes.ToArray());
 	}
 	public override void _PhysicsProcess(float delta)
 	{
-		var approachTime = Settings.ApproachTime;
-		var visibleNotes = Notes.FindAll(note => note.CalculateTime(SyncManager.NoteTime, approachTime) <= 0f && !note.Hit);
+		var visibleNotes = Notes.FindAll(note => note.CalculateTime(SyncManager.NoteTime, ApproachTime) <= 0f && !note.Hit);
 		foreach (Note note in visibleNotes)
 		{
 			bool didHitreg = false;
