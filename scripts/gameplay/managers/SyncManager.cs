@@ -14,6 +14,8 @@ public class SyncManager : Node
 	public bool SongPlaying;
 	public double SongPlayingAt;
 	public double SongPlayingOffset;
+	
+	public float Speed;
 
 	public override void _Ready()
 	{
@@ -33,7 +35,7 @@ public class SyncManager : Node
 			return;
 		if (!SongPlaying)
 		{
-			SongTime += delta;
+			SongTime += delta*Speed;
 			if (SongTime >= 0)
 			{
 				SongPlaying = true;
@@ -42,7 +44,7 @@ public class SyncManager : Node
 		}
 		else
 		{
-			var songTime = GetTimeSeconds() - SongPlayingAt;
+			var songTime = (GetTimeSeconds() - SongPlayingAt)*Speed;
 			SongTime = Math.Max(0.0, songTime - SongPlayingOffset);
 			var difference = SongTime - (AudioPlayer.GetPlaybackPosition() + AudioServer.GetTimeSinceLastMix());
 			if (difference > 0.002)
@@ -63,7 +65,7 @@ public class SyncManager : Node
 			GD.Print($"Attempting to skip {SkippableTime()}s");
 			if (SongPlaying)
 			{
-				SongPlayingAt -= skippableTime;
+				SongPlayingAt -= skippableTime/Speed;
 				AudioPlayer.Seek((float)(SongTime + skippableTime));
 			}
 			SongTime += skippableTime;
@@ -99,6 +101,7 @@ public class SyncManager : Node
 	{
 		SongPlayingAt = GetTimeSeconds() - SongTime;
 		SongPlayingOffset = GetAudioDelay();
+		AudioPlayer.PitchScale = Speed;
 		AudioPlayer.Play((float)SongTime);
 	}
 	private double GetTimeSeconds()

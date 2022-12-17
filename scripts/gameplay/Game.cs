@@ -3,6 +3,8 @@ using System;
 
 public class Game : Spatial
 {
+	public static float DebugSpeed = 1f;
+	
 	public static BeatmapSet LoadedMapset;
 	public static Beatmap LoadedMap;
 	public static BeatmapData LoadedMapData;
@@ -28,6 +30,7 @@ public class Game : Spatial
 
 		NoteManager = GetNode<NoteManager>("NoteManager");
 		SyncManager = GetNode<SyncManager>("SyncManager");
+		SyncManager.Speed = DebugSpeed/100f;
 
 		HUDManager = GetNode<HUDManager>("HUD");
 

@@ -604,6 +604,17 @@ text = "PLAY"
 align = 1
 valign = 1
 
+[node name="Speed" type="SpinBox" parent="ViewContainer/Singleplayer/MapDetails/Details"]
+margin_left = 48.0
+margin_top = 248.0
+margin_right = 248.0
+margin_bottom = 312.0
+max_value = 200.0
+value = 100.0
+align = 3
+prefix = "Speed"
+suffix = "%"
+
 [node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
 anchor_top = 1.0
 anchor_right = 1.0
