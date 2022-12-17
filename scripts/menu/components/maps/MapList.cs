@@ -9,30 +9,31 @@ public class MapList : Control
 	public BeatmapSet SelectedMapset { get; private set; }
 	public Beatmap SelectedMap { get; private set; }
 	private MapsetButton origin;
-	private MapsetButton[] mapButtons = new MapsetButton[0];
+	private Dictionary<BeatmapSet, MapsetButton> mapButtons = new Dictionary<BeatmapSet, MapsetButton>();
 	private Control content;
 	private Control anchor;
+	private Control list;
 	private Control filters;
 	private float scroll = 0;
 	private float scrollf = 0;
-	private int offset = 0;
+	private float scrolls = 0;
 	private int visible = 0;
-	private int buttonOffset = 0;
-	private int buttonOffsetAt = 0;
 	public Action<Beatmap> MapSelected = (Beatmap map) => { };
 	public Action<BeatmapSet> MapsetSelected = (BeatmapSet mapset) => { };
 	public override void _Ready()
 	{
 		content = GetNode<Control>("Content");
 		anchor = content.GetNode<Control>("Anchor");
-		origin = anchor.GetNode<MapsetButton>("Mapset");
+		list = anchor.GetNode<Control>("List");
+		origin = list.GetNode<MapsetButton>("Mapset");
 		origin.Visible = false;
 		filters = GetNode<Control>("Filters");
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
 	}
 	public override void _Process(float delta)
 	{
-		anchor.RectPosition = new Vector2(anchor.RectPosition.x, -scrollf * 76);
+		scrollf += (scroll - scrollf) * delta / 0.1f;
+		anchor.RectPosition = new Vector2(anchor.RectPosition.x, -scrollf * 78);
 		base._Process(delta);
 	}
 	public override void _GuiInput(InputEvent @event)
@@ -40,31 +41,28 @@ public class MapList : Control
 		if (!(@event is InputEventMouseButton))
 			return;
 		var ev = (InputEventMouseButton)@event;
+		if (!ev.Pressed)
+			return;
 		if (ev.ButtonIndex == (int)ButtonList.WheelUp)
 			Scroll(-1);
 		else if (ev.ButtonIndex == (int)ButtonList.WheelDown)
 			Scroll(1);
 	}
-	public void Scroll(int amount)
+	public void Scroll(float amount)
 	{
-		if (scroll + amount < 0)
+		if (scroll + amount < 0 || scroll + amount > DisplayedMaps.Count)
 			return;
 		scroll += amount;
-		offset += amount;
-		buttonOffsetAt -= amount;
+		scrolls += amount;
 		RenderButtons();
-		var tween = anchor.GetNode<Tween>("Tween");
-		tween.StopAll();
-		tween.InterpolateProperty(this, nameof(scrollf), scroll - amount, scroll, 0.1f);
-		tween.Start();
 	}
 	private MapsetButton newButton()
 	{
 		MapsetButton newBtn = origin.Duplicate() as MapsetButton;
 		newBtn.MapSelected += mapSelected;
-		newBtn.Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(newBtn));
+		newBtn.GetNode<Button>("Button").Connect("pressed", this, nameof(btnPressed), new Godot.Collections.Array(newBtn));
 		newBtn.Visible = true;
-		anchor.AddChild(newBtn);
+		list.AddChild(newBtn);
 		return newBtn;
 	}
 	private void mapSelected(Beatmap map)
@@ -74,11 +72,12 @@ public class MapList : Control
 	}
 	private void btnPressed(MapsetButton btn)
 	{
+		if (SelectedMapset != null && mapButtons.ContainsKey(SelectedMapset))
+			mapButtons[SelectedMapset].Collapse(true);
+		btn.ManualUpdate(true);
+		btn.Expand(true);
 		SelectedMapset = btn.Mapset;
 		MapsetSelected(SelectedMapset);
-		int buttonIndex = Array.IndexOf(mapButtons, btn);
-		buttonOffsetAt = buttonIndex;
-		RenderButtons();
 	}
 	public void SearchChanged(string search)
 	{
@@ -93,8 +92,8 @@ public class MapList : Control
 	}
 	public void UpdateDisplayed(bool render = false)
 	{
-		offset -= (int)scroll;
 		scroll = 0;
+		scrollf = 0;
 		var search = filters.GetNode<LineEdit>("Search").Text.Trim();
 		if (search != "")
 			DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => IsSimilar(set, search));
@@ -104,36 +103,29 @@ public class MapList : Control
 			return;
 		RenderButtons();
 	}
-	public void UpdateButton(MapsetButton button, int buttonIndex, bool animate = true)
-	{
-		if (button.Mapset == SelectedMapset)
-		{
-			button.ManualUpdate(true);
-			button.Expand(animate);
-			buttonOffset = (int)button.GetNode<VBoxContainer>("Maps").RectSize.y;
-			return;
-		}
-		button.ManualUpdate();
-		button.Collapse(animate);
-	}
 	public void RenderButtons()
 	{
+		int offset = (int)Math.Ceiling(scroll);
 		visible = Math.Min(DisplayedMaps.Count - offset, (int)Math.Ceiling(content.RectSize.y / 72));
-		for (int i = 0; i < mapButtons.Length; i++)
+		foreach (KeyValuePair<BeatmapSet, MapsetButton> pair in mapButtons)
 		{
-			if (i >= visible)
-				mapButtons[i].QueueFree();
+			var set = pair.Key;
+			var btn = pair.Value;
+			btn.Visible = DisplayedMaps.Contains(set);
 		}
-		Array.Resize(ref mapButtons, Math.Max(0,visible));
-		for (int i = 0; i < visible; i++)
+		foreach (BeatmapSet set in DisplayedMaps)
 		{
-			if (mapButtons[i] == null)
-				mapButtons[i] = newButton();
-			var btn = mapButtons[i];
-			btn.Mapset = DisplayedMaps[offset + i];
-			UpdateButton(btn, i, false);
-			int thisOffset = buttonOffsetAt < i ? buttonOffset : 0;
-			btn.RectPosition = new Vector2(btn.RectPosition.x, thisOffset + (offset + i) * 76);
+			int index = DisplayedMaps.IndexOf(set);
+			if (!(index >= offset && index <= offset + visible))
+				continue;
+			if (mapButtons.ContainsKey(set))
+			{
+				list.MoveChild(mapButtons[set], index);
+				continue;
+			}
+			mapButtons[set] = newButton();
+			mapButtons[set].Mapset = set;
+			mapButtons[set].ManualUpdate(true);
 		}
 	}
 }

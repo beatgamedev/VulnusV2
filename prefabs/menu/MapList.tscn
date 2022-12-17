@@ -132,21 +132,32 @@ expand = true
 [node name="Anchor" type="Control" parent="Content"]
 anchor_right = 1.0
 
-[node name="Mapset" type="Button" parent="Content/Anchor"]
-anchor_top = 1.0
+[node name="List" type="VBoxContainer" parent="Content/Anchor"]
 anchor_right = 1.0
-anchor_bottom = 1.0
 margin_left = 64.0
-margin_bottom = 72.0
+margin_bottom = 70.0
+custom_constants/separation = 2
+
+[node name="Mapset" type="Control" parent="Content/Anchor/List"]
+margin_right = 736.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 0, 76 )
+rect_clip_content = true
+size_flags_vertical = 0
+script = ExtResource( 5 )
+
+[node name="Button" type="Button" parent="Content/Anchor/List/Mapset"]
+margin_top = 4.0
+margin_right = 736.0
+margin_bottom = 76.0
 rect_min_size = Vector2( 0, 72 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 19 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/disabled = SubResource( 15 )
 custom_styles/normal = SubResource( 1 )
-script = ExtResource( 5 )
 
-[node name="Cover" type="Control" parent="Content/Anchor/Mapset"]
+[node name="Cover" type="Control" parent="Content/Anchor/List/Mapset/Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 2.0
@@ -154,7 +165,7 @@ margin_bottom = -2.0
 rect_clip_content = true
 mouse_filter = 2
 
-[node name="Image" type="TextureRect" parent="Content/Anchor/Mapset/Cover"]
+[node name="Image" type="TextureRect" parent="Content/Anchor/List/Mapset/Button/Cover"]
 modulate = Color( 0.784314, 0.784314, 0.784314, 0.501961 )
 show_behind_parent = true
 material = SubResource( 11 )
@@ -168,7 +179,7 @@ texture = ExtResource( 4 )
 expand = true
 stretch_mode = 7
 
-[node name="Title" type="Label" parent="Content/Anchor/Mapset"]
+[node name="Title" type="Label" parent="Content/Anchor/List/Mapset/Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
@@ -179,7 +190,7 @@ text = "The Name of the Song"
 valign = 1
 clip_text = true
 
-[node name="Artist" type="Label" parent="Content/Anchor/Mapset/Title"]
+[node name="Artist" type="Label" parent="Content/Anchor/List/Mapset/Button/Title"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -40.0
@@ -188,7 +199,7 @@ custom_fonts/font = SubResource( 14 )
 text = "The Artist"
 valign = 1
 
-[node name="Mapper" type="Label" parent="Content/Anchor/Mapset/Title"]
+[node name="Mapper" type="Label" parent="Content/Anchor/List/Mapset/Button/Title"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 48.0
@@ -198,7 +209,7 @@ custom_fonts/font = SubResource( 18 )
 text = "Mapper 1, Mapper 2"
 valign = 1
 
-[node name="Maps" type="VBoxContainer" parent="Content/Anchor/Mapset"]
+[node name="Maps" type="VBoxContainer" parent="Content/Anchor/List/Mapset/Button"]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -208,7 +219,7 @@ rect_clip_content = true
 size_flags_vertical = 2
 custom_constants/separation = 0
 
-[node name="Map" type="Button" parent="Content/Anchor/Mapset/Maps"]
+[node name="Map" type="Button" parent="Content/Anchor/List/Mapset/Button/Maps"]
 margin_right = 704.0
 margin_bottom = 56.0
 rect_min_size = Vector2( 0, 56 )
@@ -220,7 +231,7 @@ custom_styles/disabled = SubResource( 16 )
 custom_styles/normal = SubResource( 16 )
 toggle_mode = true
 
-[node name="Title" type="Label" parent="Content/Anchor/Mapset/Maps/Map"]
+[node name="Title" type="Label" parent="Content/Anchor/List/Mapset/Button/Maps/Map"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -233,7 +244,7 @@ text = "0.0* - Difficulty Name"
 valign = 1
 clip_text = true
 
-[node name="Cover" type="TextureRect" parent="Content/Anchor/Mapset/Maps/Map"]
+[node name="Cover" type="TextureRect" parent="Content/Anchor/List/Mapset/Button/Maps/Map"]
 visible = false
 show_behind_parent = true
 material = SubResource( 11 )
@@ -245,7 +256,7 @@ texture = ExtResource( 4 )
 expand = true
 stretch_mode = 7
 
-[node name="Tween" type="Tween" parent="Content/Anchor/Mapset"]
+[node name="Tween" type="Tween" parent="Content/Anchor/List/Mapset"]
 
 [node name="Tween" type="Tween" parent="Content/Anchor"]
 
