@@ -16,7 +16,6 @@ public class MapList : Control
 	private Control filters;
 	private float scroll = 0;
 	private float scrollf = 0;
-	private float scrolls = 0;
 	private int visible = 0;
 	public Action<Beatmap> MapSelected = (Beatmap map) => { };
 	public Action<BeatmapSet> MapsetSelected = (BeatmapSet mapset) => { };
@@ -55,7 +54,6 @@ public class MapList : Control
 		if (scroll + amount < 0 || scroll + amount > DisplayedMaps.Count)
 			return;
 		scroll += amount;
-		scrolls += amount;
 		RenderButtons();
 	}
 	private MapsetButton newButton()
