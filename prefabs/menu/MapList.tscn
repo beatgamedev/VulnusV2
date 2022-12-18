@@ -284,7 +284,7 @@ margin_right = -16.0
 margin_bottom = 30.0
 custom_icons/arrow = SubResource( 23 )
 text = "Title (asc.)"
-items = [ "Title (asc.)", null, false, 0, null, "Title (dsc.)", null, false, 1, null, "Artist (asc.)", null, false, 2, null, "Artist (dsc.)", null, false, 3, null, "Difficulty (asc.)", null, false, 4, null, "Difficulty (dsc.)", null, false, 5, null ]
+items = [ "Title (asc.)", null, false, 0, null, "Title (dsc.)", null, false, 1, null, "Artist (asc.)", null, false, 2, null, "Artist (dsc.)", null, false, 3, null, "Difficulty (asc.)", null, true, 4, null, "Difficulty (dsc.)", null, true, 5, null ]
 selected = 0
 
 [node name="Label" type="Label" parent="Filters/Sort"]

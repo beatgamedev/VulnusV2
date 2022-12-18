@@ -28,6 +28,7 @@ public class MapList : Control
 		origin.Visible = false;
 		filters = GetNode<Control>("Filters");
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
+		filters.GetNode<OptionButton>("Sort").Connect("item_selected", this, nameof(FilterChanged));
 	}
 	public override void _Process(float delta)
 	{
@@ -83,6 +84,10 @@ public class MapList : Control
 	{
 		UpdateDisplayed(true);
 	}
+	public void FilterChanged(int index)
+	{
+		UpdateDisplayed(true);
+	}
 	private bool IsSimilar(BeatmapSet set, string search)
 	{
 		var name = set.Name.ToLower().Trim();
@@ -99,6 +104,48 @@ public class MapList : Control
 			DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => IsSimilar(set, search));
 		else
 			DisplayedMaps = RootMaps;
+		switch (filters.GetNode<OptionButton>("Sort").Selected)
+		{
+			case 0: // Title (asc.)
+				DisplayedMaps.Sort(delegate (BeatmapSet a, BeatmapSet b)
+				{
+					return a.Title.CompareTo(b.Title);
+				});
+				break;
+			case 1: // Title (dsc.)
+				DisplayedMaps.Sort(delegate (BeatmapSet a, BeatmapSet b)
+				{
+					return -a.Title.CompareTo(b.Title);
+				});
+				break;
+			case 2: // Artist (asc.)
+				DisplayedMaps.Sort(delegate (BeatmapSet a, BeatmapSet b)
+				{
+					return a.Name.CompareTo(b.Name);
+				});
+				break;
+			case 3: // Artist (dsc.)
+				DisplayedMaps.Sort(delegate (BeatmapSet a, BeatmapSet b)
+				{
+					return -a.Name.CompareTo(b.Name);
+				});
+				break;
+			// UNIMPLEMENTED BELOW
+			case 5: // Difficulty (asc.)
+					// DisplayedMaps.Sort(delegate (BeatmapSet a, BeatmapSet b)
+					// {
+					// 	return a.Artist.CompareTo(b.Artist);
+					// });
+				break;
+			case 6: // Difficulty (dsc.)
+					// DisplayedMaps.Sort(delegate (BeatmapSet a, BeatmapSet b)
+					// {
+					// 	return -a.Artist.CompareTo(b.Artist);
+					// });
+				break;
+			default:
+				break;
+		}
 		if (!render)
 			return;
 		RenderButtons();
@@ -126,6 +173,7 @@ public class MapList : Control
 			mapButtons[set] = newButton();
 			mapButtons[set].Mapset = set;
 			mapButtons[set].ManualUpdate(true);
+			list.MoveChild(mapButtons[set], index);
 		}
 	}
 }
