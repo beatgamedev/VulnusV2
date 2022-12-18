@@ -32,6 +32,8 @@ public class MapList : Control
 	}
 	public override void _Process(float delta)
 	{
+		if (mapButtons.Count == 0 && RootMaps.Count > 0)
+			UpdateDisplayed(true);
 		scrollf += (scroll - scrollf) * delta / 0.1f;
 		anchor.RectPosition = new Vector2(anchor.RectPosition.x, -scrollf * 78);
 		base._Process(delta);
