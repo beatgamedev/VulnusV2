@@ -268,7 +268,6 @@ margin_bottom = 64.0
 color = Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 
 [node name="Gradient" type="TextureRect" parent="Filters"]
-visible = false
 margin_top = 64.0
 margin_right = 800.0
 margin_bottom = 80.0

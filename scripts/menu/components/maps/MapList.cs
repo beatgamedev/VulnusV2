@@ -6,8 +6,8 @@ public class MapList : Control
 {
 	public List<BeatmapSet> RootMaps = BeatmapLoader.LoadedMaps;
 	public List<BeatmapSet> DisplayedMaps { get; private set; }
-	public BeatmapSet SelectedMapset { get; private set; }
-	public Beatmap SelectedMap { get; private set; }
+	public BeatmapSet SelectedMapset;
+	public Beatmap SelectedMap;
 	private MapsetButton origin;
 	private Dictionary<BeatmapSet, MapsetButton> mapButtons = new Dictionary<BeatmapSet, MapsetButton>();
 	private Control content;
@@ -16,7 +16,7 @@ public class MapList : Control
 	private Control filters;
 	private float scroll = 0;
 	private float scrollf = 0;
-	private int visible = 0;
+	public int visible { get; private set; } = 0;
 	public Action<Beatmap> MapSelected = (Beatmap map) => { };
 	public Action<BeatmapSet> MapsetSelected = (BeatmapSet mapset) => { };
 	public override void _Ready()
@@ -32,8 +32,6 @@ public class MapList : Control
 	}
 	public override void _Process(float delta)
 	{
-		if (mapButtons.Count == 0 && RootMaps.Count > 0)
-			UpdateDisplayed(true);
 		scrollf += (scroll - scrollf) * delta / 0.1f;
 		anchor.RectPosition = new Vector2(anchor.RectPosition.x, -scrollf * 78);
 		base._Process(delta);
@@ -50,8 +48,10 @@ public class MapList : Control
 		else if (ev.ButtonIndex == (int)ButtonList.WheelDown)
 			Scroll(1);
 	}
-	public void Scroll(float amount)
+	public void Scroll(float amount, bool render = true)
 	{
+		if (amount == 0)
+			return;
 		if (scroll + amount < 0 || scroll + amount > DisplayedMaps.Count)
 			return;
 		scroll += amount;
@@ -98,7 +98,6 @@ public class MapList : Control
 	public void UpdateDisplayed(bool render = false)
 	{
 		scroll = 0;
-		scrollf = 0;
 		var search = filters.GetNode<LineEdit>("Search").Text.Trim();
 		if (search != "")
 			DisplayedMaps = RootMaps.FindAll((BeatmapSet set) => IsSimilar(set, search));
@@ -163,7 +162,7 @@ public class MapList : Control
 		foreach (BeatmapSet set in DisplayedMaps)
 		{
 			int index = DisplayedMaps.IndexOf(set);
-			if (!(index >= offset && index <= offset + visible))
+			if (!(index <= offset + visible))
 				continue;
 			if (mapButtons.ContainsKey(set))
 			{
@@ -173,6 +172,8 @@ public class MapList : Control
 			mapButtons[set] = newButton();
 			mapButtons[set].Mapset = set;
 			mapButtons[set].ManualUpdate(true);
+			if (SelectedMapset == set)
+				mapButtons[set].Expand();
 			list.MoveChild(mapButtons[set], index);
 		}
 	}
