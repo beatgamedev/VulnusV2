@@ -102,7 +102,7 @@ locale_filter=[ 1, [ "en_GB", "en_US", "fr" ] ]
 
 [mono]
 
-runtime/unhandled_exception_policy=1
+profiler/enabled=true
 project/assembly_name="Vulnus"
 
 [physics]
