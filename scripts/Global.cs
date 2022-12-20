@@ -17,7 +17,6 @@ public class Global : Node
 		if (!System.IO.Directory.Exists(MapPath))
 			System.IO.Directory.CreateDirectory(MapPath);
 		Instance = this;
-		SquirrelW.Run();
 		Discord = new Discord.DiscordW();
 		Discord.SetActivity(new Discord.ActivityW());
 	}
