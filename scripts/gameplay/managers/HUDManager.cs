@@ -3,12 +3,19 @@ using System;
 
 public class HUDManager : Node
 {
+	public Game Game;
+
+	public SyncManager SyncManager;
+
 	public LeftPanel LeftPanel;
 	public RightPanel RightPanel;
 	public Health Health;
 
 	public override void _Ready()
 	{
+		Game = GetParent<Game>();
+		SyncManager = Game.GetNode<SyncManager>("SyncManager");
+
 		LeftPanel = GetNode<LeftPanel>("LeftHUD/UI");
 		LeftPanel.UpdateScore(0);
 		LeftPanel.UpdateAccuracy(0, 1);
@@ -17,6 +24,10 @@ public class HUDManager : Node
 		RightPanel.UpdateCombo(0, 0);
 		Health = GetNode<Health>("HealthHUD/UI");
 		Health.UpdateHealth(10);
+	}
+	public override void _Process(float delta)
+	{
+		LeftPanel.UpdateSkip(SyncManager.CanSkip());
 	}
 	public void ManualUpdate(Score score)
 	{
