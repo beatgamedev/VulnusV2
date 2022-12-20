@@ -17,6 +17,8 @@ public class SyncManager : Node
 
 	public float Speed;
 
+	public Action Ended = () => { };
+
 	public override void _Ready()
 	{
 		Game = GetParent<Game>();
@@ -86,11 +88,9 @@ public class SyncManager : Node
 			return skipToEnd;
 		return NoteManager.NextNote.T - NoteTime - Speed;
 	}
-	[Signal]
-	public delegate void Ended();
 	public void AudioEnded()
 	{
-		EmitSignal(nameof(Ended));
+		Ended();
 	}
 	public void SetStream(AudioStream stream)
 	{

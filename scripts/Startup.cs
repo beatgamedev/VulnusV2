@@ -11,13 +11,14 @@ public class Startup : Node
 	private float counter;
 	private static bool hasRun = false;
 	private static Task task;
+	public Action<string, bool> StageReached = (string stage, bool end) => { };
 	public override void _Ready()
 	{
 		label = GetNode<Label>("Label");
 		if (hasRun)
 			return;
 		hasRun = true;
-		Connect(nameof(StageReached), this, nameof(OnStageReached));
+		StageReached += OnStageReached;
 		task = Task.Run(Run);
 	}
 	public void OnStageReached(string stage, bool end)
@@ -27,23 +28,21 @@ public class Startup : Node
 		if (end)
 			Global.Instance.GotoScene("res://scenes/MainMenu.tscn");
 	}
-	[Signal]
-	public delegate void StageReached(string stage, bool end);
 	public void Run()
 	{
 		if (OS.HasFeature("Android"))
 		{
-			EmitSignal(nameof(StageReached), "Request permissions", false);
+			StageReached("Request permissions", false);
 			OS.RequestPermissions();
 		}
-		EmitSignal(nameof(StageReached), "Loading settings", false);
+		StageReached("Loading settings", false);
 		Settings.UpdateSettings(true);
-		EmitSignal(nameof(StageReached), "Adding overlays", false);
+		StageReached("Adding overlays", false);
 		Global.Instance.AddOverlay();
-		EmitSignal(nameof(StageReached), "Loading maps", false);
+		StageReached("Loading maps", false);
 		LoadMaps();
 		Global.Instance.FinishedLoading();
-		EmitSignal(nameof(StageReached), "All done", true);
+		StageReached("All done", true);
 	}
 	public override void _Process(float delta)
 	{

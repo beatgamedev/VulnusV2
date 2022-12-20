@@ -48,7 +48,7 @@ public class Game : Spatial
 		}
 
 		SyncManager.SetStream(LoadedMapset.LoadAudio());
-		SyncManager.Connect("Ended", this, nameof(GameEnded));
+		SyncManager.Ended += GameEnded;
 
 		NoteManager.NoteHit += OnNoteHit;
 		NoteManager.NoteMiss += OnNoteMiss;
