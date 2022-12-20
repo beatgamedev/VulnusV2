@@ -14,7 +14,7 @@ public class SyncManager : Node
 	public bool SongPlaying;
 	public double SongPlayingAt;
 	public double SongPlayingOffset;
-	
+
 	public float Speed;
 
 	public override void _Ready()
@@ -35,7 +35,7 @@ public class SyncManager : Node
 			return;
 		if (!SongPlaying)
 		{
-			SongTime += delta*Speed;
+			SongTime += delta * Speed;
 			if (SongTime >= 0)
 			{
 				SongPlaying = true;
@@ -44,7 +44,7 @@ public class SyncManager : Node
 		}
 		else
 		{
-			var songTime = (GetTimeSeconds() - SongPlayingAt)*Speed;
+			var songTime = (GetTimeSeconds() - SongPlayingAt) * Speed;
 			SongTime = Math.Max(0.0, songTime - SongPlayingOffset);
 			var difference = SongTime - (AudioPlayer.GetPlaybackPosition() + AudioServer.GetTimeSinceLastMix());
 			if (difference > 0.002)
@@ -65,7 +65,7 @@ public class SyncManager : Node
 			GD.Print($"Attempting to skip {SkippableTime()}s");
 			if (SongPlaying)
 			{
-				SongPlayingAt -= skippableTime/Speed;
+				SongPlayingAt -= skippableTime / Speed;
 				AudioPlayer.Seek((float)(SongTime + skippableTime));
 			}
 			SongTime += skippableTime;
@@ -74,17 +74,17 @@ public class SyncManager : Node
 	public bool CanSkip()
 	{
 		if (NoteManager.LastNote == null || NoteManager.NextNote == null)
-			return SkippableTime() >= 2f;
-		return SkippableTime() >= 2f && (NoteManager.NextNote.T - NoteManager.LastNote.T) > 5f;
+			return SkippableTime() >= 2f * Speed;
+		return SkippableTime() >= 2f * Speed && (NoteManager.NextNote.T - NoteManager.LastNote.T) > 5f * Speed;
 	}
 	public double SkippableTime()
 	{
-		var skipToEnd = (double)AudioPlayer.Stream.GetLength() - NoteTime - 1f;
+		var skipToEnd = (double)AudioPlayer.Stream.GetLength() - NoteTime - Speed;
 		if (NoteManager.LastNote == null && NoteManager.NextNote == null)
 			return skipToEnd;
 		if (NoteManager.LastNote != null && NoteManager.LastNote.Index == (NoteManager.Notes.Count - 1))
 			return skipToEnd;
-		return NoteManager.NextNote.T - NoteTime - 1f;
+		return NoteManager.NextNote.T - NoteTime - Speed;
 	}
 	[Signal]
 	public delegate void Ended();
