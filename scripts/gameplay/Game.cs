@@ -4,7 +4,7 @@ using System;
 public class Game : Spatial
 {
 	public static float DebugSpeed = 1f;
-	
+
 	public static BeatmapSet LoadedMapset;
 	public static Beatmap LoadedMap;
 	public static BeatmapData LoadedMapData;
@@ -30,7 +30,7 @@ public class Game : Spatial
 
 		NoteManager = GetNode<NoteManager>("NoteManager");
 		SyncManager = GetNode<SyncManager>("SyncManager");
-		SyncManager.Speed = DebugSpeed/100f;
+		SyncManager.Speed = DebugSpeed / 100f;
 
 		HUDManager = GetNode<HUDManager>("HUD");
 
@@ -50,14 +50,14 @@ public class Game : Spatial
 		SyncManager.SetStream(LoadedMapset.LoadAudio());
 		SyncManager.Connect("Ended", this, nameof(GameEnded));
 
-		NoteManager.Connect("NoteHit", this, nameof(OnNoteHit));
-		NoteManager.Connect("NoteMiss", this, nameof(OnNoteMiss));
+		NoteManager.NoteHit += OnNoteHit;
+		NoteManager.NoteMiss += OnNoteMiss;
 
 		Global.Discord.SetActivity(new Discord.ActivityW(
 			state: "Playing a map",
 			details: $"{LoadedMapset.Name} - {LoadedMap.Name}",
 			startTimestamp: DateTime.Now,
-			endTimestamp: DateTime.Now.AddSeconds(SyncManager.AudioPlayer.Stream.GetLength())
+			endTimestamp: DateTime.Now.AddSeconds(SyncManager.AudioPlayer.Stream.GetLength() * SyncManager.Speed)
 		));
 	}
 	public override void _PhysicsProcess(float delta)

@@ -20,6 +20,9 @@ public class NoteManager : Node
 
 	public float ApproachTime;
 
+	public Action<Note> NoteHit = (Note note) => { };
+	public Action<Note> NoteMiss = (Note note) => { };
+
 	public override void _Ready()
 	{
 		Game = GetParent<Game>();
@@ -59,13 +62,13 @@ public class NoteManager : Node
 			bool didHitreg = false;
 			if (note.IsTouching(Camera.ClampedCursorPosition))
 			{
-				EmitSignal(nameof(NoteHit), note);
+				NoteHit(note);
 				didHitreg = true;
 				note.Hit = true;
 			}
 			if (!note.Hit && !note.InHitWindow(SyncManager.NoteTime, true))
 			{
-				EmitSignal(nameof(NoteMiss), note);
+				NoteMiss(note);
 				didHitreg = true;
 				note.Hit = true;
 			}
@@ -80,8 +83,4 @@ public class NoteManager : Node
 			continue;
 		}
 	}
-	[Signal]
-	public delegate void NoteHit(Note note);
-	[Signal]
-	public delegate void NoteMiss(Note note);
 }
