@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MapList : Control
 {
+	public static string Search = "";
+	public static int Sort = 0;
 	public List<BeatmapSet> RootMaps = BeatmapLoader.LoadedMaps;
 	public List<BeatmapSet> DisplayedMaps { get; private set; }
 	public BeatmapSet SelectedMapset;
@@ -14,6 +16,7 @@ public class MapList : Control
 	private Control anchor;
 	private Control list;
 	private Control filters;
+	private HSeparator separator;
 	private float scroll = 0;
 	private float scrollf = 0;
 	public int visible { get; private set; } = 0;
@@ -24,11 +27,14 @@ public class MapList : Control
 		content = GetNode<Control>("Content");
 		anchor = content.GetNode<Control>("Anchor");
 		list = anchor.GetNode<Control>("List");
+		separator = list.GetNode<HSeparator>("Separator");
 		origin = list.GetNode<MapsetButton>("Mapset");
 		origin.Visible = false;
 		filters = GetNode<Control>("Filters");
 		filters.GetNode<LineEdit>("Search").Connect("text_changed", this, nameof(SearchChanged));
-		filters.GetNode<OptionButton>("Sort").Connect("item_selected", this, nameof(FilterChanged));
+		filters.GetNode<LineEdit>("Search").Text = Search;
+		filters.GetNode<OptionButton>("Sort").Connect("item_selected", this, nameof(SortChanged));
+		filters.GetNode<OptionButton>("Sort").Selected = Sort;
 	}
 	public override void _Process(float delta)
 	{
@@ -82,10 +88,12 @@ public class MapList : Control
 	}
 	public void SearchChanged(string search)
 	{
+		Search = search;
 		UpdateDisplayed(true);
 	}
-	public void FilterChanged(int index)
+	public void SortChanged(int index)
 	{
+		Sort = index;
 		UpdateDisplayed(true);
 	}
 	private bool IsSimilar(BeatmapSet set, string search)
@@ -153,28 +161,59 @@ public class MapList : Control
 	{
 		int offset = (int)Math.Ceiling(scroll);
 		visible = Math.Min(DisplayedMaps.Count - offset, (int)Math.Ceiling(content.RectSize.y / 72));
+		List<BeatmapSet> forRemoval = new List<BeatmapSet>();
 		foreach (KeyValuePair<BeatmapSet, MapsetButton> pair in mapButtons)
 		{
 			var set = pair.Key;
 			var btn = pair.Value;
-			btn.Visible = DisplayedMaps.Contains(set);
+			if (DisplayedMaps.Contains(set))
+				continue;
+			forRemoval.Add(set);
 		}
+		int underAmount = SelectedMapset != null && mapButtons.ContainsKey(SelectedMapset) ? Mathf.CeilToInt(mapButtons[SelectedMapset].RectMinSize.y / 76f) : 1;
+		int hierarchyIndex = 1;
+		int creationIndex = 0;
+		int firstIndex = -1;
+		bool selectedUnder = false;
 		foreach (BeatmapSet set in DisplayedMaps)
 		{
 			int index = DisplayedMaps.IndexOf(set);
-			if (!(index <= offset + visible))
-				continue;
-			if (mapButtons.ContainsKey(set))
+			bool under = index < offset - underAmount;
+			bool over = index > offset + visible;
+			bool exists = mapButtons.ContainsKey(set) && !forRemoval.Contains(set);
+			bool selected = set == SelectedMapset || (exists && mapButtons[set].RectMinSize.y != 76);
+			bool skipCreation = false;
+			if (selected && under)
+				selectedUnder = true;
+			if (exists && !selected && (under || over))
+				forRemoval.Add(set);
+			else if (exists)
 			{
-				list.MoveChild(mapButtons[set], index);
-				continue;
+				list.MoveChild(mapButtons[set], hierarchyIndex);
+				hierarchyIndex++;
 			}
+			if (under)
+				firstIndex = index;
+			skipCreation = ((over || under) && !selected) || exists;
+			if (skipCreation)
+				continue;
+			creationIndex++;
 			mapButtons[set] = newButton();
 			mapButtons[set].Mapset = set;
 			mapButtons[set].ManualUpdate(true);
+			mapButtons[set].MoveIn((creationIndex + 1) / 20f);
 			if (SelectedMapset == set)
 				mapButtons[set].Expand();
-			list.MoveChild(mapButtons[set], index);
+			list.MoveChild(mapButtons[set], hierarchyIndex);
+			hierarchyIndex++;
 		}
+		foreach (BeatmapSet set in forRemoval)
+		{
+			mapButtons[set].QueueFree();
+			mapButtons.Remove(set);
+		}
+		if (selectedUnder)
+			firstIndex--;
+		separator.AddConstantOverride("separation", (firstIndex + 1) * 78);
 	}
 }

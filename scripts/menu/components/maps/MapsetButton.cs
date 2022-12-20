@@ -10,14 +10,24 @@ public class MapsetButton : Control
 	private Control origin;
 	private Button setButton;
 	private Tween tween;
+	private Tween inTween;
 	public override void _Ready()
 	{
 		tween = GetNode<Tween>("Tween");
+		inTween = GetNode<Tween>("InTween");
 		setButton = GetNode<Button>("Button");
 		list = setButton.GetNode<VBoxContainer>("Maps");
 		origin = list.GetNode<Button>("Map");
 		origin.Visible = false;
 		Collapse();
+	}
+	public void MoveIn(float delay = 0.1f)
+	{
+		setButton.Modulate = new Color(1, 1, 1, 0);
+		inTween.RemoveAll();
+		inTween.InterpolateProperty(setButton, "rect_position:x", 48, 0, 0.4f, Tween.TransitionType.Expo, Tween.EaseType.Out, delay);
+		inTween.InterpolateProperty(setButton, "modulate:a", 0, 1, 0.3f, Tween.TransitionType.Expo, Tween.EaseType.Out, delay);
+		inTween.Start();
 	}
 	private void btnPressed(Button button)
 	{
@@ -38,7 +48,7 @@ public class MapsetButton : Control
 	public void Expand(bool animate = false)
 	{
 		Expanded = true;
-		tween.StopAll();
+		tween.RemoveAll();
 		if (!animate)
 		{
 			RectMinSize = new Vector2(0, 20 + (list.GetChildCount() * 56));
@@ -52,7 +62,7 @@ public class MapsetButton : Control
 	public void Collapse(bool animate = false)
 	{
 		Expanded = false;
-		tween.StopAll();
+		tween.RemoveAll();
 		if (!animate)
 		{
 			RectMinSize = new Vector2(0, 76);

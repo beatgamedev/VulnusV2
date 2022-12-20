@@ -138,9 +138,14 @@ margin_left = 64.0
 margin_bottom = 70.0
 custom_constants/separation = 2
 
-[node name="Mapset" type="Control" parent="Content/Anchor/List"]
+[node name="Separator" type="HSeparator" parent="Content/Anchor/List"]
 margin_right = 736.0
-margin_bottom = 76.0
+custom_constants/separation = 0
+
+[node name="Mapset" type="Control" parent="Content/Anchor/List"]
+margin_top = 2.0
+margin_right = 736.0
+margin_bottom = 78.0
 rect_min_size = Vector2( 0, 76 )
 rect_pivot_offset = Vector2( 736, 0 )
 rect_clip_content = true
@@ -258,6 +263,8 @@ expand = true
 stretch_mode = 7
 
 [node name="Tween" type="Tween" parent="Content/Anchor/List/Mapset"]
+
+[node name="InTween" type="Tween" parent="Content/Anchor/List/Mapset"]
 
 [node name="Tween" type="Tween" parent="Content/Anchor"]
 
