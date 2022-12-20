@@ -79,6 +79,8 @@ public class MapList : Control
 	}
 	private void btnPressed(MapsetButton btn)
 	{
+		if (SelectedMapset == btn.Mapset)
+			return;
 		if (SelectedMapset != null && mapButtons.ContainsKey(SelectedMapset))
 			mapButtons[SelectedMapset].Collapse(true);
 		btn.ManualUpdate(true);
