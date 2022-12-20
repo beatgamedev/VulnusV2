@@ -74,7 +74,7 @@ public class SyncManager : Node
 	public bool CanSkip()
 	{
 		if (NoteManager.LastNote == null || NoteManager.NextNote == null)
-			return SkippableTime() >= 2f * Speed;
+			return SkippableTime() >= 5f * Speed;
 		return SkippableTime() >= 2f * Speed && (NoteManager.NextNote.T - NoteManager.LastNote.T) > 5f * Speed;
 	}
 	public double SkippableTime()
