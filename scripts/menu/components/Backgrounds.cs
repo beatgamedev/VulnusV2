@@ -43,7 +43,7 @@ public class Backgrounds : Control
 			if (random.Next(0, 1337420) == 69)
 				next = Global.Matt;
 			Texture.Texture = next;
-			tween.StopAll();
+			tween.RemoveAll();
 			tween.InterpolateProperty(transition, "modulate:a", 1f, 0f, 0.5f, Tween.TransitionType.Quart, Tween.EaseType.InOut);
 			if (tween.IsConnected("tween_all_completed", this, nameof(TweenFinished)))
 				tween.Disconnect("tween_all_completed", this, nameof(TweenFinished));

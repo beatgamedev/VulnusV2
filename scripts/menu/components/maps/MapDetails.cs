@@ -81,7 +81,7 @@ public class MapDetails : View
 	public override async void OnShow()
 	{
 		this.Visible = true;
-		ViewTween.StopAll();
+		ViewTween.RemoveAll();
 		ViewTween.InterpolateProperty(this, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		ViewTween.Start();
 		await ToSignal(ViewTween, "tween_all_completed");
@@ -90,7 +90,7 @@ public class MapDetails : View
 	public override async void OnHide()
 	{
 		this.IsActive = false;
-		ViewTween.StopAll();
+		ViewTween.RemoveAll();
 		ViewTween.InterpolateProperty(this, "modulate:a", 1, 0, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		ViewTween.Start();
 		await ToSignal(ViewTween, "tween_all_completed");

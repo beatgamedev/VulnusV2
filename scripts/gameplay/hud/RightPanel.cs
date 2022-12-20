@@ -14,7 +14,7 @@ public class RightPanel : Panel
 	{
 		if (multiplier == Multiplier && miniplier == Miniplier)
 			return;
-		tween.StopAll();
+		tween.RemoveAll();
 		tween.InterpolateProperty(GetNode<TextureProgress>("Multiplier"), "value", Miniplier, miniplier, 0.1f);
 		GetNode<Label>("Multiplier/Value").Text = multiplier.ToString();
 		Multiplier = multiplier;

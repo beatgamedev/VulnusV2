@@ -31,7 +31,7 @@ public class Singleplayer : View
 		}
 		else
 			mapList.RenderButtons();
-		tween.StopAll();
+		tween.RemoveAll();
 		tween.InterpolateProperty(mapList, "modulate:a", 0, 1, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
 		tween.InterpolateProperty(bottomBar, "margin_top", 0, -48, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();
@@ -40,7 +40,7 @@ public class Singleplayer : View
 	public override async void OnHide()
 	{
 		// base.OnHide();
-		tween.StopAll();
+		tween.RemoveAll();
 		tween.InterpolateProperty(mapList, "modulate:a", 1, 0, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
 		tween.InterpolateProperty(bottomBar, "margin_top", -48, 0, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();

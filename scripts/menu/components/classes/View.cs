@@ -21,7 +21,7 @@ public partial class View : Control
 	{
 		this.IsActive = true;
 		this.Visible = true;
-		ViewTween.StopAll();
+		ViewTween.RemoveAll();
 		this.RectPosition = new Vector2(0, 0);
 		ViewTween.InterpolateProperty(this, "modulate:a", 0, 1, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		ViewTween.Start();
@@ -30,7 +30,7 @@ public partial class View : Control
 	public virtual async void OnHide()
 	{
 		this.IsActive = false;
-		ViewTween.StopAll();
+		ViewTween.RemoveAll();
 		ViewTween.InterpolateProperty(this, "rect_position:y", 0, 64, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		ViewTween.InterpolateProperty(this, "modulate:a", 1, 0, 0.15f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		ViewTween.Start();
