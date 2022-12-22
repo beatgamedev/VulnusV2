@@ -156,7 +156,7 @@ bus = "Music"
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7 )
 current = true
 near = 0.01
-far = 1000.0
+far = 500.0
 script = ExtResource( 2 )
 
 [node name="Grid" type="MeshInstance" parent="."]
