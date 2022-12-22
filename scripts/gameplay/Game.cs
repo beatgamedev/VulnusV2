@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public class Game : Spatial
 {
@@ -10,17 +11,20 @@ public class Game : Spatial
 	public static BeatmapData LoadedMapData;
 
 	public static Score Score;
+	public static ModList Mods = new ModList();
 
 	public GameCamera Camera;
 	public Spatial Cursor;
 	public Spatial GhostCursor;
 
 	public NoteManager NoteManager;
+	public NoteRenderer NoteRenderer;
 	public SyncManager SyncManager;
 
 	public HUDManager HUDManager;
 
 	public bool Ended;
+	public bool CanFail;
 
 	public override void _Ready()
 	{
@@ -29,6 +33,7 @@ public class Game : Spatial
 		GhostCursor = GetNode<Spatial>("GhostCursor");
 
 		NoteManager = GetNode<NoteManager>("NoteManager");
+		NoteRenderer = NoteManager.GetNode<NoteRenderer>("NoteRenderer");
 		SyncManager = GetNode<SyncManager>("SyncManager");
 		SyncManager.Speed = DebugSpeed / 100f;
 
@@ -36,6 +41,7 @@ public class Game : Spatial
 
 		Score = new Score();
 
+		CanFail = true;
 		Ended = false;
 
 		Camera.Cursor = Cursor;
@@ -53,6 +59,32 @@ public class Game : Spatial
 		NoteManager.NoteHit += OnNoteHit;
 		NoteManager.NoteMiss += OnNoteMiss;
 
+		if (Mods.Any(m => m is IApplicableToGame))
+		{
+			foreach (var mod in Mods.OfType<IApplicableToGame>())
+				mod.ApplyToGame(this);
+		}
+		if (Mods.Any(m => m is IApplicableToNoteManager))
+		{
+			foreach (var mod in Mods.OfType<IApplicableToNoteManager>())
+				mod.ApplyToNoteManager(NoteManager);
+		}
+		if (Mods.Any(m => m is IApplicableToNoteRenderer))
+		{
+			foreach (var mod in Mods.OfType<IApplicableToNoteRenderer>())
+				mod.ApplyToNoteManager(NoteRenderer);
+		}
+		if (Mods.Any(m => m is IApplicableToSyncManager))
+		{
+			foreach (var mod in Mods.OfType<IApplicableToSyncManager>())
+				mod.ApplyToSyncManager(SyncManager);
+		}
+		if (Mods.Any(m => m is IApplicableToHUDManager))
+		{
+			foreach (var mod in Mods.OfType<IApplicableToHUDManager>())
+				mod.ApplyToHUDManager(HUDManager);
+		}
+
 		Global.Discord.SetActivity(new Discord.ActivityW(
 			state: "Playing a map",
 			details: $"{LoadedMapset.Name} - {LoadedMap.Name}",
@@ -67,7 +99,11 @@ public class Game : Spatial
 		if (Input.IsActionJustPressed("force_end"))
 		{
 			Score.Health = 0;
-			GameEnded();
+		}
+		if (Score.Health <= 0)
+		{
+			if (CanFail) GameEnded();
+			Score.Failed = true;
 		}
 	}
 	public override void _EnterTree()
@@ -97,7 +133,7 @@ public class Game : Spatial
 		if (Score.Combo > Score.HighestCombo)
 			Score.HighestCombo = Score.Combo;
 		Score.Total += 1;
-		Score.Health = Math.Min(10, Score.Health + 10.0 / 8.0);
+		if (!Score.Failed) Score.Health = Math.Min(10, Score.Health + 10.0 / 8.0);
 		HUDManager.ManualUpdate(Score);
 	}
 	public void OnNoteMiss(Note note)
@@ -107,12 +143,7 @@ public class Game : Spatial
 		Score.Combo = 0;
 		Score.Misses += 1;
 		Score.Total += 1;
-		Score.Health = Math.Max(0, Score.Health - 2);
-		if (Score.Health <= 0)
-		{
-			GameEnded();
-			return;
-		}
+		if (!Score.Failed) Score.Health = Math.Max(0, Score.Health - 2);
 		HUDManager.ManualUpdate(Score);
 	}
 	public void GameEnded()
