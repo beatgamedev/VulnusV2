@@ -12,6 +12,7 @@ public class Score
 	public int Multiplier = 1;
 	public int Miniplier = 0;
 	public double Health = 10;
+	public bool Failed = false;
 	public static Dictionary<double, string> Ranks = new Dictionary<double, string>
 	{
 		{99.0,"SS"},
