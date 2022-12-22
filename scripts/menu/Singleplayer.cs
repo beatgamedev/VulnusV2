@@ -32,7 +32,7 @@ public class Singleplayer : View
 		else
 			mapList.RenderButtons();
 		tween.RemoveAll();
-		tween.InterpolateProperty(mapList, "modulate:a", 0, 1, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
+		tween.InterpolateProperty(this, "modulate:a", 0, 1, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
 		tween.InterpolateProperty(bottomBar, "margin_top", 0, -48, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();
 		this.Visible = true;
@@ -41,7 +41,7 @@ public class Singleplayer : View
 	{
 		// base.OnHide();
 		tween.RemoveAll();
-		tween.InterpolateProperty(mapList, "modulate:a", 1, 0, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
+		tween.InterpolateProperty(this, "modulate:a", 1, 0, 0.3f, Tween.TransitionType.Quart, Tween.EaseType.Out);
 		tween.InterpolateProperty(bottomBar, "margin_top", -48, 0, 0.2f, Tween.TransitionType.Sine, Tween.EaseType.Out);
 		tween.Start();
 		await ToSignal(tween, "tween_all_completed");
