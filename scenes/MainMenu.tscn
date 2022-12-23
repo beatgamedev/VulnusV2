@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -75,6 +75,11 @@ font_data = ExtResource( 1 )
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.0627451, 0.0627451, 0.0627451, 0.501961 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 32
+use_filter = true
+font_data = ExtResource( 7 )
+
 [sub_resource type="Gradient" id=15]
 interpolation_mode = 2
 offsets = PoolRealArray( 0.65, 1 )
@@ -129,14 +134,37 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=30]
+size = 24
+use_filter = true
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=31]
 size = 36
 use_filter = true
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=3]
-size = 32
+[sub_resource type="DynamicFont" id=32]
+size = 48
 use_filter = true
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=33]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=36]
+size = 24
+use_filter = true
+font_data = ExtResource( 18 )
+
+[sub_resource type="StyleBoxFlat" id=34]
+bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+
+[sub_resource type="DynamicFont" id=35]
+size = 24
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 64
@@ -483,6 +511,28 @@ anchor_left = 0.5
 margin_left = 0.0
 margin_bottom = -48.0
 
+[node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -48.0
+color = Color( 0.12549, 0.12549, 0.12549, 1 )
+
+[node name="Back" type="Button" parent="ViewContainer/Singleplayer/BottomBar"]
+anchor_bottom = 1.0
+margin_right = 192.0
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/BottomBar/Back"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "GO BACK"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="MapDetails" type="TextureRect" parent="ViewContainer/Singleplayer"]
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -588,54 +638,174 @@ custom_fonts/font = SubResource( 23 )
 text = "Difficulty Name"
 
 [node name="Play" type="Button" parent="ViewContainer/Singleplayer/MapDetails/Details"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = 160.0
-margin_top = -64.0
-margin_right = -160.0
-margin_bottom = -16.0
-
-[node name="Label" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/Play"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = -204.0
+margin_top = -136.0
+margin_right = 52.0
+margin_bottom = -64.0
 custom_fonts/font = SubResource( 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/MapDetails/Details/Play"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 12.0
+margin_right = -24.0
+margin_bottom = -12.0
+
+[node name="Icon" type="TextureRect" parent="ViewContainer/Singleplayer/MapDetails/Details/Play/HBoxContainer"]
+margin_right = 58.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/MapDetails/Details/Play/HBoxContainer"]
+margin_left = 62.0
+margin_top = 1.0
+margin_right = 208.0
+margin_bottom = 47.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 31 )
 text = "PLAY"
 align = 1
 valign = 1
 
-[node name="Speed" type="SpinBox" parent="ViewContainer/Singleplayer/MapDetails/Details"]
-margin_left = 48.0
-margin_top = 248.0
-margin_right = 248.0
-margin_bottom = 312.0
-max_value = 200.0
-value = 100.0
-align = 3
-prefix = "Speed"
-suffix = "%"
-
-[node name="BottomBar" type="ColorRect" parent="ViewContainer/Singleplayer"]
+[node name="Mods" type="Button" parent="ViewContainer/Singleplayer/MapDetails/Details"]
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 58.0
+margin_top = -136.0
+margin_right = 130.0
+margin_bottom = -64.0
+custom_fonts/font = SubResource( 32 )
+text = "+"
+
+[node name="Icon" type="TextureRect" parent="ViewContainer/Singleplayer/MapDetails/Details/Mods"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -48.0
-color = Color( 0.12549, 0.12549, 0.12549, 1 )
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 6
 
-[node name="Back" type="Button" parent="ViewContainer/Singleplayer/BottomBar"]
-anchor_bottom = 1.0
-margin_right = 192.0
-
-[node name="Label" type="Label" parent="ViewContainer/Singleplayer/BottomBar/Back"]
+[node name="ModSelect" type="ColorRect" parent="ViewContainer/Singleplayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 3 )
-text = "GO BACK"
+color = Color( 0, 0, 0, 0.784314 )
+
+[node name="ModPanel" type="Panel" parent="ViewContainer/Singleplayer/ModSelect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -184.0
+margin_right = 320.0
+margin_bottom = 184.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_right = -16.0
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
+margin_right = 608.0
+margin_bottom = 50.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+custom_fonts/font = SubResource( 33 )
+text = "Mod Selection"
 align = 1
 valign = 1
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="DiffInc" type="Control" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
+margin_top = 54.0
+margin_right = 608.0
+margin_bottom = 156.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffInc"]
+anchor_right = 1.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 36 )
+text = "Difficulty Increase"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffInc"]
+anchor_right = 1.0
+margin_top = 32.0
+margin_bottom = 96.0
+
+[node name="DiffDec" type="Control" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
+margin_top = 160.0
+margin_right = 608.0
+margin_bottom = 262.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffDec"]
+anchor_right = 1.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 36 )
+text = "Difficulty Decrease"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffDec"]
+anchor_right = 1.0
+margin_top = 32.0
+margin_bottom = 96.0
+
+[node name="Misc" type="Control" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
+margin_top = 266.0
+margin_right = 608.0
+margin_bottom = 368.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/Misc"]
+anchor_right = 1.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 36 )
+text = "Miscellaneous"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/Misc"]
+anchor_right = 1.0
+margin_top = 32.0
+margin_bottom = 96.0
+
+[node name="ConfigPanel" type="Panel" parent="ViewContainer/Singleplayer/ModSelect/ModPanel"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 48.0
+margin_right = 256.0
+margin_bottom = -48.0
+custom_styles/panel = SubResource( 34 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/ConfigPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/ConfigPanel/VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 272.0
+size_flags_vertical = 3
+custom_fonts/font = SubResource( 35 )
+text = "Configuration"
+align = 1
+valign = 1
 
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
 

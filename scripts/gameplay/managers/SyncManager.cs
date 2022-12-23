@@ -15,7 +15,7 @@ public class SyncManager : Node
 	public double SongPlayingAt;
 	public double SongPlayingOffset;
 
-	public float Speed;
+	public float Speed = 1f;
 
 	public Action Ended = () => { };
 

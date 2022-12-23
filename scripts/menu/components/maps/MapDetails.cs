@@ -32,7 +32,6 @@ public class MapDetails : View
 		Game.LoadedMapset = currentMap;
 		Game.LoadedMap = currentDifficulty;
 		Game.LoadedMapData = currentDifficulty.Data;
-		Game.DebugSpeed = (float)details.GetNode<SpinBox>("Speed").Value;
 		Global.Instance.GotoScene("res://scenes/Game.tscn", (Node scn) =>
 		{
 			var menuHandler = GetParent().GetParent<MenuHandler>();
