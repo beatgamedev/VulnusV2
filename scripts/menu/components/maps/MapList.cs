@@ -101,9 +101,12 @@ public class MapList : Control
 	private bool IsSimilar(BeatmapSet set, string search)
 	{
 		var name = set.Name.ToLower().Trim();
+		var mappers = set.Mappers.ToLower().Trim();
 		search = search.ToLower().Trim();
-		return name.Contains(search)
-			|| name.Similarity(search) >= 0.5;
+		return (name.Contains(search)
+			|| name.Similarity(search) >= 0.5)
+			|| (mappers.Contains(search)
+			|| mappers.Similarity(search) >= 0.5);
 	}
 	public void UpdateDisplayed(bool render = false)
 	{
