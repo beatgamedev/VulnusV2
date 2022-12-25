@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public abstract class Mod : IEquatable<Mod>
 {
@@ -8,15 +9,10 @@ public abstract class Mod : IEquatable<Mod>
 	public abstract string Description { get; }
 	public abstract double ScoreMultiplier { get; }
 	public abstract double PerformanceMultiplier { get; }
-	public abstract Mod[] IncompatibleMods { get; }
+	public abstract Type[] IncompatibleMods { get; }
 	public bool CompatibleWith(Mod other)
 	{
-		foreach (Mod incompatible in IncompatibleMods)
-		{
-			if (other.Equals(incompatible))
-				return false;
-		}
-		return true;
+		return IncompatibleMods.Any(t => t.IsInstanceOfType(other)) || other.IncompatibleMods.Any(t => t.IsInstanceOfType(this));
 	}
 	public virtual ModType Type { get; } = ModType.Misc;
 	public bool Equals(Mod other)
