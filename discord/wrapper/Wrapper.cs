@@ -10,13 +10,16 @@ namespace Discord
 		private Discord Discord;
 		public DiscordW()
 		{
-			try
+			if (OS.HasFeature("pc"))
 			{
-				Discord = new Discord(ClientId, (ulong)CreateFlags.NoRequireDiscord);
-			}
-			catch (ResultException e)
-			{
-				GD.PrintErr($"No Discord | {e.Message}");
+				try
+				{
+					Discord = new Discord(ClientId, (ulong)CreateFlags.NoRequireDiscord);
+				}
+				catch (ResultException e)
+				{
+					GD.PrintErr($"No Discord | {e.Message}");
+				}
 			}
 		}
 		public void Dispose()
