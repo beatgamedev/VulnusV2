@@ -34,8 +34,8 @@ Global="*res://scripts/Global.cs"
 
 window/size/width=1600
 window/size/height=900
-window/size/test_width=1280
-window/size/test_height=720
+window/size/test_width=1600
+window/size/test_height=900
 window/vsync/use_vsync=false
 window/tablet_driver=""
 
