@@ -4,8 +4,6 @@ using System.Linq;
 
 public class Game : Spatial
 {
-	public static float DebugSpeed = 1f;
-
 	public static BeatmapSet LoadedMapset;
 	public static Beatmap LoadedMap;
 	public static BeatmapData LoadedMapData;
@@ -35,13 +33,12 @@ public class Game : Spatial
 		NoteManager = GetNode<NoteManager>("NoteManager");
 		NoteRenderer = NoteManager.GetNode<NoteRenderer>("NoteRenderer");
 		SyncManager = GetNode<SyncManager>("SyncManager");
-		SyncManager.Speed = DebugSpeed / 100f;
 
 		HUDManager = GetNode<HUDManager>("HUD");
 
 		Score = new Score();
 
-		CanFail = true;
+		CanFail = false;
 		Ended = false;
 
 		Camera.Cursor = Cursor;
@@ -98,12 +95,13 @@ public class Game : Spatial
 			SyncManager.AttemptSkip();
 		if (Input.IsActionJustPressed("force_end"))
 		{
-			Score.Health = 0;
+			Score.Failed = true;
+			GameEnded();
 		}
 		if (Score.Health <= 0)
 		{
-			if (CanFail) GameEnded();
 			Score.Failed = true;
+			if (CanFail) GameEnded();
 		}
 	}
 	public override void _EnterTree()
