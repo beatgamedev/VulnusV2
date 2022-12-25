@@ -11,11 +11,14 @@ public class MapDetails : View
 	private Control mapDetails;
 	private Control details;
 	private Control loading;
+	private Control modPanel;
 	private AudioStreamPlayer musicPreview;
 	public override void _Ready()
 	{
 		mapList = GetParent().GetNode<MapList>("MapList");
 		mapList.MapSelected += MapSelected;
+		modPanel = GetParent().GetNode<Control>("ModSelect");
+		modPanel.Visible = false;
 		details = GetNode<Control>("Details");
 		mapDetails = details.GetNode<Control>("AspectRatioContainer/Map");
 		loading = GetNode<Control>("Loading");
@@ -24,6 +27,12 @@ public class MapDetails : View
 		details.GetNode<Button>("Play").Connect("pressed", this, nameof(PlayMap));
 
 		SetActive(false);
+	}
+	public void ShowMods(){
+		modPanel.Visible = true;
+		var tween = modPanel.GetNode<Tween>("Tween");
+		tween.InterpolateProperty(modPanel,"modulate:a",0,1,0.3f);
+		tween.Start();
 	}
 	public void PlayMap()
 	{

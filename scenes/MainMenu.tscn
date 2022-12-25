@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://assets/fonts/SourceSansPro/SourceSansPro-Semibold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/images/play.png" type="Texture" id=2]
@@ -157,6 +157,10 @@ size = 24
 use_filter = true
 font_data = ExtResource( 18 )
 
+[sub_resource type="DynamicFont" id=37]
+size = 18
+font_data = ExtResource( 18 )
+
 [sub_resource type="StyleBoxFlat" id=34]
 bg_color = Color( 0.164706, 0.164706, 0.164706, 1 )
 corner_radius_top_right = 12
@@ -164,6 +168,11 @@ corner_radius_bottom_right = 12
 
 [sub_resource type="DynamicFont" id=35]
 size = 24
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=38]
+size = 24
+use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=8]
@@ -703,7 +712,6 @@ expand = true
 stretch_mode = 6
 
 [node name="ModSelect" type="ColorRect" parent="ViewContainer/Singleplayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.784314 )
@@ -722,11 +730,13 @@ margin_bottom = 184.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
+margin_top = 8.0
 margin_right = -16.0
+margin_bottom = -8.0
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
 margin_right = 608.0
-margin_bottom = 50.0
+margin_bottom = 43.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 custom_fonts/font = SubResource( 33 )
@@ -735,9 +745,9 @@ align = 1
 valign = 1
 
 [node name="DiffInc" type="Control" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
-margin_top = 54.0
+margin_top = 47.0
 margin_right = 608.0
-margin_bottom = 156.0
+margin_bottom = 133.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffInc"]
@@ -749,12 +759,12 @@ text = "Difficulty Increase"
 [node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffInc"]
 anchor_right = 1.0
 margin_top = 32.0
-margin_bottom = 96.0
+margin_bottom = 80.0
 
 [node name="DiffDec" type="Control" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
-margin_top = 160.0
+margin_top = 137.0
 margin_right = 608.0
-margin_bottom = 262.0
+margin_bottom = 223.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffDec"]
@@ -766,12 +776,12 @@ text = "Difficulty Decrease"
 [node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/DiffDec"]
 anchor_right = 1.0
 margin_top = 32.0
-margin_bottom = 96.0
+margin_bottom = 80.0
 
 [node name="Misc" type="Control" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
-margin_top = 266.0
+margin_top = 227.0
 margin_right = 608.0
-margin_bottom = 368.0
+margin_bottom = 313.0
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/Misc"]
@@ -783,7 +793,17 @@ text = "Miscellaneous"
 [node name="HBoxContainer" type="HBoxContainer" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer/Misc"]
 anchor_right = 1.0
 margin_top = 32.0
-margin_bottom = 96.0
+margin_bottom = 80.0
+
+[node name="SelectedMods" type="Label" parent="ViewContainer/Singleplayer/ModSelect/ModPanel/VBoxContainer"]
+margin_top = 317.0
+margin_right = 608.0
+margin_bottom = 352.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+custom_fonts/font = SubResource( 37 )
+text = "Selected: "
+valign = 1
 
 [node name="ConfigPanel" type="Panel" parent="ViewContainer/Singleplayer/ModSelect/ModPanel"]
 anchor_left = 1.0
@@ -806,6 +826,19 @@ custom_fonts/font = SubResource( 35 )
 text = "Configuration"
 align = 1
 valign = 1
+
+[node name="Button" type="Button" parent="ViewContainer/Singleplayer/ModSelect/ModPanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_right = 128.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 38 )
+text = "SAVE"
+
+[node name="Tween" type="Tween" parent="ViewContainer/Singleplayer/ModSelect"]
 
 [node name="Tween" type="Tween" parent="ViewContainer/Singleplayer"]
 
