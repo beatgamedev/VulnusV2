@@ -8,7 +8,7 @@ public class ModNoFail : Mod, IApplicableToGame
 	public override string Description => "No more failing";
 	public override double ScoreMultiplier => 0.5;
 	public override double PerformanceMultiplier => 0;
-	public override Mod[] IncompatibleMods => throw new NotImplementedException();
+	public override Type[] IncompatibleMods => throw new NotImplementedException();
 	public override ModType Type => ModType.Misc;
 	public void ApplyToGame(Game game)
 	{
