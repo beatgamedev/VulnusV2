@@ -18,6 +18,7 @@
 background_mode = 1
 background_color = Color( 0.0117647, 0.0117647, 0.0117647, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.5
 ambient_light_sky_contribution = 0.0
 auto_exposure_scale = 0.15
 auto_exposure_max_luma = 0.5
@@ -64,6 +65,7 @@ albedo_texture = ExtResource( 3 )
 [sub_resource type="SpatialMaterial" id=9]
 render_priority = 2
 flags_transparent = true
+flags_unshaded = true
 vertex_color_use_as_albedo = true
 
 [sub_resource type="MultiMesh" id=8]
