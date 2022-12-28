@@ -2,6 +2,9 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
+using Content.Beatmaps;
+using Gameplay;
+
 public class MapDetails : View
 {
 	private BeatmapSet currentMap;
@@ -28,10 +31,11 @@ public class MapDetails : View
 
 		SetActive(false);
 	}
-	public void ShowMods(){
+	public void ShowMods()
+	{
 		modPanel.Visible = true;
 		var tween = modPanel.GetNode<Tween>("Tween");
-		tween.InterpolateProperty(modPanel,"modulate:a",0,1,0.3f);
+		tween.InterpolateProperty(modPanel, "modulate:a", 0, 1, 0.3f);
 		tween.Start();
 	}
 	public void PlayMap()

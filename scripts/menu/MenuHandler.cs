@@ -15,7 +15,7 @@ public class MenuHandler : Control
 			view.Visible = false;
 		}
 		Views = views;
-		CallDeferred(nameof(GoTo), Game.Score == null ? 0 : 2);
+		CallDeferred(nameof(GoTo), Gameplay.Game.Score == null ? 0 : 2);
 		Global.Discord.SetActivity(new Discord.ActivityW(
 			startTimestamp: DateTime.Now
 		));

@@ -1,21 +1,24 @@
 using Godot;
 using System;
 
-public class Health : TextureProgress
+namespace Gameplay.Hud
 {
-	private Tween tween;
-	private double HealthPoints;
-	public override void _Ready()
+	public class Health : TextureProgress
 	{
-		tween = GetNode<Tween>("Tween");
-	}
-	public void UpdateHealth(double health)
-	{
-		if (health == HealthPoints)
-			return;
-		tween.StopAll();
-		tween.InterpolateProperty(this, "value", HealthPoints, health, 0.1f);
-		HealthPoints = health;
-		tween.Start();
+		private Tween tween;
+		private double HealthPoints;
+		public override void _Ready()
+		{
+			tween = GetNode<Tween>("Tween");
+		}
+		public void UpdateHealth(double health)
+		{
+			if (health == HealthPoints)
+				return;
+			tween.StopAll();
+			tween.InterpolateProperty(this, "value", HealthPoints, health, 0.1f);
+			HealthPoints = health;
+			tween.Start();
+		}
 	}
 }

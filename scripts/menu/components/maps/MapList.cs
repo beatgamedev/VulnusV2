@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+using Content.Beatmaps;
 public class MapList : Control
 {
 	public static string Search = "";

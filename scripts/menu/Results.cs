@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+using Gameplay;
+
 public class Results : View
 {
 	public override void _Ready()

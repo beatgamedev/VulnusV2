@@ -2,42 +2,45 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class LeftPanel : Panel
+namespace Gameplay.Hud
 {
-	private Tween tween;
-	private bool displayingSkip = false;
-	public override void _Ready()
+	public class LeftPanel : Panel
 	{
-		tween = GetNode<Tween>("Tween");
-	}
-	public void UpdateScore(int score)
-	{
-		GetNode<Label>("Score").Text = String.Format("{0:n0}", score);
-	}
-	public void UpdateAccuracy(double misses, double total)
-	{
-		if (total < 1)
-			total = 1;
-		double accuracy = total > 0 ? (total - misses) / total : 0;
-		GetNode<Label>("Accuracy").Text = String.Format("{0:.##}%", accuracy * 100);
-		GetNode<Label>("Rank").Text = Score.GetRankForAccuracy(accuracy);
-	}
-	public void UpdateSkip(bool skippable)
-	{
-		if (skippable && !displayingSkip)
+		private Tween tween;
+		private bool displayingSkip = false;
+		public override void _Ready()
 		{
-			displayingSkip = true;
-			tween.RemoveAll();
-			tween.InterpolateProperty(GetNode<Label>("Skippable"), "modulate:a", 0, 1, 2f, Tween.TransitionType.Sine);
-			tween.Start();
+			tween = GetNode<Tween>("Tween");
 		}
-		else if (displayingSkip && !skippable)
+		public void UpdateScore(int score)
 		{
-			displayingSkip = false;
-			var a = GetNode<Label>("Skippable").Modulate.a;
-			tween.RemoveAll();
-			tween.InterpolateProperty(GetNode<Label>("Skippable"), "modulate:a", a, 0, 0.5f * a, Tween.TransitionType.Sine);
-			tween.Start();
+			GetNode<Label>("Score").Text = String.Format("{0:n0}", score);
+		}
+		public void UpdateAccuracy(double misses, double total)
+		{
+			if (total < 1)
+				total = 1;
+			double accuracy = total > 0 ? (total - misses) / total : 0;
+			GetNode<Label>("Accuracy").Text = String.Format("{0:.##}%", accuracy * 100);
+			GetNode<Label>("Rank").Text = Score.GetRankForAccuracy(accuracy);
+		}
+		public void UpdateSkip(bool skippable)
+		{
+			if (skippable && !displayingSkip)
+			{
+				displayingSkip = true;
+				tween.RemoveAll();
+				tween.InterpolateProperty(GetNode<Label>("Skippable"), "modulate:a", 0, 1, 2f, Tween.TransitionType.Sine);
+				tween.Start();
+			}
+			else if (displayingSkip && !skippable)
+			{
+				displayingSkip = false;
+				var a = GetNode<Label>("Skippable").Modulate.a;
+				tween.RemoveAll();
+				tween.InterpolateProperty(GetNode<Label>("Skippable"), "modulate:a", a, 0, 0.5f * a, Tween.TransitionType.Sine);
+				tween.Start();
+			}
 		}
 	}
 }

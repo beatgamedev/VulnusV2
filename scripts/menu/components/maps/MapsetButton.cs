@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+using Content.Beatmaps;
+
 public class MapsetButton : Control
 {
 	public BeatmapSet Mapset;

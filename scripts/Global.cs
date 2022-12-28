@@ -70,7 +70,6 @@ public class Global : Node
 		CurrentScene = nextScene.Instance();
 		GetTree().Root.AddChild(CurrentScene);
 		GetTree().Root.MoveChild(CurrentScene, 1);
-		GetTree().CurrentScene = CurrentScene;
 		callback?.Invoke(CurrentScene);
 	}
 	public void FinishedLoading()
